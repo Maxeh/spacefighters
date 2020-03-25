@@ -18,8 +18,9 @@ public:
     explicit View(sf::RenderWindow &window, const Model &model, const int &windowWidth, const int &windowHeight) :
         window(window), model(model), windowWidth(windowWidth), windowHeight(windowHeight) {
 
-        backgroundTexture.loadFromFile("res/background.png");
-        asteroidTexture.loadFromFile("res/asteroid-60x54.png", sf::IntRect(0, 0, model.ASTEROID_WIDTH, model.ASTEROID_HEIGHT));
+        backgroundTexture.loadFromFile("res/bg3.jpg");
+        asteroidTexture.loadFromFile("res/asteroid-60x54.png",
+                sf::IntRect(0, 0, model.ASTEROID_WIDTH, model.ASTEROID_HEIGHT));
         asteroidTexture.setSmooth(true);
         spaceshipTexture.loadFromFile("res/spaceship-75x74.png");
     };

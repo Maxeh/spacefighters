@@ -6,6 +6,7 @@
 
 int main()
 {
+    srand(time(nullptr));
     const int windowWidth = 700;
     const int windowHeight = 900;
 

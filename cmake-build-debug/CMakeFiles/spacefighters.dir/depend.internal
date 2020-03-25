@@ -6,6 +6,7 @@ CMakeFiles/spacefighters.dir/main.cpp.obj
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/View.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Config.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Graphics.hpp
@@ -89,6 +90,7 @@ CMakeFiles/spacefighters.dir/src/Controller.cpp.obj
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/View.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Config.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Graphics/BlendMode.hpp
@@ -156,6 +158,7 @@ CMakeFiles/spacefighters.dir/src/Model.cpp.obj
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.cpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Config.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Graphics/BlendMode.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Graphics/Color.hpp
@@ -188,9 +191,13 @@ CMakeFiles/spacefighters.dir/src/Model.cpp.obj
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Window/Window.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
+CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.cpp
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp
 CMakeFiles/spacefighters.dir/src/View.cpp.obj
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp
+ C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/View.cpp
  C:/Users/Maximilian/Documents/Github/spacefighters/src/View.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Config.hpp
@@ -219,8 +226,6 @@ CMakeFiles/spacefighters.dir/src/View.cpp.obj
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/NonCopyable.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/String.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/String.inl
- C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/Thread.hpp
- C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/Thread.inl
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/Time.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/Utf.hpp
  C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/System/Utf.inl

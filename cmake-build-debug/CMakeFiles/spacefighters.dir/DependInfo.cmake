@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Controller.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Model.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/View.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/View.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

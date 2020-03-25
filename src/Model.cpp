@@ -2,14 +2,15 @@
 
 void Model::addAsteroids() {
 
-    srand(time(0));
     int startY = (windowHeight / 2) - ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_HEIGHT) -
-            ((NUMBER_OF_ASTEROIDS / 2) * VERTICAL_SPACE_BETWEEN_ASTEROIDS) + (VERTICAL_SPACE_BETWEEN_ASTEROIDS / 2);
+            ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_VERTICAL_SPACE) +
+            (ASTEROID_VERTICAL_SPACE / 2);
+
     for (int i = 0; i < NUMBER_OF_ASTEROIDS; i++) {
-        if (((double) rand() / RAND_MAX) < ASTEROID_PROBABILITY) {
-            int randNum = rand() % (HORIZONTAL_SPACE_BETWEEN_ASTEROIDS - 0 + 1) + 0;
-            asteroids.push_back(Asteroid(ASTEROID_START_POSITION + randNum,
-                    startY + i * ASTEROID_HEIGHT + i * VERTICAL_SPACE_BETWEEN_ASTEROIDS));
+        if (shouldAddAsteroid(ASTEROID_PROBABILITY)) {
+            asteroids.emplace_back(
+                    ASTEROID_START_POSITION + randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX),
+                    startY + i * ASTEROID_HEIGHT + i * ASTEROID_VERTICAL_SPACE, randomFloatBetween(-1.2, 1.2));
         }
     }
 }
@@ -25,13 +26,51 @@ void Model::moveAsteroids() {
         }
     }
 
-    int s = asteroidMoveCounter % HORIZONTAL_SPACE_BETWEEN_ASTEROIDS;
+    int s = asteroidMoveCounter % ASTEROID_HORIZONTAL_SPACE_MAX;
     if (s == 0) {
+        asteroidMoveCounter = 0;
         addAsteroids();
     }
 }
 
-std::vector<Asteroid> Model::getAsteroids() const {
+const std::vector <Asteroid> &Model::getAsteroids() const {
 
     return asteroids;
+}
+
+void Model::rotateAsteroids() {
+
+    for (auto &asteroid : asteroids) {
+        asteroid.rotate();
+    }
+}
+
+bool Model::shouldAddAsteroid(double probability) const {
+
+    return ((double) rand() / RAND_MAX) < probability;
+}
+
+int Model::randomIntBetween(int iMin, int iMax) const {
+
+    return rand() % (iMax - iMin + 1) + iMin;
+}
+
+float Model::randomFloatBetween(double fMin, double fMax) const {
+
+    double randDouble = (double) rand() / RAND_MAX;
+    return (float) (fMin + randDouble * (fMax - fMin));
+}
+
+const Spaceship &Model::getSpaceship() const {
+
+    return spaceship;
+}
+
+void Model::moveSpaceship(MoveDirection moveDirection) {
+
+    if (moveDirection == MoveDirection::Left) {
+        spaceship.moveX(-1);
+    } else if (moveDirection == MoveDirection::Right) {
+        spaceship.moveX(1);
+    }
 }

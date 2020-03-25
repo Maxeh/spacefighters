@@ -105,6 +105,12 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/View.cpp">
 			<Option target="spacefighters"/>
 		</Unit>

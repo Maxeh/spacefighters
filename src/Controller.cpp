@@ -7,11 +7,11 @@ bool isPauseKey(const sf::Keyboard::Key &key) {
     return key == sf::Keyboard::P;
 }
 
-//bool isDirectionKey(const sf::Keyboard::Key &key) {
-//
-//    return key == sf::Keyboard::Up || key == sf::Keyboard::Down || key == sf::Keyboard::Left ||
-//           key == sf::Keyboard::Right;
-//}
+bool isDirectionKey(const sf::Keyboard::Key &key) {
+
+    return key == sf::Keyboard::Up || key == sf::Keyboard::Down || key == sf::Keyboard::Left ||
+           key == sf::Keyboard::Right;
+}
 
 //MoveDirection convertDirectionKey(const sf::Keyboard::Key &key) {
 //
@@ -31,6 +31,14 @@ bool isPauseKey(const sf::Keyboard::Key &key) {
 
 void Controller::eventLoop() {
 
+    bool mouseButtonPressed = false;
+    int initialWindowX = 0;
+    int initialWindowY = 0;
+    int mousePositionWhenPressedX = 0;
+    int mousePositionWhenPressedY = 0;
+    int mousePositionWhenMovedDiffX = 0;
+    int mousePositionWhenMovedDiffY = 0;
+
     sf::Clock clock;
     while (window.isOpen()) {
         sf::Event event{};
@@ -40,29 +48,51 @@ void Controller::eventLoop() {
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-//                    if (isDirectionKey(event.key.code)) {
-//                        model.setMoveDirection(convertDirectionKey(event.key.code));
-//                    }
-//                    if (isPauseKey(event.key.code)) {
-//                        pause = !pause;
-//                    }
-
+                    if (event.key.code == sf::Keyboard::Left) {
+                        model.moveSpaceship(model.MoveDirection::Left);
+                    }
+                    if (event.key.code == sf::Keyboard::Right) {
+                        model.moveSpaceship(model.MoveDirection::Right);
+                    }
+                    if (isPauseKey(event.key.code)) {
+                        pause = !pause;
+                    }
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        initialWindowX = window.getPosition().x;
+                        initialWindowY = window.getPosition().y;
+                        sf::Vector2i mousePositionVector = sf::Mouse::getPosition();
+                        mousePositionWhenPressedX = mousePositionVector.x;
+                        mousePositionWhenPressedY = mousePositionVector.y;
+                        mouseButtonPressed = true;
+                    }
+                    break;
+                case sf::Event::MouseMoved:
+                    if (mouseButtonPressed) {
+                        sf::Vector2i v = sf::Mouse::getPosition();
+                        mousePositionWhenMovedDiffX = mousePositionWhenPressedX - v.x;
+                        mousePositionWhenMovedDiffY = mousePositionWhenPressedY - v.y;
+                        window.setPosition(sf::Vector2i(
+                                initialWindowX - mousePositionWhenMovedDiffX,
+                                initialWindowY - mousePositionWhenMovedDiffY));
+                    }
+                    break;
+                case sf::Event::MouseButtonReleased:
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        mouseButtonPressed = false;
+                    }
                     break;
                 default:
                     break;
             }
         }
-//        window.setActive(false);
-//        view.renderView();
-
 
         if (!pause && clock.getElapsedTime().asMilliseconds() >= 15) {
             model.moveAsteroids();
+            model.rotateAsteroids();
             view.renderView();
             clock.restart();
         }
-
-
-
     }
 }
