@@ -7,39 +7,20 @@ bool isPauseKey(const sf::Keyboard::Key &key) {
     return key == sf::Keyboard::P;
 }
 
-bool isDirectionKey(const sf::Keyboard::Key &key) {
-
-    return key == sf::Keyboard::Up || key == sf::Keyboard::Down || key == sf::Keyboard::Left ||
-           key == sf::Keyboard::Right;
-}
-
-//MoveDirection convertDirectionKey(const sf::Keyboard::Key &key) {
-//
-//    switch (key) {
-//        case sf::Keyboard::Up:
-//            return MoveDirection::Up;
-//        case sf::Keyboard::Down:
-//            return MoveDirection::Down;
-//        case sf::Keyboard::Left:
-//            return MoveDirection::Left;
-//        case sf::Keyboard::Right:
-//            return MoveDirection::Right;
-//        default:
-//            throw std::runtime_error("Key is not a direction key");
-//    }
-//}
-
 void Controller::eventLoop() {
-
-    bool mouseButtonPressed = false;
+    
     int initialWindowX = 0;
     int initialWindowY = 0;
     int mousePositionWhenPressedX = 0;
     int mousePositionWhenPressedY = 0;
     int mousePositionWhenMovedDiffX = 0;
     int mousePositionWhenMovedDiffY = 0;
-
-    sf::Clock clock;
+    float velocity = 2;
+    float acceleration = 0.1;
+    bool mouseButtonPressed = false;
+    
+    sf::Clock clockAsteroid;
+    sf::Clock clockSpaceship;
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -48,16 +29,17 @@ void Controller::eventLoop() {
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Left) {
-                        model.moveSpaceship(model.MoveDirection::Left);
-                    }
-                    if (event.key.code == sf::Keyboard::Right) {
-                        model.moveSpaceship(model.MoveDirection::Right);
-                    }
                     if (isPauseKey(event.key.code)) {
                         pause = !pause;
                     }
                     break;
+                case sf::Event::KeyReleased:
+                    if (event.key.code == sf::Keyboard::Left) {
+                        velocity = 2;
+                    }
+                    if (event.key.code == sf::Keyboard::Right) {
+                        velocity = 2;
+                    }
                 case sf::Event::MouseButtonPressed:
                     if (event.mouseButton.button == sf::Mouse::Left) {
                         initialWindowX = window.getPosition().x;
@@ -88,11 +70,39 @@ void Controller::eventLoop() {
             }
         }
 
-        if (!pause && clock.getElapsedTime().asMilliseconds() >= 15) {
+        if (!pause && clockAsteroid.getElapsedTime().asMilliseconds() >= 15) {
             model.moveAsteroids();
             model.rotateAsteroids();
-            view.renderView();
-            clock.restart();
+            clockAsteroid.restart();
         }
+    
+        bool moveSpaceship = false;
+        if (clockSpaceship.getElapsedTime().asMilliseconds() >= 5) {
+            moveSpaceship = true;
+            clockSpaceship.restart();
+        }
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            if (moveSpaceship) {
+                model.moveSpaceship(-velocity);
+                if (velocity < 5) {
+                    velocity += acceleration;
+                }
+            }
+
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            if (moveSpaceship) {
+                model.moveSpaceship(velocity);
+                if (velocity < 5) {
+                    velocity += acceleration;
+                }
+                if (velocity < 1) {
+                    velocity = 1;
+                }
+            }
+        }
+    
+        view.renderView();
     }
 }

@@ -19,7 +19,6 @@ void View::renderBackground() const {
 
     sf::RectangleShape shape(sf::Vector2f(windowWidth, windowHeight));
     shape.setTexture(&backgroundTexture);
-//    shape.setPosition(5.f, 5.f);
     window.draw(shape);
 }
 
@@ -41,9 +40,9 @@ void View::renderAsteroids() const {
 //        shape.setPosition((float) asteroid.getX(), (float) asteroid.getY());
 //        window.draw(shape);
         sf::Sprite sprite;
-        sprite.setOrigin(model.ASTEROID_WIDTH / 2, model.ASTEROID_HEIGHT / 2);
+        sprite.setOrigin(model.getAsteroidWidth() / 2, model.getAsteroidHeight() / 2);
         sprite.setTexture(asteroidTexture);
-        sprite.setPosition((float) asteroid.getX() + model.ASTEROID_WIDTH / 2, (float) asteroid.getY() + model.ASTEROID_HEIGHT / 2);
+        sprite.setPosition((float) asteroid.getX() + model.getAsteroidWidth() / 2, (float) asteroid.getY() + model.getAsteroidHeight() / 2);
         sprite.rotate(asteroid.getRotation());
         window.draw(sprite);
     }
@@ -53,26 +52,6 @@ void View::renderSpaceship() const {
 
     sf::Sprite sprite;
     sprite.setTexture(spaceshipTexture);
-    sprite.setPosition((float) model.getSpaceship().getX(), (float) windowHeight - 100);
+    sprite.setPosition(model.getSpaceship().getX(), (float) windowHeight - 100);
     window.draw(sprite);
 }
-
-
-
-int View::getWindowWidth() const {
-    return windowWidth;
-}
-
-int View::getWindowHeight() const {
-    return windowHeight;
-}
-
-sf::RenderWindow &View::getRenderWindow() const {
-    return window;
-}
-
-Model const &View::getModel() const {
-    return model;
-}
-
-

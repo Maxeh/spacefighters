@@ -19,16 +19,11 @@ public:
         window(window), model(model), windowWidth(windowWidth), windowHeight(windowHeight) {
 
         backgroundTexture.loadFromFile("res/bg3.jpg");
-        asteroidTexture.loadFromFile("res/asteroid-60x54.png",
-                sf::IntRect(0, 0, model.ASTEROID_WIDTH, model.ASTEROID_HEIGHT));
+        asteroidTexture.loadFromFile("res/asteroid-60x54.png");
         asteroidTexture.setSmooth(true);
         spaceshipTexture.loadFromFile("res/spaceship-75x74.png");
     };
     void renderView();
-    int getWindowWidth() const;
-    int getWindowHeight() const;
-    Model const &getModel() const;
-    sf::RenderWindow &getRenderWindow() const;
 private:
     void renderBorder() const;
     void renderBackground() const;
