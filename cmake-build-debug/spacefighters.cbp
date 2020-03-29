@@ -93,6 +93,9 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Constants.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp">
 			<Option target="spacefighters"/>
 		</Unit>

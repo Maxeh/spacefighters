@@ -1,9 +1,7 @@
-#ifndef SFML1_MODEL_HPP
-#define SFML1_MODEL_HPP
+#ifndef SPACEFIGHTERS_MODEL_HPP
+#define SPACEFIGHTERS_MODEL_HPP
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <map>
-#include <iostream>
+#include <vector>
 #include "Asteroid.hpp"
 #include "Spaceship.hpp"
 
@@ -14,24 +12,14 @@ class Model {
     const int ASTEROID_VERTICAL_SPACE = 40;
     const int ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
     const int ASTEROID_HORIZONTAL_SPACE_MAX = 250;
-    // windowWidth - (ASTEROID_HORIZONTAL_SPACE_MAX * 4) - ASTEROID_WIDTH
-    const int ASTEROID_START_POSITION = -360;
     const int NUMBER_OF_ASTEROIDS = 6;
     const int SPACESHIP_WIDTH = 100;
-    int windowWidth;
-    int windowHeight;
+    int asteroidStartPosition = 0;
     int asteroidMoveCounter = 0;
     std::vector<Asteroid> asteroids;
     Spaceship spaceship;
 public:
-    explicit Model(int windowWidth, int windowHeight) : windowWidth(windowWidth), windowHeight(windowHeight),
-            spaceship(windowWidth / 2 - SPACESHIP_WIDTH / 2) {
-        
-        addAsteroids(windowWidth - ASTEROID_HORIZONTAL_SPACE_MAX);
-        addAsteroids(windowWidth - ASTEROID_HORIZONTAL_SPACE_MAX * 2);
-        addAsteroids(windowWidth - ASTEROID_HORIZONTAL_SPACE_MAX * 3);
-        addAsteroids(windowWidth - ASTEROID_HORIZONTAL_SPACE_MAX * 4);
-    }
+    Model();
     void addAsteroids(int startPosition);
     void moveAsteroids();
     void rotateAsteroids();

@@ -1,9 +1,10 @@
 #include "Controller.hpp"
 #include <SFML/Window.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
+
+Controller::Controller(Model &model, View &view) : model(model), view(view), pause(false) {};
 
 bool isPauseKey(const sf::Keyboard::Key &key) {
-
+    
     return key == sf::Keyboard::P;
 }
 
@@ -21,12 +22,14 @@ void Controller::eventLoop() {
     
     sf::Clock clockAsteroid;
     sf::Clock clockSpaceship;
-    while (window.isOpen()) {
+    
+    sf::RenderWindow &mainWin = view.getMainWindow();
+    while (mainWin.isOpen()) {
         sf::Event event{};
-        while (window.pollEvent(event)) {
+        while (mainWin.pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed:
-                    window.close();
+                    mainWin.close();
                     break;
                 case sf::Event::KeyPressed:
                     if (isPauseKey(event.key.code)) {
@@ -42,8 +45,8 @@ void Controller::eventLoop() {
                     }
                 case sf::Event::MouseButtonPressed:
                     if (event.mouseButton.button == sf::Mouse::Left) {
-                        initialWindowX = window.getPosition().x;
-                        initialWindowY = window.getPosition().y;
+                        initialWindowX = mainWin.getPosition().x;
+                        initialWindowY = mainWin.getPosition().y;
                         sf::Vector2i mousePositionVector = sf::Mouse::getPosition();
                         mousePositionWhenPressedX = mousePositionVector.x;
                         mousePositionWhenPressedY = mousePositionVector.y;
@@ -55,9 +58,9 @@ void Controller::eventLoop() {
                         sf::Vector2i v = sf::Mouse::getPosition();
                         mousePositionWhenMovedDiffX = mousePositionWhenPressedX - v.x;
                         mousePositionWhenMovedDiffY = mousePositionWhenPressedY - v.y;
-                        window.setPosition(sf::Vector2i(
-                                initialWindowX - mousePositionWhenMovedDiffX,
-                                initialWindowY - mousePositionWhenMovedDiffY));
+                        mainWin.setPosition(sf::Vector2i(
+                            initialWindowX - mousePositionWhenMovedDiffX,
+                            initialWindowY - mousePositionWhenMovedDiffY));
                     }
                     break;
                 case sf::Event::MouseButtonReleased:
@@ -69,13 +72,13 @@ void Controller::eventLoop() {
                     break;
             }
         }
-
+        
         if (!pause && clockAsteroid.getElapsedTime().asMilliseconds() >= 15) {
             model.moveAsteroids();
             model.rotateAsteroids();
             clockAsteroid.restart();
         }
-    
+        
         bool moveSpaceship = false;
         if (clockSpaceship.getElapsedTime().asMilliseconds() >= 5) {
             moveSpaceship = true;
@@ -89,7 +92,7 @@ void Controller::eventLoop() {
                     velocity += acceleration;
                 }
             }
-
+            
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             if (moveSpaceship) {
@@ -97,12 +100,9 @@ void Controller::eventLoop() {
                 if (velocity < 5) {
                     velocity += acceleration;
                 }
-                if (velocity < 1) {
-                    velocity = 1;
-                }
             }
         }
-    
+        
         view.renderView();
     }
 }
