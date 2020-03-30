@@ -7,7 +7,7 @@ class Asteroid {
     float initialRotation;
     float currentRotation;
 public:
-    Asteroid(int x, int y, float rotation);
+    explicit Asteroid(int x, int y, float rotation);
     void rotate();
     void moveX(int x);
     int getX() const;

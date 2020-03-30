@@ -1,6 +1,9 @@
 #include "Controller.hpp"
 #include <SFML/Window.hpp>
 
+#include <windows.h>
+
+
 Controller::Controller(Model &model, View &view) : model(model), view(view), pause(false) {};
 
 bool isPauseKey(const sf::Keyboard::Key &key) {
@@ -34,6 +37,7 @@ void Controller::eventLoop() {
                 case sf::Event::KeyPressed:
                     if (isPauseKey(event.key.code)) {
                         pause = !pause;
+                        ShowWindow(mainWin.getSystemHandle(), SW_MINIMIZE);
                     }
                     break;
                 case sf::Event::KeyReleased:

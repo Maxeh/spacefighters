@@ -6,26 +6,14 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Maximilian/Documents/Github/spacefighters/main.cpp
-SFML/Window.hpp
--
-src/Constants.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/Constants.hpp
-src/Model.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp
-src/View.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/View.hpp
-src/Controller.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp
-
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp
-
-C:/Users/Maximilian/Documents/Github/spacefighters/src/Constants.hpp
 
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp
 Controller.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp
 SFML/Window.hpp
+-
+windows.h
 -
 
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp

@@ -19,7 +19,7 @@ class Model {
     std::vector<Asteroid> asteroids;
     Spaceship spaceship;
 public:
-    Model();
+    explicit Model();
     void addAsteroids(int startPosition);
     void moveAsteroids();
     void rotateAsteroids();

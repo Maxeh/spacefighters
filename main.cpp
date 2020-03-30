@@ -10,7 +10,7 @@ int main()
     
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Spacefighters", sf::Style::None);
     window.setPosition(sf::Vector2i(window.getPosition().x, window.getPosition().y - 20));
-
+    
     Model model;
     View view(window, model);
     Controller controller(model, view);
