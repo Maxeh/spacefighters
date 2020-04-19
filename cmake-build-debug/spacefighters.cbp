@@ -87,37 +87,46 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/main.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.cpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/AssetManager.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.hpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/AssetManager.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Constants.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameManager.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.hpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameManager.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.cpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.hpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.cpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.hpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/View.cpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/View.hpp">
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Screen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/CMakeLists.txt">

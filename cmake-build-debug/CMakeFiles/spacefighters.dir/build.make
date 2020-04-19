@@ -70,94 +70,110 @@ CMakeFiles/spacefighters.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/main.cpp.s"
 	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\main.cpp -o CMakeFiles\spacefighters.dir\main.cpp.s
 
-CMakeFiles/spacefighters.dir/src/View.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/View.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/View.cpp.obj: ../src/View.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spacefighters.dir/src/View.cpp.obj"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\View.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\View.cpp
+CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj: ../src/GameScreen/Asteroid.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\GameScreen\Asteroid.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Asteroid.cpp
 
-CMakeFiles/spacefighters.dir/src/View.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/View.cpp.i"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\View.cpp > CMakeFiles\spacefighters.dir\src\View.cpp.i
+CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Asteroid.cpp > CMakeFiles\spacefighters.dir\src\GameScreen\Asteroid.cpp.i
 
-CMakeFiles/spacefighters.dir/src/View.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/View.cpp.s"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\View.cpp -o CMakeFiles\spacefighters.dir\src\View.cpp.s
+CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Asteroid.cpp -o CMakeFiles\spacefighters.dir\src\GameScreen\Asteroid.cpp.s
 
-CMakeFiles/spacefighters.dir/src/Controller.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/Controller.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/Controller.cpp.obj: ../src/Controller.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spacefighters.dir/src/Controller.cpp.obj"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Controller.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\Controller.cpp
+CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj: ../src/GameScreen/Spaceship.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\GameScreen\Spaceship.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Spaceship.cpp
 
-CMakeFiles/spacefighters.dir/src/Controller.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Controller.cpp.i"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\Controller.cpp > CMakeFiles\spacefighters.dir\src\Controller.cpp.i
+CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Spaceship.cpp > CMakeFiles\spacefighters.dir\src\GameScreen\Spaceship.cpp.i
 
-CMakeFiles/spacefighters.dir/src/Controller.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Controller.cpp.s"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\Controller.cpp -o CMakeFiles\spacefighters.dir\src\Controller.cpp.s
+CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\Spaceship.cpp -o CMakeFiles\spacefighters.dir\src\GameScreen\Spaceship.cpp.s
 
-CMakeFiles/spacefighters.dir/src/Model.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/Model.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/Model.cpp.obj: ../src/Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spacefighters.dir/src/Model.cpp.obj"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Model.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\Model.cpp
+CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj: ../src/GameScreen/GameScreen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\GameScreen\GameScreen.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\GameScreen.cpp
 
-CMakeFiles/spacefighters.dir/src/Model.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Model.cpp.i"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\Model.cpp > CMakeFiles\spacefighters.dir\src\Model.cpp.i
+CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\GameScreen.cpp > CMakeFiles\spacefighters.dir\src\GameScreen\GameScreen.cpp.i
 
-CMakeFiles/spacefighters.dir/src/Model.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Model.cpp.s"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\Model.cpp -o CMakeFiles\spacefighters.dir\src\Model.cpp.s
+CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\GameScreen\GameScreen.cpp -o CMakeFiles\spacefighters.dir\src\GameScreen\GameScreen.cpp.s
 
-CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj: ../src/Asteroid.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Asteroid.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\Asteroid.cpp
+CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj: ../src/AssetManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\AssetManager.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\AssetManager.cpp
 
-CMakeFiles/spacefighters.dir/src/Asteroid.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Asteroid.cpp.i"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\Asteroid.cpp > CMakeFiles\spacefighters.dir\src\Asteroid.cpp.i
+CMakeFiles/spacefighters.dir/src/AssetManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/AssetManager.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\AssetManager.cpp > CMakeFiles\spacefighters.dir\src\AssetManager.cpp.i
 
-CMakeFiles/spacefighters.dir/src/Asteroid.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Asteroid.cpp.s"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\Asteroid.cpp -o CMakeFiles\spacefighters.dir\src\Asteroid.cpp.s
+CMakeFiles/spacefighters.dir/src/AssetManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/AssetManager.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\AssetManager.cpp -o CMakeFiles\spacefighters.dir\src\AssetManager.cpp.s
 
-CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj: ../src/Spaceship.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Spaceship.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\Spaceship.cpp
+CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj: ../src/ScreenManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\ScreenManager.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\ScreenManager.cpp
 
-CMakeFiles/spacefighters.dir/src/Spaceship.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Spaceship.cpp.i"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\Spaceship.cpp > CMakeFiles\spacefighters.dir\src\Spaceship.cpp.i
+CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\ScreenManager.cpp > CMakeFiles\spacefighters.dir\src\ScreenManager.cpp.i
 
-CMakeFiles/spacefighters.dir/src/Spaceship.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Spaceship.cpp.s"
-	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\Spaceship.cpp -o CMakeFiles\spacefighters.dir\src\Spaceship.cpp.s
+CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\ScreenManager.cpp -o CMakeFiles\spacefighters.dir\src\ScreenManager.cpp.s
+
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/GameManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\GameManager.cpp.obj -c C:\Users\Maximilian\Documents\Github\spacefighters\src\GameManager.cpp
+
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/GameManager.cpp.i"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Github\spacefighters\src\GameManager.cpp > CMakeFiles\spacefighters.dir\src\GameManager.cpp.i
+
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/GameManager.cpp.s"
+	C:\GCC-7.3.0-WIN32-DWARF\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Github\spacefighters\src\GameManager.cpp -o CMakeFiles\spacefighters.dir\src\GameManager.cpp.s
 
 # Object files for target spacefighters
 spacefighters_OBJECTS = \
 "CMakeFiles/spacefighters.dir/main.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/View.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/Controller.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/Model.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj"
+"CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj"
 
 # External object files for target spacefighters
 spacefighters_EXTERNAL_OBJECTS =
 
 spacefighters.exe: CMakeFiles/spacefighters.dir/main.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/View.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/Controller.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/Model.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/build.make
 spacefighters.exe: C:/Users/Maximilian/Documents/SFML-2.5.1/lib/libsfml-graphics-s-d.a
 spacefighters.exe: C:/Users/Maximilian/Documents/SFML-2.5.1/lib/libsfml-audio-s-d.a
@@ -173,7 +189,7 @@ spacefighters.exe: C:/Users/Maximilian/Documents/SFML-2.5.1/lib/libFLAC.a
 spacefighters.exe: CMakeFiles/spacefighters.dir/linklibs.rsp
 spacefighters.exe: CMakeFiles/spacefighters.dir/objects1.rsp
 spacefighters.exe: CMakeFiles/spacefighters.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable spacefighters.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Maximilian\Documents\Github\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable spacefighters.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\spacefighters.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

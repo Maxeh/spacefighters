@@ -149,140 +149,167 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/Asteroid.obj: src/Asteroid.cpp.obj
+src/AssetManager.obj: src/AssetManager.cpp.obj
 
-.PHONY : src/Asteroid.obj
-
-# target to build an object file
-src/Asteroid.cpp.obj:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj
-.PHONY : src/Asteroid.cpp.obj
-
-src/Asteroid.i: src/Asteroid.cpp.i
-
-.PHONY : src/Asteroid.i
-
-# target to preprocess a source file
-src/Asteroid.cpp.i:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Asteroid.cpp.i
-.PHONY : src/Asteroid.cpp.i
-
-src/Asteroid.s: src/Asteroid.cpp.s
-
-.PHONY : src/Asteroid.s
-
-# target to generate assembly for a file
-src/Asteroid.cpp.s:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Asteroid.cpp.s
-.PHONY : src/Asteroid.cpp.s
-
-src/Controller.obj: src/Controller.cpp.obj
-
-.PHONY : src/Controller.obj
+.PHONY : src/AssetManager.obj
 
 # target to build an object file
-src/Controller.cpp.obj:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Controller.cpp.obj
-.PHONY : src/Controller.cpp.obj
+src/AssetManager.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj
+.PHONY : src/AssetManager.cpp.obj
 
-src/Controller.i: src/Controller.cpp.i
+src/AssetManager.i: src/AssetManager.cpp.i
 
-.PHONY : src/Controller.i
+.PHONY : src/AssetManager.i
 
 # target to preprocess a source file
-src/Controller.cpp.i:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Controller.cpp.i
-.PHONY : src/Controller.cpp.i
+src/AssetManager.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/AssetManager.cpp.i
+.PHONY : src/AssetManager.cpp.i
 
-src/Controller.s: src/Controller.cpp.s
+src/AssetManager.s: src/AssetManager.cpp.s
 
-.PHONY : src/Controller.s
+.PHONY : src/AssetManager.s
 
 # target to generate assembly for a file
-src/Controller.cpp.s:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Controller.cpp.s
-.PHONY : src/Controller.cpp.s
+src/AssetManager.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/AssetManager.cpp.s
+.PHONY : src/AssetManager.cpp.s
 
-src/Model.obj: src/Model.cpp.obj
+src/GameManager.obj: src/GameManager.cpp.obj
 
-.PHONY : src/Model.obj
+.PHONY : src/GameManager.obj
 
 # target to build an object file
-src/Model.cpp.obj:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Model.cpp.obj
-.PHONY : src/Model.cpp.obj
+src/GameManager.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj
+.PHONY : src/GameManager.cpp.obj
 
-src/Model.i: src/Model.cpp.i
+src/GameManager.i: src/GameManager.cpp.i
 
-.PHONY : src/Model.i
+.PHONY : src/GameManager.i
 
 # target to preprocess a source file
-src/Model.cpp.i:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Model.cpp.i
-.PHONY : src/Model.cpp.i
+src/GameManager.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameManager.cpp.i
+.PHONY : src/GameManager.cpp.i
 
-src/Model.s: src/Model.cpp.s
+src/GameManager.s: src/GameManager.cpp.s
 
-.PHONY : src/Model.s
+.PHONY : src/GameManager.s
 
 # target to generate assembly for a file
-src/Model.cpp.s:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Model.cpp.s
-.PHONY : src/Model.cpp.s
+src/GameManager.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameManager.cpp.s
+.PHONY : src/GameManager.cpp.s
 
-src/Spaceship.obj: src/Spaceship.cpp.obj
+src/GameScreen/Asteroid.obj: src/GameScreen/Asteroid.cpp.obj
 
-.PHONY : src/Spaceship.obj
+.PHONY : src/GameScreen/Asteroid.obj
 
 # target to build an object file
-src/Spaceship.cpp.obj:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj
-.PHONY : src/Spaceship.cpp.obj
+src/GameScreen/Asteroid.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj
+.PHONY : src/GameScreen/Asteroid.cpp.obj
 
-src/Spaceship.i: src/Spaceship.cpp.i
+src/GameScreen/Asteroid.i: src/GameScreen/Asteroid.cpp.i
 
-.PHONY : src/Spaceship.i
+.PHONY : src/GameScreen/Asteroid.i
 
 # target to preprocess a source file
-src/Spaceship.cpp.i:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Spaceship.cpp.i
-.PHONY : src/Spaceship.cpp.i
+src/GameScreen/Asteroid.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.i
+.PHONY : src/GameScreen/Asteroid.cpp.i
 
-src/Spaceship.s: src/Spaceship.cpp.s
+src/GameScreen/Asteroid.s: src/GameScreen/Asteroid.cpp.s
 
-.PHONY : src/Spaceship.s
+.PHONY : src/GameScreen/Asteroid.s
 
 # target to generate assembly for a file
-src/Spaceship.cpp.s:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Spaceship.cpp.s
-.PHONY : src/Spaceship.cpp.s
+src/GameScreen/Asteroid.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.s
+.PHONY : src/GameScreen/Asteroid.cpp.s
 
-src/View.obj: src/View.cpp.obj
+src/GameScreen/GameScreen.obj: src/GameScreen/GameScreen.cpp.obj
 
-.PHONY : src/View.obj
+.PHONY : src/GameScreen/GameScreen.obj
 
 # target to build an object file
-src/View.cpp.obj:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/View.cpp.obj
-.PHONY : src/View.cpp.obj
+src/GameScreen/GameScreen.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj
+.PHONY : src/GameScreen/GameScreen.cpp.obj
 
-src/View.i: src/View.cpp.i
+src/GameScreen/GameScreen.i: src/GameScreen/GameScreen.cpp.i
 
-.PHONY : src/View.i
+.PHONY : src/GameScreen/GameScreen.i
 
 # target to preprocess a source file
-src/View.cpp.i:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/View.cpp.i
-.PHONY : src/View.cpp.i
+src/GameScreen/GameScreen.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.i
+.PHONY : src/GameScreen/GameScreen.cpp.i
 
-src/View.s: src/View.cpp.s
+src/GameScreen/GameScreen.s: src/GameScreen/GameScreen.cpp.s
 
-.PHONY : src/View.s
+.PHONY : src/GameScreen/GameScreen.s
 
 # target to generate assembly for a file
-src/View.cpp.s:
-	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/View.cpp.s
-.PHONY : src/View.cpp.s
+src/GameScreen/GameScreen.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.s
+.PHONY : src/GameScreen/GameScreen.cpp.s
+
+src/GameScreen/Spaceship.obj: src/GameScreen/Spaceship.cpp.obj
+
+.PHONY : src/GameScreen/Spaceship.obj
+
+# target to build an object file
+src/GameScreen/Spaceship.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj
+.PHONY : src/GameScreen/Spaceship.cpp.obj
+
+src/GameScreen/Spaceship.i: src/GameScreen/Spaceship.cpp.i
+
+.PHONY : src/GameScreen/Spaceship.i
+
+# target to preprocess a source file
+src/GameScreen/Spaceship.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.i
+.PHONY : src/GameScreen/Spaceship.cpp.i
+
+src/GameScreen/Spaceship.s: src/GameScreen/Spaceship.cpp.s
+
+.PHONY : src/GameScreen/Spaceship.s
+
+# target to generate assembly for a file
+src/GameScreen/Spaceship.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.s
+.PHONY : src/GameScreen/Spaceship.cpp.s
+
+src/ScreenManager.obj: src/ScreenManager.cpp.obj
+
+.PHONY : src/ScreenManager.obj
+
+# target to build an object file
+src/ScreenManager.cpp.obj:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj
+.PHONY : src/ScreenManager.cpp.obj
+
+src/ScreenManager.i: src/ScreenManager.cpp.i
+
+.PHONY : src/ScreenManager.i
+
+# target to preprocess a source file
+src/ScreenManager.cpp.i:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.i
+.PHONY : src/ScreenManager.cpp.i
+
+src/ScreenManager.s: src/ScreenManager.cpp.s
+
+.PHONY : src/ScreenManager.s
+
+# target to generate assembly for a file
+src/ScreenManager.cpp.s:
+	$(MAKE) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.s
+.PHONY : src/ScreenManager.cpp.s
 
 # Help Target
 help:
@@ -296,21 +323,24 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... src/Asteroid.obj
-	@echo ... src/Asteroid.i
-	@echo ... src/Asteroid.s
-	@echo ... src/Controller.obj
-	@echo ... src/Controller.i
-	@echo ... src/Controller.s
-	@echo ... src/Model.obj
-	@echo ... src/Model.i
-	@echo ... src/Model.s
-	@echo ... src/Spaceship.obj
-	@echo ... src/Spaceship.i
-	@echo ... src/Spaceship.s
-	@echo ... src/View.obj
-	@echo ... src/View.i
-	@echo ... src/View.s
+	@echo ... src/AssetManager.obj
+	@echo ... src/AssetManager.i
+	@echo ... src/AssetManager.s
+	@echo ... src/GameManager.obj
+	@echo ... src/GameManager.i
+	@echo ... src/GameManager.s
+	@echo ... src/GameScreen/Asteroid.obj
+	@echo ... src/GameScreen/Asteroid.i
+	@echo ... src/GameScreen/Asteroid.s
+	@echo ... src/GameScreen/GameScreen.obj
+	@echo ... src/GameScreen/GameScreen.i
+	@echo ... src/GameScreen/GameScreen.s
+	@echo ... src/GameScreen/Spaceship.obj
+	@echo ... src/GameScreen/Spaceship.i
+	@echo ... src/GameScreen/Spaceship.s
+	@echo ... src/ScreenManager.obj
+	@echo ... src/ScreenManager.i
+	@echo ... src/ScreenManager.s
 .PHONY : help
 
 

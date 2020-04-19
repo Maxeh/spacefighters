@@ -5,11 +5,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Maximilian/Documents/Github/spacefighters/main.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/main.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/Asteroid.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Asteroid.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/Controller.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Controller.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/Model.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Model.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/Spaceship.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/Spaceship.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/View.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/View.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/AssetManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
