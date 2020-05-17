@@ -120,6 +120,12 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/Screen.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
@@ -127,6 +133,18 @@
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/SplashScreen/SplashScreen.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/src/SplashScreen/SplashScreen.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Github/spacefighters/CMakeLists.txt">

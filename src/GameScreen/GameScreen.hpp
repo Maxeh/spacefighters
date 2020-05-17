@@ -21,6 +21,19 @@ private:
     int asteroidMoveCounter = 0;
     double rotation = 0.f;
     bool isPause = false;
+    
+    int initialWindowX = 0;
+    int initialWindowY = 0;
+    int mousePositionWhenPressedX = 0;
+    int mousePositionWhenPressedY = 0;
+    int mousePositionWhenMovedDiffX = 0;
+    int mousePositionWhenMovedDiffY = 0;
+    bool mouseButtonPressed = false;
+    
+    float velocity = 2;
+    float acceleration = 0.1;
+    
+    
     std::shared_ptr<GameManager::GameData> gameData;
     std::vector<Asteroid> asteroids;
     Spaceship spaceship;

@@ -26,17 +26,7 @@ bool isPauseKey(const sf::Keyboard::Key &key) {
 
 void GameScreen::handleInput() {
     
-    int initialWindowX = 0;
-    int initialWindowY = 0;
-    int mousePositionWhenPressedX = 0;
-    int mousePositionWhenPressedY = 0;
-    int mousePositionWhenMovedDiffX = 0;
-    int mousePositionWhenMovedDiffY = 0;
-    float velocity = 2;
-    float acceleration = 0.1;
-    bool mouseButtonPressed = false;
-    
-    sf::Clock clockSpaceship;
+//    sf::Clock clockSpaceship;
     
     sf::Event event{};
     while (this->gameData->renderWindow.pollEvent(event)) {
@@ -167,7 +157,7 @@ void GameScreen::draw() {
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 20));
     borderShape.setFillColor(sf::Color(255, 255, 255, 0));
     borderShape.setOutlineThickness(5.f);
-    borderShape.setOutlineColor(sf::Color(200, 100, 0));
+    borderShape.setOutlineColor(sf::Color(165, 23, 23));
     borderShape.setPosition(5.f, 15.f);
     this->gameData->renderWindow.draw(borderShape);
     

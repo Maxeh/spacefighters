@@ -24,29 +24,23 @@ C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.hpp
 AssetManager.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/AssetManager.hpp
 
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.hpp
-
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.cpp
+C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.cpp
 iostream
 -
-GameScreen.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.hpp
+MenuScreen.hpp
+C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.hpp
 ../Constants.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Constants.hpp
+../SpaceButton.hpp
+C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.hpp
 
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.hpp
-memory
--
+C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.hpp
 ../Screen.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Screen.hpp
 ../GameManager.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/GameManager.hpp
-Asteroid.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.hpp
-Spaceship.hpp
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.hpp
-
-C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.hpp
+../SpaceButton.hpp
+C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.hpp
 
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Screen.hpp
 
@@ -57,6 +51,14 @@ stack
 -
 Screen.hpp
 C:/Users/Maximilian/Documents/Github/spacefighters/src/Screen.hpp
+
+C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.hpp
+SFML/Graphics/Color.hpp
+-
+SFML/Graphics/Font.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
 
 C:/Users/Maximilian/Documents/SFML-2.5.1/include/SFML/Config.hpp
 TargetConditionals.h

@@ -10,7 +10,10 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj"
   "C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj"
+  "C:/Users/Maximilian/Documents/Github/spacefighters/src/SplashScreen/SplashScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
