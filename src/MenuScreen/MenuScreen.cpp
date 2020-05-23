@@ -3,54 +3,93 @@
 #include "../Constants.hpp"
 #include "../SpaceButton.hpp"
 
-MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameData(gameData) {}
+MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameData(gameData) {
+    
+    closeButton = new SpaceButton(WINDOW_WIDTH - 47, 12, 35, 35);
+    soundButton = new SpaceButton(WINDOW_WIDTH - 90, 12, 35, 35);
+    singlePlayerButton = new SpaceButton(50, 300, WINDOW_WIDTH - 100, 50);
+    twoPlayerButton = new SpaceButton(50, 370, WINDOW_WIDTH - 100, 50);
+    highscoreButton = new SpaceButton(50, 440, WINDOW_WIDTH - 100, 50);
+    aboutButton = new SpaceButton(50, 510, WINDOW_WIDTH - 100, 50);
+}
+
+MenuScreen::~MenuScreen() {
+    
+    delete closeButton;
+    delete soundButton;
+    delete singlePlayerButton;
+    delete twoPlayerButton;
+    delete highscoreButton;
+    delete aboutButton;
+}
 
 void MenuScreen::init() {
     
-    this->gameData->assetManager.loadTexture("background", "res/bg3.jpg");
-    this->gameData->assetManager.loadTexture("soundOn", "res/sound3.png");
-    this->gameData->assetManager.loadTexture("soundOff", "res/sound4.png");
-    this->gameData->assetManager.loadFont("menuFont", "res/space_age.ttf");
+    gameData->assetManager.loadTexture("background", "res/bg3.jpg");
+    gameData->assetManager.loadTexture("soundOn", "res/sound3.png");
+    gameData->assetManager.loadTexture("soundOff", "res/sound4.png");
+    gameData->assetManager.loadFont("menuFont", "res/space_age.ttf");
 }
 
 void MenuScreen::handleInput() {
     
     sf::Event event{};
-    while (this->gameData->renderWindow.pollEvent(event)) {
+    while (gameData->renderWindow.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
-                this->gameData->renderWindow.close();
+                gameData->renderWindow.close();
                 break;
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
-                    initialWindowX = this->gameData->renderWindow.getPosition().x;
-                    initialWindowY = this->gameData->renderWindow.getPosition().y;
-                    sf::Vector2i mousePositionVector = sf::Mouse::getPosition();
-                    mousePositionWhenPressedX = mousePositionVector.x;
-                    mousePositionWhenPressedY = mousePositionVector.y;
+                    initialWindowX = gameData->renderWindow.getPosition().x;
+                    initialWindowY = gameData->renderWindow.getPosition().y;
+                    sf::Vector2i mousePositionGlobal = sf::Mouse::getPosition();
+                    mousePositionWhenPressedX = mousePositionGlobal.x;
+                    mousePositionWhenPressedY = mousePositionGlobal.y;
+    
+                    // only start moving window when no button was pressed
+                    sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
+                    sf::Vector2f mouseCoordsWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
                     mouseButtonPressed = true;
-                }
-                {
-                    sf::Vector2i mousePosition = sf::Mouse::getPosition(this->gameData->renderWindow);
-                    sf::Vector2f mouseCoords = this->gameData->renderWindow.mapPixelToCoords(mousePosition);
-                    if (buttonClose.contains(mouseCoords)) {
-                        std::exit(0);
+                    for (SpaceButton *button : {closeButton, soundButton, singlePlayerButton, twoPlayerButton,
+                        highscoreButton, aboutButton}) {
+                        if (button->contains(mouseCoordsWindow)) {
+                            mouseButtonPressed = false;
+                            break; // break for-loop
+                        }
                     }
                 }
                 break;
             case sf::Event::MouseMoved:
                 if (mouseButtonPressed) {
-                    sf::Vector2i v = sf::Mouse::getPosition();
-                    mousePositionWhenMovedDiffX = mousePositionWhenPressedX - v.x;
-                    mousePositionWhenMovedDiffY = mousePositionWhenPressedY - v.y;
-                    this->gameData->renderWindow.setPosition(sf::Vector2i(
+                    sf::Vector2i mousePositionGlobal = sf::Mouse::getPosition();
+                    mousePositionWhenMovedDiffX = mousePositionWhenPressedX - mousePositionGlobal.x;
+                    mousePositionWhenMovedDiffY = mousePositionWhenPressedY - mousePositionGlobal.y;
+                    gameData->renderWindow.setPosition(sf::Vector2i(
                         initialWindowX - mousePositionWhenMovedDiffX,
                         initialWindowY - mousePositionWhenMovedDiffY));
+                }
+                {
+                    sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
+                    sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
+                    closeButtonHovered = closeButton->contains(mouseCoordsInWindow);
+                    soundButtonHovered = soundButton->contains(mouseCoordsInWindow);
+                    singlePlayerButtonHovered = singlePlayerButton->contains(mouseCoordsInWindow);
+                    twoPlayerButtonHovered = twoPlayerButton->contains(mouseCoordsInWindow);
+                    highscoreButtonHovered = highscoreButton->contains(mouseCoordsInWindow);
+                    aboutButtonHovered = aboutButton->contains(mouseCoordsInWindow);
                 }
                 break;
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     mouseButtonPressed = false;
+                }
+                {
+                    sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
+                    sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
+                    if (closeButton->contains(mouseCoordsInWindow)) {
+                        std::exit(0);
+                    }
                 }
                 break;
             default:
@@ -65,58 +104,12 @@ void MenuScreen::update() {
 
 void MenuScreen::draw() {
     
-    // TODO this-> überall löschen
-    
-    
     gameData->renderWindow.clear(sf::Color::White);
     
     // background
     sf::RectangleShape backgroundShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    backgroundShape.setFillColor(sf::Color(30, 39, 56));
-    this->gameData->renderWindow.draw(backgroundShape);
-    
-    // title text
-    sf::Text titleText;
-    titleText.setFont(this->gameData->assetManager.getFont("menuFont"));
-    titleText.setString("Spacefighters");
-    titleText.setCharacterSize(25);
-    titleText.setFillColor(COLOR_LIGHT_BLUE);
-    titleText.setPosition(20, 12);
-    this->gameData->renderWindow.draw(titleText);
-    
-    // menu text
-    sf::Text menuText;
-    menuText.setFont(this->gameData->assetManager.getFont("menuFont"));
-    menuText.setString("MENU");
-    menuText.setCharacterSize(100);
-    menuText.setFillColor(COLOR_GREY);
-    menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2,  100);
-    this->gameData->renderWindow.draw(menuText);
-    
-    // close button
-    buttonClose.setRectangle(
-        WINDOW_WIDTH - 47, 12, 35, 35,
-        1.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonClose.setText(
-        30, new std::string("x"),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonClose.renderButtonOnWindow(this->gameData->renderWindow);
-    
-    
-    // sound button
-    SpaceButton buttonSound;
-    buttonSound.setRectangle(
-        WINDOW_WIDTH - 90, 12, 35, 35,
-        1.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonSound.setTexture(&this->gameData->assetManager.getTexture("soundOn"));
-    buttonSound.setText(
-        30, new std::string(""),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonSound.renderButtonOnWindow(this->gameData->renderWindow);
+    backgroundShape.setFillColor(COLOR_BLUE);
+    gameData->renderWindow.draw(backgroundShape);
     
     // border around window
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
@@ -124,7 +117,7 @@ void MenuScreen::draw() {
     borderShape.setOutlineThickness(5.f);
     borderShape.setOutlineColor(COLOR_DARK_BLUE);
     borderShape.setPosition(5.f, 5.f);
-    this->gameData->renderWindow.draw(borderShape);
+    gameData->renderWindow.draw(borderShape);
     
     // top border
     sf::RectangleShape borderShape2(sf::Vector2f(WINDOW_WIDTH - 10, 0));
@@ -132,57 +125,77 @@ void MenuScreen::draw() {
     borderShape2.setOutlineThickness(1.f);
     borderShape2.setOutlineColor(COLOR_LIGHT_BLUE);
     borderShape2.setPosition(5.f, 54.f);
-    this->gameData->renderWindow.draw(borderShape2);
+    gameData->renderWindow.draw(borderShape2);
     
-    // player vs. computer button
-    SpaceButton buttonPlayerVsComputer;
-    buttonPlayerVsComputer.setRectangle(
-        50, 300, WINDOW_WIDTH - 100, 50,
-        2.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonPlayerVsComputer.setText(
-        30, new std::string("Player vs. Computer"),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonPlayerVsComputer.renderButtonOnWindow(this->gameData->renderWindow);
+    // title text
+    sf::Text titleText;
+    titleText.setFont(gameData->assetManager.getFont("menuFont"));
+    titleText.setString("spacefighters");
+    titleText.setCharacterSize(25);
+    titleText.setFillColor(COLOR_LIGHT_BLUE);
+    titleText.setPosition(20, 12);
+    gameData->renderWindow.draw(titleText);
     
-    // player vs. player button
-    SpaceButton buttonPlayerVsPlayer;
-    buttonPlayerVsPlayer.setRectangle(
-        50, 370, WINDOW_WIDTH - 100, 50,
-        2.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonPlayerVsPlayer.setText(
-        30, new std::string("Player vs. Player"),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonPlayerVsPlayer.renderButtonOnWindow(this->gameData->renderWindow);
+    // menu text
+    sf::Text menuText;
+    menuText.setFont(gameData->assetManager.getFont("menuFont"));
+    menuText.setString("MENU");
+    menuText.setCharacterSize(100);
+    menuText.setFillColor(COLOR_LIGHT_BLUE);
+    menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2,  100);
+    menuText.setOutlineColor(COLOR_DARK_BLUE);
+    menuText.setOutlineThickness(5.f);
+    gameData->renderWindow.draw(menuText);
+    
+    // close button
+    closeButton->setOutline(closeButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
+    closeButton->setFillColor(new COLOR_DARK_BLUE);
+    closeButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    closeButton->setText(new std::string("x"), 30);
+    closeButton->setTextColor(closeButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    closeButton->renderButtonOnWindow(gameData->renderWindow);
+    
+    // sound button
+    soundButton->setOutline(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
+    soundButton->setFillColor(new COLOR_DARK_BLUE);
+    soundButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    soundButton->setText(new std::string(""), 30);
+    soundButton->setTextColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    soundButton->renderButtonOnWindow(gameData->renderWindow);
+    
+    // singlePlayerButton
+    singlePlayerButton->setOutline(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+    singlePlayerButton->setFillColor(new COLOR_DARK_BLUE);
+    singlePlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    singlePlayerButton->setText(new std::string("player vs. computer"), 30);
+    singlePlayerButton->setTextColor(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    singlePlayerButton->renderButtonOnWindow(gameData->renderWindow);
+    
+    // singlePlayerButton
+    twoPlayerButton->setOutline(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+    twoPlayerButton->setFillColor(new COLOR_DARK_BLUE);
+    twoPlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    twoPlayerButton->setText(new std::string("player vs. player"), 30);
+    twoPlayerButton->setTextColor(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    twoPlayerButton->renderButtonOnWindow(gameData->renderWindow);
     
     // highscore button
-    SpaceButton buttonHighscore;
-    buttonHighscore.setRectangle(
-        50, 440, WINDOW_WIDTH - 100, 50,
-        2.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonHighscore.setText(
-        30, new std::string("Highscore"),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonHighscore.renderButtonOnWindow(this->gameData->renderWindow);
+    highscoreButton->setOutline(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+    highscoreButton->setFillColor(new COLOR_DARK_BLUE);
+    highscoreButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    highscoreButton->setText(new std::string("highscore"), 30);
+    highscoreButton->setTextColor(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    highscoreButton->renderButtonOnWindow(gameData->renderWindow);
     
     // about button
-    SpaceButton buttonAbout;
-    buttonAbout.setRectangle(
-        50, 510, WINDOW_WIDTH - 100, 50,
-        2.f, new COLOR_LIGHT_BLUE,
-        new COLOR_DARK_BLUE);
-    buttonAbout.setText(
-        30, new std::string("About"),
-        &this->gameData->assetManager.getFont("menuFont"),
-        new COLOR_LIGHT_BLUE);
-    buttonAbout.renderButtonOnWindow(this->gameData->renderWindow);
+    aboutButton->setOutline(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+    aboutButton->setFillColor(new COLOR_DARK_BLUE);
+    aboutButton->setFont(&gameData->assetManager.getFont("menuFont"));
+    aboutButton->setText(new std::string("about"), 30);
+    aboutButton->setTextColor(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    aboutButton->renderButtonOnWindow(gameData->renderWindow);
     
-    this->gameData->renderWindow.display();
+    gameData->renderWindow.display();
 }
 
 void MenuScreen::resume() {

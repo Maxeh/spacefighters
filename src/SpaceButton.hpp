@@ -11,26 +11,23 @@ private:
     float y;
     float width;
     float height;
-    float outlineThickness;
-    sf::Color* outlineColor;
-    sf::Color* fillColor;
-    int textCharacterSize;
-    std::string* textString;
-    sf::Font* textFont;
-    sf::Color* textFillColor;
-    sf::Texture* texture = nullptr;
-    
-    sf::RectangleShape* buttonShape;
+    float outlineThickness = 1.f;
+    sf::Color* outlineColor = nullptr;
+    sf::Color* fillColor = nullptr;
+    int textCharacterSize = 10;
+    std::string* textString = nullptr;
+    sf::Font* textFont = nullptr;
+    sf::Color* textColor = nullptr;
+    sf::RectangleShape* buttonShape = nullptr;
 public:
-    
-    // TODO refactor this class to prevent NPE, make use of constructor, text & texture is optional, remove setRectangle
-    
-    SpaceButton() = default;
+    SpaceButton(float x, float y, float width, float height);
     ~SpaceButton();
-    void setRectangle(float x, float y, float width, float height, float outlineThickness, sf::Color* outlineColor, sf::Color* fillColor);
-    void setText(int textCharacterSize, std::string* textString, sf::Font* textFont, sf::Color* textFillColor);
-    void setTexture(sf::Texture* texture);
     bool contains(const sf::Vector2f& point);
+    void setOutline(sf::Color* outlineColor, float outlineThickness);
+    void setFillColor(sf::Color* fillColor);
+    void setFont(sf::Font* textFont);
+    void setText(std::string* textString, int textCharacterSize);
+    void setTextColor(sf::Color* textColor);
     void renderButtonOnWindow(sf::RenderWindow& window);
 };
 

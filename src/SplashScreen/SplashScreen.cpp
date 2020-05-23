@@ -20,7 +20,7 @@ void SplashScreen::handleInput() {
 
 void SplashScreen::update() {
 
-    if (clock.getElapsedTime().asMilliseconds() > 3000) {
+    if (clock.getElapsedTime().asMilliseconds() > SPLASH_SCREEN_TIME) {
         this->gameData->screenManager.addScreen(std::make_unique<MenuScreen>(this->gameData), true);
     }
 }
