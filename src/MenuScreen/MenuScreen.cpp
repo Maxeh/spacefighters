@@ -11,6 +11,11 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameDa
     twoPlayerButton = new SpaceButton(50, 370, WINDOW_WIDTH - 100, 50);
     highscoreButton = new SpaceButton(50, 440, WINDOW_WIDTH - 100, 50);
     aboutButton = new SpaceButton(50, 510, WINDOW_WIDTH - 100, 50);
+    
+    gameData->assetManager.loadTexture("background", "res/bg3.jpg");
+    gameData->assetManager.loadTexture("soundOn", "res/s5.png");
+    gameData->assetManager.loadTexture("soundOff", "res/sound4.png");
+    gameData->assetManager.loadFont("menuFont", "res/space_age.ttf");
 }
 
 MenuScreen::~MenuScreen() {
@@ -25,10 +30,7 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::init() {
     
-    gameData->assetManager.loadTexture("background", "res/bg3.jpg");
-    gameData->assetManager.loadTexture("soundOn", "res/sound3.png");
-    gameData->assetManager.loadTexture("soundOff", "res/sound4.png");
-    gameData->assetManager.loadFont("menuFont", "res/space_age.ttf");
+
 }
 
 void MenuScreen::handleInput() {
@@ -158,10 +160,14 @@ void MenuScreen::draw() {
     // sound button
     soundButton->setOutline(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
     soundButton->setFillColor(new COLOR_DARK_BLUE);
-    soundButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    soundButton->setText(new std::string(""), 30);
-    soundButton->setTextColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    auto* soundSprite = new sf::Sprite();
+    auto soundTexture = gameData->assetManager.getTexture("soundOn");
+    soundTexture.setSmooth(true);
+    soundSprite->setTexture(soundTexture);
+    soundButton->setSprite(soundSprite);
+    soundButton->setSpriteColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
     soundButton->renderButtonOnWindow(gameData->renderWindow);
+    delete soundSprite;
     
     // singlePlayerButton
     singlePlayerButton->setOutline(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);

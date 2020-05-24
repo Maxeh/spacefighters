@@ -1,9 +1,7 @@
 #ifndef SPACEFIGHTERS_SPACEBUTTON_HPP
 #define SPACEFIGHTERS_SPACEBUTTON_HPP
 
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 
 class SpaceButton {
 private:
@@ -14,6 +12,8 @@ private:
     float outlineThickness = 1.f;
     sf::Color* outlineColor = nullptr;
     sf::Color* fillColor = nullptr;
+    sf::Sprite* sprite = nullptr;
+    sf::Color* spriteColor = nullptr;
     int textCharacterSize = 10;
     std::string* textString = nullptr;
     sf::Font* textFont = nullptr;
@@ -25,6 +25,8 @@ public:
     bool contains(const sf::Vector2f& point);
     void setOutline(sf::Color* outlineColor, float outlineThickness);
     void setFillColor(sf::Color* fillColor);
+    void setSprite(sf::Sprite* sprite);
+    void setSpriteColor(sf::Color* spriteColor);
     void setFont(sf::Font* textFont);
     void setText(std::string* textString, int textCharacterSize);
     void setTextColor(sf::Color* textColor);

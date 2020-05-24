@@ -12,6 +12,8 @@ SpaceButton::~SpaceButton() {
     delete textString;
     delete textColor;
     delete buttonShape;
+    delete sprite;
+    delete spriteColor;
 }
 
 bool SpaceButton::contains(const sf::Vector2f& point) {
@@ -30,18 +32,28 @@ void SpaceButton::setFillColor(sf::Color* fillColor) {
     this->fillColor = fillColor;
 }
 
-void SpaceButton::setFont(sf::Font *textFont) {
+void SpaceButton::setSprite(sf::Sprite* sprite) {
+    
+    this->sprite = sprite;
+}
+
+void SpaceButton::setSpriteColor(sf::Color* spriteColor) {
+    
+    this->spriteColor = spriteColor;
+}
+
+void SpaceButton::setFont(sf::Font* textFont) {
     
     this->textFont = textFont;
 }
 
-void SpaceButton::setText(std::string *textString, int textCharacterSize) {
+void SpaceButton::setText(std::string* textString, int textCharacterSize) {
     
     this->textString = textString;
     this->textCharacterSize = textCharacterSize;
 }
 
-void SpaceButton::setTextColor(sf::Color *textColor) {
+void SpaceButton::setTextColor(sf::Color* textColor) {
     
     this->textColor = textColor;
 }
@@ -49,6 +61,7 @@ void SpaceButton::setTextColor(sf::Color *textColor) {
 void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
     
     buttonShape = new sf::RectangleShape(sf::Vector2f(width, height));
+    buttonShape->setPosition(x, y);
     
     if (fillColor) {
         buttonShape->setFillColor(*fillColor);
@@ -59,12 +72,16 @@ void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
         buttonShape->setOutlineColor(*outlineColor);
     }
     
-    buttonShape->setPosition(x, y);
-//    if (texture) {
-//        buttonShape->setTexture(texture);
-//    }
-    
     renderWindow.draw(*buttonShape);
+    
+    if (sprite) {
+        sprite->setPosition(x + 4, y + 5);
+        sprite->setScale(0.26f, 0.26f);
+        if (spriteColor) {
+            sprite->setColor(*spriteColor);
+        }
+        renderWindow.draw(*sprite);
+    }
     
     if (textFont && textString) {
         sf::Text buttonText;
@@ -76,11 +93,12 @@ void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
         }
         sf::FloatRect textRect = buttonText.getLocalBounds();
         buttonText.setOrigin(
-            textRect.left + textRect.width/2.0f,
-            textRect.top  + textRect.height/2.0f);
+            textRect.left + textRect.width / 2.0f,
+            textRect.top + textRect.height / 2.0f);
         buttonText.setPosition(
             x + (width / 2),
             y + (height / 2));
         renderWindow.draw(buttonText);
     }
 }
+

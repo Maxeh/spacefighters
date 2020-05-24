@@ -3,7 +3,7 @@
 
 #define WINDOW_WIDTH 700
 #define WINDOW_HEIGHT 900
-#define SPLASH_SCREEN_TIME 3500
+#define SPLASH_SCREEN_TIME 500
 #define COLOR_LIGHT_BLUE sf::Color(15, 168, 214)
 #define COLOR_BLUE sf::Color(30, 39, 56)
 #define COLOR_DARK_BLUE sf::Color(24, 31, 45)
