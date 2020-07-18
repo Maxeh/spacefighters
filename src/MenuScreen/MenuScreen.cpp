@@ -156,50 +156,52 @@ void MenuScreen::draw() {
     closeButton->setText(new std::string("x"), 30);
     closeButton->setTextColor(closeButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
     closeButton->renderButtonOnWindow(gameData->renderWindow);
-    
+//
     // sound button
     soundButton->setOutline(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
     soundButton->setFillColor(new COLOR_DARK_BLUE);
-    auto* soundSprite = new sf::Sprite();
-    auto soundTexture = gameData->assetManager.getTexture("soundOn");
-    soundTexture.setSmooth(true);
-    soundSprite->setTexture(soundTexture);
-    soundButton->setSprite(soundSprite);
-    soundButton->setSpriteColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    sf::Sprite sprite;
+    
+    // TODO 1. git reset --hard 2. hier doku machen => & needed sonst out of scope
+    sf::Texture& soundTexture = gameData->assetManager.getTexture("soundOn");
+//    soundTexture.setSmooth(true);
+    sprite.setTexture(soundTexture);
+//    soundButton->setSprite(soundSprite);
+//    soundButton->setSpriteColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
     soundButton->renderButtonOnWindow(gameData->renderWindow);
-    delete soundSprite;
-    
-    // singlePlayerButton
-    singlePlayerButton->setOutline(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
-    singlePlayerButton->setFillColor(new COLOR_DARK_BLUE);
-    singlePlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    singlePlayerButton->setText(new std::string("player vs. computer"), 30);
-    singlePlayerButton->setTextColor(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
-    singlePlayerButton->renderButtonOnWindow(gameData->renderWindow);
-    
-    // singlePlayerButton
-    twoPlayerButton->setOutline(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
-    twoPlayerButton->setFillColor(new COLOR_DARK_BLUE);
-    twoPlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    twoPlayerButton->setText(new std::string("player vs. player"), 30);
-    twoPlayerButton->setTextColor(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
-    twoPlayerButton->renderButtonOnWindow(gameData->renderWindow);
-    
-    // highscore button
-    highscoreButton->setOutline(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
-    highscoreButton->setFillColor(new COLOR_DARK_BLUE);
-    highscoreButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    highscoreButton->setText(new std::string("highscore"), 30);
-    highscoreButton->setTextColor(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
-    highscoreButton->renderButtonOnWindow(gameData->renderWindow);
-    
-    // about button
-    aboutButton->setOutline(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
-    aboutButton->setFillColor(new COLOR_DARK_BLUE);
-    aboutButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    aboutButton->setText(new std::string("about"), 30);
-    aboutButton->setTextColor(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
-    aboutButton->renderButtonOnWindow(gameData->renderWindow);
+//    delete soundSprite;
+//
+//    // singlePlayerButton
+//    singlePlayerButton->setOutline(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+//    singlePlayerButton->setFillColor(new COLOR_DARK_BLUE);
+//    singlePlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
+//    singlePlayerButton->setText(new std::string("player vs. computer"), 30);
+//    singlePlayerButton->setTextColor(singlePlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+//    singlePlayerButton->renderButtonOnWindow(gameData->renderWindow);
+//
+//    // singlePlayerButton
+//    twoPlayerButton->setOutline(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+//    twoPlayerButton->setFillColor(new COLOR_DARK_BLUE);
+//    twoPlayerButton->setFont(&gameData->assetManager.getFont("menuFont"));
+//    twoPlayerButton->setText(new std::string("player vs. player"), 30);
+//    twoPlayerButton->setTextColor(twoPlayerButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+//    twoPlayerButton->renderButtonOnWindow(gameData->renderWindow);
+//
+//    // highscore button
+//    highscoreButton->setOutline(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+//    highscoreButton->setFillColor(new COLOR_DARK_BLUE);
+//    highscoreButton->setFont(&gameData->assetManager.getFont("menuFont"));
+//    highscoreButton->setText(new std::string("highscore"), 30);
+//    highscoreButton->setTextColor(highscoreButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+//    highscoreButton->renderButtonOnWindow(gameData->renderWindow);
+//
+//    // about button
+//    aboutButton->setOutline(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 2.f);
+//    aboutButton->setFillColor(new COLOR_DARK_BLUE);
+//    aboutButton->setFont(&gameData->assetManager.getFont("menuFont"));
+//    aboutButton->setText(new std::string("about"), 30);
+//    aboutButton->setTextColor(aboutButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+//    aboutButton->renderButtonOnWindow(gameData->renderWindow);
     
     gameData->renderWindow.display();
 }
