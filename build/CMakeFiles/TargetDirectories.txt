@@ -1,0 +1,3 @@
+/home/maximilian/Github/spacefighters/build/CMakeFiles/rebuild_cache.dir
+/home/maximilian/Github/spacefighters/build/CMakeFiles/edit_cache.dir
+/home/maximilian/Github/spacefighters/build/CMakeFiles/spacefighters.dir

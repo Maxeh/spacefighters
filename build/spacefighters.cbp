@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="spacefighters"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\SFML-2.5.1-Compiled\;CMake Files\SFML-2.5.1-Compiled\lib\;CMake Files\SFML-2.5.1-Compiled\lib\cmake\;CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/maximilian/Github/spacefighters/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/maximilian/Github/spacefighters/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/maximilian/Github/spacefighters/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="spacefighters">
+				<Option output="/home/maximilian/Github/spacefighters/build/spacefighters" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maximilian/Github/spacefighters/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 spacefighters"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="spacefighters/fast">
+				<Option output="/home/maximilian/Github/spacefighters/build/spacefighters" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maximilian/Github/spacefighters/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 spacefighters/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/maximilian/Github/spacefighters/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/maximilian/Github/spacefighters/main.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/AssetManager.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/AssetManager.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/Constants.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameManager.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameManager.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/Asteroid.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/Asteroid.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/GameScreen.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/GameScreen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/Spaceship.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/GameScreen/Spaceship.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/MenuScreen/MenuScreen.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/MenuScreen/MenuScreen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/Screen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/ScreenManager.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/ScreenManager.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/SpaceButton.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/SpaceButton.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/SplashScreen/SplashScreen.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/src/SplashScreen/SplashScreen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML/SFMLSharedTargets-release.cmake">
+			<Option virtualFolder="CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\SFML-2.5.1-Compiled\lib\cmake\SFML\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

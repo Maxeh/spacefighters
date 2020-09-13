@@ -1,0 +1,5 @@
+/snap/clion/123/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/maximilian/Github/spacefighters
+-- Found SFML 2.5.1 in /home/maximilian/Github/spacefighters/SFML-2.5.1-Compiled/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/maximilian/Github/spacefighters/build
