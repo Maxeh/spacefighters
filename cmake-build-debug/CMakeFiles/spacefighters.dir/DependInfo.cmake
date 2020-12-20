@@ -4,16 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Maximilian/Documents/Github/spacefighters/main.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/main.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/AssetManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Asteroid.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/GameScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/GameScreen/Spaceship.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/MenuScreen/MenuScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/ScreenManager.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/SpaceButton.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj"
-  "C:/Users/Maximilian/Documents/Github/spacefighters/src/SplashScreen/SplashScreen.cpp" "C:/Users/Maximilian/Documents/Github/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/main.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/main.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/AssetManager.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/AssetManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/MenuScreen/MenuScreen.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/SpaceButton.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj"
+  "C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.cpp" "C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-debug/CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,7 +24,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "C:/Users/Maximilian/Documents/SFML-2.5.1/include"
+  "C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include"
   )
 
 # Targets to which this target links.

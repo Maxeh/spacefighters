@@ -60,20 +60,20 @@ void SpaceButton::setTextColor(sf::Color* textColor) {
 
 void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
     
-//    buttonShape = new sf::RectangleShape(sf::Vector2f(width, height));
-//    buttonShape->setPosition(x, y);
-//
-//    if (fillColor) {
-//        buttonShape->setFillColor(*fillColor);
-//    }
-//
-//    if (outlineColor) {
-//        buttonShape->setOutlineThickness(outlineThickness);
-//        buttonShape->setOutlineColor(*outlineColor);
-//    }
-//
-//    renderWindow.draw(*buttonShape);
-//
+    buttonShape = new sf::RectangleShape(sf::Vector2f(width, height));
+    buttonShape->setPosition(x, y);
+
+    if (fillColor) {
+        buttonShape->setFillColor(*fillColor);
+    }
+
+    if (outlineColor) {
+        buttonShape->setOutlineThickness(outlineThickness);
+        buttonShape->setOutlineColor(*outlineColor);
+    }
+
+    renderWindow.draw(*buttonShape);
+
     if (sprite) {
         sprite->setPosition(x + 4, y + 5);
         sprite->setScale(0.26f, 0.26f);
@@ -83,22 +83,22 @@ void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
         renderWindow.draw(*sprite);
     }
 
-//    if (textFont && textString) {
-//        sf::Text buttonText;
-//        buttonText.setFont(*textFont);
-//        buttonText.setString(*textString);
-//        buttonText.setCharacterSize(textCharacterSize);
-//        if (textColor) {
-//            buttonText.setFillColor(*textColor);
-//        }
-//        sf::FloatRect textRect = buttonText.getLocalBounds();
-//        buttonText.setOrigin(
-//            textRect.left + textRect.width / 2.0f,
-//            textRect.top + textRect.height / 2.0f);
-//        buttonText.setPosition(
-//            x + (width / 2),
-//            y + (height / 2));
-//        renderWindow.draw(buttonText);
-//    }
+    if (textFont && textString) {
+        sf::Text buttonText;
+        buttonText.setFont(*textFont);
+        buttonText.setString(*textString);
+        buttonText.setCharacterSize(textCharacterSize);
+        if (textColor) {
+            buttonText.setFillColor(*textColor);
+        }
+        sf::FloatRect textRect = buttonText.getLocalBounds();
+        buttonText.setOrigin(
+            textRect.left + textRect.width / 2.0f,
+            textRect.top + textRect.height / 2.0f);
+        buttonText.setPosition(
+            x + (width / 2),
+            y + (height / 2));
+        renderWindow.draw(buttonText);
+    }
 }
 

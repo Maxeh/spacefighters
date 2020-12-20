@@ -8,12 +8,13 @@
 class MenuScreen : public Screen {
 private:
     std::shared_ptr<GameManager::GameData> gameData;
-    SpaceButton* closeButton;
-    SpaceButton* soundButton;
     SpaceButton* singlePlayerButton;
     SpaceButton* twoPlayerButton;
     SpaceButton* highscoreButton;
     SpaceButton* aboutButton;
+    SpaceButton* closeButton;
+    SpaceButton* soundButton;
+    sf::Sprite* soundButtonSprite;
     bool closeButtonHovered = false;
     bool soundButtonHovered = false;
     bool singlePlayerButtonHovered = false;
@@ -28,6 +29,7 @@ private:
     int mousePositionWhenMovedDiffX = 0;
     int mousePositionWhenMovedDiffY = 0;
     bool mouseButtonPressed = false;
+    bool soundOn = true;
 public:
     explicit MenuScreen(std::shared_ptr<GameManager::GameData> gameData);
     ~MenuScreen();

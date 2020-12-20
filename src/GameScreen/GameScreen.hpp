@@ -4,6 +4,7 @@
 #include <memory>
 #include "../Screen.hpp"
 #include "../GameManager.hpp"
+#include "../SpaceButton.hpp"
 #include "Asteroid.hpp"
 #include "Spaceship.hpp"
 
@@ -21,7 +22,14 @@ private:
     int asteroidMoveCounter = 0;
     double rotation = 0.f;
     bool isPause = false;
-    
+    bool soundOn = true;
+
+    SpaceButton* closeButton;
+    SpaceButton* soundButton;
+    sf::Sprite* soundButtonSprite;
+    bool closeButtonHovered = false;
+    bool soundButtonHovered = false;
+
     int initialWindowX = 0;
     int initialWindowY = 0;
     int mousePositionWhenPressedX = 0;
