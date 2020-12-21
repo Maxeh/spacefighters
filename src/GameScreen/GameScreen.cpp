@@ -18,11 +18,9 @@ void GameScreen::init() {
     this->gameData->assetManager.loadTexture("asteroid", "res/asteroid-60x54.png", false);
     this->gameData->assetManager.loadTexture("spaceship", "res/spaceship-75x74.png", false);
     
-    int i = 0;
-    while ((WINDOW_WIDTH - ASTEROID_HORIZONTAL_SPACE_MAX * i) > -ASTEROID_HORIZONTAL_SPACE_MAX && ++i) {
-        addAsteroids(WINDOW_WIDTH - ASTEROID_HORIZONTAL_SPACE_MAX * i);
+    for (int i = 0; i < 12; i++) {
+        addAsteroids();
     }
-    asteroidStartPosition = WINDOW_WIDTH - (i * ASTEROID_HORIZONTAL_SPACE_MAX) - ASTEROID_WIDTH;
 }
 
 bool isPauseKey(const sf::Keyboard::Key &key) {
@@ -43,7 +41,6 @@ void GameScreen::handleInput() {
             case sf::Event::KeyPressed:
                 if (isPauseKey(event.key.code)) {
                     isPause = !isPause;
-//                        ShowWindow(mainWin.getSystemHandle(), SW_MINIMIZE);
                 }
                 break;
             case sf::Event::KeyReleased:
@@ -116,28 +113,28 @@ void GameScreen::handleInput() {
         }
     }
     
-    bool shouldMoveSpaceship = true;
+//    bool shouldMoveSpaceship = true;
 //    if (clockSpaceship.getElapsedTime().asMilliseconds() >= 5) {
 //        shouldMoveSpaceship = true;
 //        clockSpaceship.restart();
 //    }
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        if (shouldMoveSpaceship) {
+//        if (shouldMoveSpaceship) {
             moveSpaceship(-velocity);
             if (velocity < 5) {
                 velocity += acceleration;
             }
-        }
+//        }
     }
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        if (shouldMoveSpaceship) {
+//        if (shouldMoveSpaceship) {
             moveSpaceship(velocity);
             if (velocity < 5) {
                 velocity += acceleration;
             }
-        }
+//        }
     }
 }
 
@@ -155,7 +152,7 @@ void GameScreen::update() {
     int s = asteroidMoveCounter % ASTEROID_HORIZONTAL_SPACE_MAX;
     if (s == 0) {
         asteroidMoveCounter = 0;
-        addAsteroids(asteroidStartPosition);
+        addAsteroids();
     }
     
     // rotate asteroids
@@ -188,7 +185,7 @@ void GameScreen::draw() {
     // spaceship
     sf::Sprite sprite;
     sprite.setTexture(this->gameData->assetManager.getTexture("spaceship"));
-    sprite.setPosition(this->spaceship.getX(), (float) WINDOW_HEIGHT - 100);
+    sprite.setPosition(this->spaceship.getX(), (float) WINDOW_HEIGHT - 100); // TODO need y
     this->gameData->renderWindow.draw(sprite);
 
     // border around window
@@ -233,14 +230,6 @@ void GameScreen::draw() {
     soundButton->setSprite(soundButtonSprite);
     soundButton->setSpriteColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
     soundButton->renderButtonOnWindow(gameData->renderWindow);
-
-    // border
-//    sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 20));
-//    borderShape.setFillColor(sf::Color(255, 255, 255, 0));
-//    borderShape.setOutlineThickness(5.f);
-//    borderShape.setOutlineColor(sf::Color(165, 23, 23));
-//    borderShape.setPosition(5.f, 15.f);
-//    this->gameData->renderWindow.draw(borderShape);
     
     this->gameData->renderWindow.display();
     
@@ -257,35 +246,36 @@ void GameScreen::pause() {
 
 // -------------------------
 
-void GameScreen::addAsteroids(int startPosition) {
-    
-    int startY = (WINDOW_HEIGHT / 2) - ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_HEIGHT) -
-        ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_VERTICAL_SPACE) + (ASTEROID_VERTICAL_SPACE / 2);
-    
+void GameScreen::addAsteroids() {
+
+    int startY = ((WINDOW_HEIGHT) / 2) - ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_HEIGHT) -
+                 ((NUMBER_OF_ASTEROIDS / 2) * ASTEROID_VERTICAL_SPACE) + (ASTEROID_VERTICAL_SPACE / 2) + 27;
+
     for (int i = 0; i < NUMBER_OF_ASTEROIDS; i++) {
-        if (shouldAddAsteroid(ASTEROID_PROBABILITY)) {
-            asteroids.emplace_back(
-                startPosition + randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX),
-                startY + i * ASTEROID_HEIGHT + i * ASTEROID_VERTICAL_SPACE, randomFloatBetween(-1.2, 1.2));
+        int startY2 = startY + i * ASTEROID_HEIGHT + i * ASTEROID_VERTICAL_SPACE;
+
+        int startX = WINDOW_WIDTH;
+        if (asteroids.size() >= NUMBER_OF_ASTEROIDS) {
+            startX = asteroids.at(asteroids.size() - NUMBER_OF_ASTEROIDS).getX();
         }
+
+        asteroids.emplace_back(
+                startX - randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, (300)),
+                randomIntBetween(startY2 - ASTEROID_VERTICAL_SPACE / 2, startY2 + ASTEROID_VERTICAL_SPACE / 2),
+                randomFloatBetween(-0.8, 0.8));
     }
 }
 
 void GameScreen::moveSpaceship(float velocity) {
     
     float newX = spaceship.getX() + velocity;
-    if (newX < 0) {
-        spaceship.setX(1);
-    } else if (newX > (float) (WINDOW_WIDTH - SPACESHIP_WIDTH)) {
-        spaceship.setX((float) (WINDOW_WIDTH - SPACESHIP_WIDTH));
+    if (newX < 5) {
+        spaceship.setX(5);
+    } else if (newX > (float) (WINDOW_WIDTH - SPACESHIP_WIDTH - 5)) {
+        spaceship.setX((float) (WINDOW_WIDTH - SPACESHIP_WIDTH - 5));
     } else {
         spaceship.moveX(velocity);
     }
-}
-
-bool GameScreen::shouldAddAsteroid(double probability) const {
-    
-    return ((double) rand() / RAND_MAX) < probability;
 }
 
 int GameScreen::randomIntBetween(int iMin, int iMax) const {

@@ -19,11 +19,12 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameDa
     gameData->assetManager.loadTexture("soundOn", "res/soundOn.png", false);
     gameData->assetManager.loadTexture("soundOff", "res/soundOff.png", true);
     gameData->assetManager.loadFont("menuFont", "res/space_age.ttf");
+    gameData->assetManager.loadSound(MENU_SOUND, "res/spaceSound3.wav");
+    gameData->assetManager.playSound(MENU_SOUND);
 }
 
 MenuScreen::~MenuScreen() {
 
-    std::cout << "called";
     delete singlePlayerButton;
     delete twoPlayerButton;
     delete highscoreButton;
@@ -35,8 +36,6 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::init() {
 
-    this->gameData->assetManager.loadSound(MENU_SOUND, "res/spaceSound3.wav");
-    this->gameData->assetManager.playSound(MENU_SOUND);
 }
 
 void MenuScreen::handleInput() {
