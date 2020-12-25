@@ -27,3 +27,15 @@ float Asteroid::getRotation() const {
     
     return currentRotation;
 }
+
+bool Asteroid::setVisible(bool visible) {
+
+    this->visible = visible;
+}
+
+bool Asteroid::isVisible() {
+
+    return visible;
+}
+
+

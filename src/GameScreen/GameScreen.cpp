@@ -4,7 +4,7 @@
 
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
         gameData(gameData),
-        spaceship((float) WINDOW_WIDTH / 2 - (float) SPACESHIP_WIDTH / 2) {}
+        spaceship((float) WINDOW_WIDTH / 2 - (float) SPACESHIP_WIDTH / 2, (float) WINDOW_HEIGHT - 100) {}
 
 void GameScreen::init() {
 
@@ -36,9 +36,12 @@ bool isPauseKey(const sf::Keyboard::Key &key) {
     return key == sf::Keyboard::P;
 }
 
-void GameScreen::handleInput() {
+bool isSpaceKey(const sf::Keyboard::Key &key) {
 
-//    sf::Clock clockSpaceship;
+    return key == sf::Keyboard::Space;
+}
+
+void GameScreen::handleInput() {
 
     sf::Event event{};
     while (this->gameData->renderWindow.pollEvent(event)) {
@@ -49,6 +52,15 @@ void GameScreen::handleInput() {
             case sf::Event::KeyPressed:
                 if (isPauseKey(event.key.code)) {
                     isPause = !isPause;
+                }
+                if (isSpaceKey(event.key.code)) {
+                    if (!spaceship.isReloading()) {
+                        float x = spaceship.getX();
+                        float y = spaceship.getY();
+                        missiles.emplace_back(x + 4, y);
+                        missiles.emplace_back(x + (float) SPACESHIP_WIDTH - 6, y);
+                        spaceship.reload();
+                    }
                 }
                 break;
             case sf::Event::KeyReleased:
@@ -148,15 +160,55 @@ void GameScreen::handleInput() {
 
 void GameScreen::update() {
 
-    for (std::vector<Asteroid> &asteroids : asteroidsArray) {
+    // collision detection using shapes
+    for (auto &missile : missiles) {
+        if (missile.isVisible()) {
+            for (auto &asteroids : asteroidsArray) {
+                for (auto &asteroid : asteroids) {
+                    if (asteroid.isVisible()) {
+
+                        sf::RectangleShape missileShape(sf::Vector2f(5, 50));
+                        missileShape.setPosition((float) missile.getX(), (float) missile.getY());
+
+                        sf::Sprite asteroidSprite;
+                        asteroidSprite.setOrigin((float) ASTEROID_WIDTH / 2, (float) ASTEROID_HEIGHT / 2);
+                        asteroidSprite.setTexture(this->gameData->assetManager.getTexture("asteroid"));
+                        asteroidSprite.setPosition(
+                                (float) asteroid.getX() + (float) ASTEROID_WIDTH / 2,
+                                (float) asteroid.getY() + (float) ASTEROID_HEIGHT / 2);
+                        asteroidSprite.rotate(asteroid.getRotation());
+                        // workaround for better real object collision
+                        asteroidSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+
+                        if (missileShape.getGlobalBounds().intersects(asteroidSprite.getGlobalBounds())) {
+                            asteroid.setVisible(false);
+                            missile.setVisible(false);
+                        }
+                    }
+                }
+
+                // TODO add spaceship collision
+            }
+        }
+    }
+
+    // update missiles
+    for (int i = 0; i < missiles.size(); i++) {
+        auto& missile = missiles.at(i);
+        missile.move();
+        if (missile.getY() < -100) {
+            missiles.erase(missiles.begin() + i);
+            i--;
+        }
+    }
+
+    // update asteroids
+    for (int i = 0; i < 6; i++) {
+        auto& asteroids = asteroidsArray[i];
         for (auto &asteroid : asteroids) {
             asteroid.moveX(1);
             asteroid.rotate();
         }
-    }
-
-    for (int i = 0; i < 6; i++) {
-        auto &asteroids = asteroidsArray[i];
         if (asteroids.at(0).getX() > WINDOW_WIDTH) {
             asteroids.erase(asteroids.begin());
             int y = getAsteroidStartY() + i * ASTEROID_HEIGHT + i * ASTEROID_VERTICAL_SPACE;
@@ -167,6 +219,8 @@ void GameScreen::update() {
             asteroids.emplace_back(x, y, r);
         }
     }
+
+    rotation += 2.0;
 }
 
 void GameScreen::draw() {
@@ -178,25 +232,43 @@ void GameScreen::draw() {
     backgroundShape.setFillColor(COLOR_DARK_BLUE_2);
     this->gameData->renderWindow.draw(backgroundShape);
 
+    for (auto &missile : missiles) {
+        if (missile.isVisible()) {
+            sf::RectangleShape borderShape(sf::Vector2f(5, 30));
+            borderShape.setFillColor(COLOR_RED);
+            borderShape.setPosition((float) missile.getX(), (float) missile.getY());
+            gameData->renderWindow.draw(borderShape);
+        }
+    }
+
     // asteroids
     for (auto &asteroids : asteroidsArray) {
         for (auto &asteroid : asteroids) {
-            sf::Sprite sprite;
-            sprite.setOrigin((float) ASTEROID_WIDTH / 2, (float) ASTEROID_HEIGHT / 2);
-            sprite.setTexture(this->gameData->assetManager.getTexture("asteroid"));
-            sprite.setPosition(
-                    (float) asteroid.getX() + (float) ASTEROID_WIDTH / 2,
-                    (float) asteroid.getY() + (float) ASTEROID_HEIGHT / 2);
-            sprite.rotate(asteroid.getRotation());
-            this->gameData->renderWindow.draw(sprite);
+            if (asteroid.isVisible()) {
+                sf::Sprite sprite;
+                sprite.setOrigin((float) ASTEROID_WIDTH / 2, (float) ASTEROID_HEIGHT / 2);
+                sprite.setTexture(this->gameData->assetManager.getTexture("asteroid"));
+                sprite.setPosition(
+                        (float) asteroid.getX() + (float) ASTEROID_WIDTH / 2,
+                        (float) asteroid.getY() + (float) ASTEROID_HEIGHT / 2);
+                sprite.rotate(asteroid.getRotation());
+                sf::FloatRect rect;
+                rect.left = sprite.getPosition().x;
+                rect.top = sprite.getPosition().y;
+                rect.width = sprite.getGlobalBounds().width;
+                rect.height = sprite.getGlobalBounds().height;
+                this->gameData->renderWindow.draw(sprite);
+            }
         }
     }
 
     // spaceship
     sf::Sprite sprite;
     sprite.setTexture(this->gameData->assetManager.getTexture("spaceship"));
-    sprite.setPosition(this->spaceship.getX(), (float) WINDOW_HEIGHT - 100); // TODO need y
+    sprite.setPosition(this->spaceship.getX(), this->spaceship.getY());
     this->gameData->renderWindow.draw(sprite);
+
+    /** draw not game related UI elements **/
 
     // border around window
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
@@ -205,6 +277,12 @@ void GameScreen::draw() {
     borderShape.setOutlineColor(COLOR_DARK_BLUE_1);
     borderShape.setPosition(5.f, 5.f);
     gameData->renderWindow.draw(borderShape);
+
+    // top border box
+    sf::RectangleShape topBorderShape(sf::Vector2f(WINDOW_WIDTH - 10, 50));
+    topBorderShape.setFillColor(sf::Color(COLOR_DARK_BLUE_2));
+    topBorderShape.setPosition(5.f, 5.f);
+    gameData->renderWindow.draw(topBorderShape);
 
     // top border
     sf::RectangleShape borderShape2(sf::Vector2f(WINDOW_WIDTH - 10, 0));
@@ -242,8 +320,6 @@ void GameScreen::draw() {
     soundButton->renderButtonOnWindow(gameData->renderWindow);
 
     this->gameData->renderWindow.display();
-
-    rotation = rotation + 2.0;
 }
 
 void GameScreen::resume() {

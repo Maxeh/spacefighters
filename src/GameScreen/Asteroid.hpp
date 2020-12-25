@@ -6,6 +6,7 @@ class Asteroid {
     int y;
     float initialRotation;
     float currentRotation;
+    bool visible = true;
 public:
     explicit Asteroid(int x, int y, float rotation);
     void rotate();
@@ -13,6 +14,8 @@ public:
     int getX() const;
     int getY() const;
     float getRotation() const;
+    bool setVisible(bool visible);
+    bool isVisible();
 };
 
 #endif

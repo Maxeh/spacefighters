@@ -277,6 +277,33 @@ src/GameScreen/GameScreen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.s
 .PHONY : src/GameScreen/GameScreen.cpp.s
 
+src/GameScreen/Missile.obj: src/GameScreen/Missile.cpp.obj
+
+.PHONY : src/GameScreen/Missile.obj
+
+# target to build an object file
+src/GameScreen/Missile.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj
+.PHONY : src/GameScreen/Missile.cpp.obj
+
+src/GameScreen/Missile.i: src/GameScreen/Missile.cpp.i
+
+.PHONY : src/GameScreen/Missile.i
+
+# target to preprocess a source file
+src/GameScreen/Missile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.i
+.PHONY : src/GameScreen/Missile.cpp.i
+
+src/GameScreen/Missile.s: src/GameScreen/Missile.cpp.s
+
+.PHONY : src/GameScreen/Missile.s
+
+# target to generate assembly for a file
+src/GameScreen/Missile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.s
+.PHONY : src/GameScreen/Missile.cpp.s
+
 src/GameScreen/Spaceship.obj: src/GameScreen/Spaceship.cpp.obj
 
 .PHONY : src/GameScreen/Spaceship.obj
@@ -436,6 +463,9 @@ help:
 	@echo ... src/GameScreen/GameScreen.obj
 	@echo ... src/GameScreen/GameScreen.i
 	@echo ... src/GameScreen/GameScreen.s
+	@echo ... src/GameScreen/Missile.obj
+	@echo ... src/GameScreen/Missile.i
+	@echo ... src/GameScreen/Missile.s
 	@echo ... src/GameScreen/Spaceship.obj
 	@echo ... src/GameScreen/Spaceship.i
 	@echo ... src/GameScreen/Spaceship.s

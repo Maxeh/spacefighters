@@ -7,6 +7,7 @@
 #include "../SpaceButton.hpp"
 #include "Asteroid.hpp"
 #include "Spaceship.hpp"
+#include "Missile.hpp"
 
 class GameScreen : public Screen {
 private:
@@ -41,6 +42,7 @@ private:
 
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
+    std::vector<Missile> missiles;
     Spaceship spaceship;
     void moveSpaceship(float velocity);
     int randomIntBetween(int iMin, int iMax) const;

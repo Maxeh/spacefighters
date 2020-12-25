@@ -114,6 +114,12 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
