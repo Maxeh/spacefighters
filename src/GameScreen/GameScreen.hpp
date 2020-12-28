@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "../Screen.hpp"
+#include "../Constants.hpp"
 #include "../GameManager.hpp"
 #include "../SpaceButton.hpp"
 #include "Asteroid.hpp"
@@ -16,10 +17,16 @@ private:
     const int ASTEROID_VERTICAL_SPACE = 30;
     const int ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
     const int ASTEROID_HORIZONTAL_SPACE_MAX = 300;
+    const float ASTEROID_ROTATION_ANGLE[2] = {-5, 5};
+    const float ASTEROID_VELOCITY = 8;
     const int NUMBER_OF_ASTEROIDS_IN_COLUMN = 6;
     const int SPACESHIP_WIDTH = 75;
+    const float SPACESHIP_MAX_LEFT_POSITION = 5;
+    const float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
+    const float SPACESHIP_DEFAULT_ACCELERATION = 1;
+    const float SPACESHIP_DEFAULT_VELOCITY = 15;
+    const float SPACESHIP_MAX_VELOCITY = 40;
     const int HEADER_HEIGHT = 54;
-    double rotation = 0.f;
     bool isPause = false;
     bool soundOn = true;
 
@@ -37,8 +44,11 @@ private:
     int mousePositionWhenMovedDiffY = 0;
     bool mouseButtonPressed = false;
     
-    float velocity = 2;
-    float acceleration = 0.1;
+    float velocity = SPACESHIP_DEFAULT_VELOCITY;
+    float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
+    bool movingLeft = false;
+    bool movingRight = false;
+    float lastInterpolation = 0;
 
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
@@ -53,7 +63,7 @@ public:
     void init() override;
     void handleInput() override;
     void update() override;
-    void draw() override;
+    void draw(float interpolation) override;
     void resume() override;
     void pause() override;
 

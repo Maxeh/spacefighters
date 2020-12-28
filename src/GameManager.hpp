@@ -14,8 +14,12 @@ public:
     };
     GameManager(int width, int height, const std::string& title);
 private:
-    void run();
+    const int MAX_FRAME_SKIP = 5;
+    const int UPDATE_INTERVAL = 40;
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
+    void run();
+    int getClockTimeInMillis(sf::Clock& clock);
+    float getInterpolation(sf::Clock& clock, int nextUpdateInMillis);
 };
 
 #endif

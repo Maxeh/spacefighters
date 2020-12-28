@@ -134,7 +134,7 @@ void MenuScreen::update() {
 
 }
 
-void MenuScreen::draw() {
+void MenuScreen::draw(float interpolation) {
     
     gameData->renderWindow.clear(sf::Color::White);
     

@@ -285,6 +285,7 @@ CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: C:/Users/Maximilian/Docume
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/AssetManager.hpp
+CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/Constants.hpp
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/GameManager.cpp
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/GameManager.hpp
 CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj: ../src/GameScreen/Asteroid.hpp

@@ -6,8 +6,7 @@ Missile::Missile(float x, float y) : x(x), y(y) {
 
 void Missile::move() {
 
-    y -= 5;
-
+    y -= velocity;
 }
 
 float Missile::getX() {
@@ -28,4 +27,19 @@ void Missile::setVisible(bool visible) {
 bool Missile::isVisible() {
 
     return visible;
+}
+
+float Missile::getWidth() {
+
+    return width;
+}
+
+float Missile::getHeight() {
+
+    return height;
+}
+
+float Missile::getSpeed() {
+
+    return velocity;
 }

@@ -25,7 +25,7 @@ void SplashScreen::update() {
     }
 }
 
-void SplashScreen::draw() {
+void SplashScreen::draw(float interpolation) {
     
     this->gameData->renderWindow.clear(sf::Color::White);
     

@@ -15,17 +15,41 @@ GameManager::GameManager(int width, int height, const std::string &title) {
 }
 
 void GameManager::run() {
-    
-    sf::Clock clock;
+
+    sf::Clock gameClock;
+    sf::Clock fpsClock;
+    int fpsCounter = 0;
+    int nextUpdateInMillis = getClockTimeInMillis(gameClock);
     while (this->gameData->renderWindow.isOpen()) {
-        this->gameData->screenManager.processScreenChanges();
-    
-        // TODO here we need advanced game loop
-        if (clock.getElapsedTime().asMilliseconds() >= 5) {
+
+        int loops = 0; // on slow hardware we can skip frames
+        while(getClockTimeInMillis(gameClock) >= nextUpdateInMillis && loops < MAX_FRAME_SKIP) {
+            this->gameData->screenManager.processScreenChanges();
             this->gameData->screenManager.getActiveScreen()->handleInput();
             this->gameData->screenManager.getActiveScreen()->update();
-            this->gameData->screenManager.getActiveScreen()->draw();
-            clock.restart();
+            nextUpdateInMillis += UPDATE_INTERVAL;
+            loops++;
+        }
+
+        // rendering is done as often as possible using prediction technique
+        float interpolation = getInterpolation(gameClock, nextUpdateInMillis);
+        this->gameData->screenManager.getActiveScreen()->draw(interpolation);
+
+        fpsCounter++;
+        if (fpsClock.getElapsedTime().asMilliseconds() >= 1000) {
+//            std::cout << "FPS: " << fpsCounter << std::endl;
+            fpsCounter = 0;
+            fpsClock.restart();
         }
     }
+}
+
+int GameManager::getClockTimeInMillis(sf::Clock& clock) {
+
+    return clock.getElapsedTime().asMilliseconds();
+}
+
+float GameManager::getInterpolation(sf::Clock &clock, int nextUpdateInMillis) {
+
+    return float(getClockTimeInMillis(clock) + UPDATE_INTERVAL - nextUpdateInMillis) / float(UPDATE_INTERVAL);
 }

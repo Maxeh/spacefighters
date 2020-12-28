@@ -25,8 +25,9 @@ void GameScreen::init() {
             y = randomIntBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
             int x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
             x -= randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(-0.8, 0.8);
-            asteroidsArray[i].emplace_back(x, y, r);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
+            float v = ASTEROID_VELOCITY;
+            asteroidsArray[i].emplace_back(x, y, v, r);
         }
     }
 }
@@ -65,10 +66,14 @@ void GameScreen::handleInput() {
                 break;
             case sf::Event::KeyReleased:
                 if (event.key.code == sf::Keyboard::Left) {
-                    velocity = 2;
+                    moveSpaceship(-velocity * lastInterpolation);
+                    velocity = SPACESHIP_DEFAULT_VELOCITY;
+                    movingLeft = false;
                 }
                 if (event.key.code == sf::Keyboard::Right) {
-                    velocity = 2;
+                    moveSpaceship(velocity * lastInterpolation);
+                    velocity = SPACESHIP_DEFAULT_VELOCITY;
+                    movingRight = false;
                 }
                 break;
             case sf::Event::MouseButtonPressed:
@@ -133,28 +138,25 @@ void GameScreen::handleInput() {
         }
     }
 
-//    bool shouldMoveSpaceship = true;
-//    if (clockSpaceship.getElapsedTime().asMilliseconds() >= 5) {
-//        shouldMoveSpaceship = true;
-//        clockSpaceship.restart();
-//    }
+
+    // TODO gameloop + space release timer reset + balken unten
+
+    // Checking key is pressed need extra handling
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-//        if (shouldMoveSpaceship) {
+        movingLeft = true;
         moveSpaceship(-velocity);
-        if (velocity < 5) {
+        if (velocity < SPACESHIP_MAX_VELOCITY) {
             velocity += acceleration;
         }
-//        }
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-//        if (shouldMoveSpaceship) {
+        movingRight = true;
         moveSpaceship(velocity);
-        if (velocity < 5) {
+        if (velocity < SPACESHIP_MAX_VELOCITY) {
             velocity += acceleration;
         }
-//        }
     }
 }
 
@@ -167,7 +169,7 @@ void GameScreen::update() {
                 for (auto &asteroid : asteroids) {
                     if (asteroid.isVisible()) {
 
-                        sf::RectangleShape missileShape(sf::Vector2f(5, 50));
+                        sf::RectangleShape missileShape(sf::Vector2f(missile.getWidth(), missile.getHeight()));
                         missileShape.setPosition((float) missile.getX(), (float) missile.getY());
 
                         sf::Sprite asteroidSprite;
@@ -178,7 +180,7 @@ void GameScreen::update() {
                                 (float) asteroid.getY() + (float) ASTEROID_HEIGHT / 2);
                         asteroidSprite.rotate(asteroid.getRotation());
                         // workaround for better real object collision
-                        asteroidSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+//                        asteroidSprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
                         if (missileShape.getGlobalBounds().intersects(asteroidSprite.getGlobalBounds())) {
                             asteroid.setVisible(false);
@@ -196,7 +198,7 @@ void GameScreen::update() {
     for (int i = 0; i < missiles.size(); i++) {
         auto& missile = missiles.at(i);
         missile.move();
-        if (missile.getY() < -100) {
+        if (missile.getY() < -missile.getHeight()) {
             missiles.erase(missiles.begin() + i);
             i--;
         }
@@ -206,7 +208,7 @@ void GameScreen::update() {
     for (int i = 0; i < 6; i++) {
         auto& asteroids = asteroidsArray[i];
         for (auto &asteroid : asteroids) {
-            asteroid.moveX(1);
+            asteroid.move();
             asteroid.rotate();
         }
         if (asteroids.at(0).getX() > WINDOW_WIDTH) {
@@ -215,16 +217,16 @@ void GameScreen::update() {
             y = randomIntBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
             int x = asteroids[asteroids.size() - 1].getX();
             x -= randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(-0.8, 0.8);
-            asteroids.emplace_back(x, y, r);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
+            float v = ASTEROID_VELOCITY;
+            asteroids.emplace_back(x, y, v, r);
         }
     }
-
-    rotation += 2.0;
 }
 
-void GameScreen::draw() {
+void GameScreen::draw(float interpolation) {
 
+    lastInterpolation = interpolation;
     this->gameData->renderWindow.clear(sf::Color::White);
 
     // background
@@ -234,9 +236,9 @@ void GameScreen::draw() {
 
     for (auto &missile : missiles) {
         if (missile.isVisible()) {
-            sf::RectangleShape borderShape(sf::Vector2f(5, 30));
+            sf::RectangleShape borderShape(sf::Vector2f(missile.getWidth(), missile.getHeight()));
             borderShape.setFillColor(COLOR_RED);
-            borderShape.setPosition((float) missile.getX(), (float) missile.getY());
+            borderShape.setPosition((float) missile.getX(), (float) missile.getY() - missile.getSpeed() * interpolation);
             gameData->renderWindow.draw(borderShape);
         }
     }
@@ -249,14 +251,9 @@ void GameScreen::draw() {
                 sprite.setOrigin((float) ASTEROID_WIDTH / 2, (float) ASTEROID_HEIGHT / 2);
                 sprite.setTexture(this->gameData->assetManager.getTexture("asteroid"));
                 sprite.setPosition(
-                        (float) asteroid.getX() + (float) ASTEROID_WIDTH / 2,
+                        (float) asteroid.getX() + (float) ASTEROID_WIDTH / 2 + interpolation * ASTEROID_VELOCITY,
                         (float) asteroid.getY() + (float) ASTEROID_HEIGHT / 2);
-                sprite.rotate(asteroid.getRotation());
-                sf::FloatRect rect;
-                rect.left = sprite.getPosition().x;
-                rect.top = sprite.getPosition().y;
-                rect.width = sprite.getGlobalBounds().width;
-                rect.height = sprite.getGlobalBounds().height;
+                sprite.setRotation(asteroid.getRotation() + asteroid.getAngle() * interpolation);
                 this->gameData->renderWindow.draw(sprite);
             }
         }
@@ -265,8 +262,28 @@ void GameScreen::draw() {
     // spaceship
     sf::Sprite sprite;
     sprite.setTexture(this->gameData->assetManager.getTexture("spaceship"));
-    sprite.setPosition(this->spaceship.getX(), this->spaceship.getY());
+    if (movingLeft) {
+        if (this->spaceship.getX() - velocity * interpolation > SPACESHIP_MAX_LEFT_POSITION) {
+            sprite.setPosition(this->spaceship.getX() - velocity * interpolation, this->spaceship.getY());
+        } else {
+            sprite.setPosition(SPACESHIP_MAX_LEFT_POSITION, this->spaceship.getY());
+        }
+    } else if (movingRight) {
+        if (this->spaceship.getX() + velocity * interpolation < SPACESHIP_MAX_RIGHT_POSITION) {
+            sprite.setPosition(this->spaceship.getX() + velocity * interpolation, this->spaceship.getY());
+        } else {
+            sprite.setPosition(SPACESHIP_MAX_RIGHT_POSITION, this->spaceship.getY());
+        }
+    } else {
+        sprite.setPosition(this->spaceship.getX(), this->spaceship.getY());
+    }
     this->gameData->renderWindow.draw(sprite);
+
+    // health
+//    sf::RectangleShape healthShape(sf::Vector2f(WINDOW_WIDTH - 10, 10));
+//    healthShape.setFillColor(COLOR_RED);
+//    healthShape.setPosition(5, WINDOW_HEIGHT - 10);
+//    gameData->renderWindow.draw(healthShape);
 
     /** draw not game related UI elements **/
 
@@ -337,8 +354,10 @@ void GameScreen::moveSpaceship(float velocity) {
     float newX = spaceship.getX() + velocity;
     if (newX < 5) {
         spaceship.setX(5);
+        movingLeft = false;
     } else if (newX > (float) (WINDOW_WIDTH - SPACESHIP_WIDTH - 5)) {
         spaceship.setX((float) (WINDOW_WIDTH - SPACESHIP_WIDTH - 5));
+        movingRight = false;
     } else {
         spaceship.moveX(velocity);
     }

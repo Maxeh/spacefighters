@@ -1,16 +1,16 @@
 #include "Asteroid.hpp"
 
-Asteroid::Asteroid(int x, int y, float rotation)
-    : x(x), y(y), initialRotation(rotation), currentRotation(rotation) {}
+Asteroid::Asteroid(int x, int y, float v, float rotation)
+    : x(x), y(y), velocity(v), angle(rotation), rotation(rotation) {}
 
 void Asteroid::rotate() {
-    
-    currentRotation += initialRotation;
+
+    rotation += angle;
 }
 
-void Asteroid::moveX(int x) {
+void Asteroid::move() {
     
-    this->x += x;
+    this->x += velocity;
 }
 
 int Asteroid::getX() const {
@@ -25,10 +25,15 @@ int Asteroid::getY() const {
 
 float Asteroid::getRotation() const {
     
-    return currentRotation;
+    return rotation;
 }
 
-bool Asteroid::setVisible(bool visible) {
+float Asteroid::getAngle() const {
+
+    return angle;
+}
+
+void Asteroid::setVisible(bool visible) {
 
     this->visible = visible;
 }

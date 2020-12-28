@@ -4,17 +4,19 @@
 class Asteroid {
     int x;
     int y;
-    float initialRotation;
-    float currentRotation;
+    float angle;
+    float rotation;
+    float velocity;
     bool visible = true;
 public:
-    explicit Asteroid(int x, int y, float rotation);
+    explicit Asteroid(int x, int y, float v, float rotation);
     void rotate();
-    void moveX(int x);
+    void move();
     int getX() const;
     int getY() const;
+    float getAngle() const;
     float getRotation() const;
-    bool setVisible(bool visible);
+    void setVisible(bool visible);
     bool isVisible();
 };
 
