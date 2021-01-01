@@ -12,21 +12,21 @@
 
 class GameScreen : public Screen {
 private:
-    const int ASTEROID_WIDTH = 60;
-    const int ASTEROID_HEIGHT = 54;
-    const int ASTEROID_VERTICAL_SPACE = 30;
-    const int ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
-    const int ASTEROID_HORIZONTAL_SPACE_MAX = 300;
+    const int NUMBER_OF_ASTEROID_ROWS = 6;
+    const float ASTEROID_WIDTH = 60;
+    const float ASTEROID_HEIGHT = 54;
+    const float ASTEROID_VERTICAL_SPACE = 30;
+    const float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
+    const float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
     const float ASTEROID_ROTATION_ANGLE[2] = {-5, 5};
     const float ASTEROID_VELOCITY = 8;
-    const int NUMBER_OF_ASTEROIDS_IN_COLUMN = 6;
-    const int SPACESHIP_WIDTH = 75;
+    const float SPACESHIP_WIDTH = 75;
     const float SPACESHIP_MAX_LEFT_POSITION = 5;
     const float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
     const float SPACESHIP_DEFAULT_ACCELERATION = 1;
     const float SPACESHIP_DEFAULT_VELOCITY = 15;
     const float SPACESHIP_MAX_VELOCITY = 40;
-    const int HEADER_HEIGHT = 54;
+    const float HEADER_HEIGHT = 54;
     bool isPause = false;
     bool soundOn = true;
 
@@ -54,9 +54,9 @@ private:
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;
     Spaceship spaceship;
-    void moveSpaceship(float velocity);
-    int randomIntBetween(int iMin, int iMax) const;
-    float randomFloatBetween(double fMin, double fMax) const;
+    void moveSpaceship(float v);
+    static int randomIntBetween(float fMin, float fMax);
+    static float randomFloatBetween(float fMin, float fMax);
 public:
     explicit GameScreen(std::shared_ptr<GameManager::GameData> gameData);
     ~GameScreen() = default;
@@ -67,7 +67,7 @@ public:
     void resume() override;
     void pause() override;
 
-    int getAsteroidStartY();
+    float getAsteroidStartY() const;
 };
 
 #endif
