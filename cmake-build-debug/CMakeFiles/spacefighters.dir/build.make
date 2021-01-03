@@ -202,19 +202,19 @@ CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.s"
 	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Projects\spacefighters\src\MenuScreen\MenuScreen.cpp -o CMakeFiles\spacefighters.dir\src\MenuScreen\MenuScreen.cpp.s
 
-CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
-CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
-CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj: ../src/SpaceButton.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj"
-	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\SpaceButton.cpp.obj -c C:\Users\Maximilian\Documents\Projects\spacefighters\src\SpaceButton.cpp
+CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj: ../src/Utils/SpaceButton.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Utils\SpaceButton.cpp.obj -c C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceButton.cpp
 
-CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.i"
-	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Projects\spacefighters\src\SpaceButton.cpp > CMakeFiles\spacefighters.dir\src\SpaceButton.cpp.i
+CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.i"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceButton.cpp > CMakeFiles\spacefighters.dir\src\Utils\SpaceButton.cpp.i
 
-CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.s"
-	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Projects\spacefighters\src\SpaceButton.cpp -o CMakeFiles\spacefighters.dir\src\SpaceButton.cpp.s
+CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.s"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceButton.cpp -o CMakeFiles\spacefighters.dir\src\Utils\SpaceButton.cpp.s
 
 CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
 CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
@@ -230,6 +230,20 @@ CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.s"
 	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Projects\spacefighters\src\GameScreen\Missile.cpp -o CMakeFiles\spacefighters.dir\src\GameScreen\Missile.cpp.s
 
+CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj: CMakeFiles/spacefighters.dir/flags.make
+CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj: CMakeFiles/spacefighters.dir/includes_CXX.rsp
+CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj: ../src/Utils/SpaceHeader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\spacefighters.dir\src\Utils\SpaceHeader.cpp.obj -c C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceHeader.cpp
+
+CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.i"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceHeader.cpp > CMakeFiles\spacefighters.dir\src\Utils\SpaceHeader.cpp.i
+
+CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.s"
+	C:\Users\Maximilian\Documents\Projects\toolchain\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Maximilian\Documents\Projects\spacefighters\src\Utils\SpaceHeader.cpp -o CMakeFiles\spacefighters.dir\src\Utils\SpaceHeader.cpp.s
+
 # Object files for target spacefighters
 spacefighters_OBJECTS = \
 "CMakeFiles/spacefighters.dir/main.cpp.obj" \
@@ -241,8 +255,9 @@ spacefighters_OBJECTS = \
 "CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj" \
 "CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj" \
 "CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj" \
-"CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj"
+"CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj" \
+"CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj"
 
 # External object files for target spacefighters
 spacefighters_EXTERNAL_OBJECTS =
@@ -256,8 +271,9 @@ spacefighters.exe: CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj
-spacefighters.exe: CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj
+spacefighters.exe: CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj
 spacefighters.exe: CMakeFiles/spacefighters.dir/build.make
 spacefighters.exe: C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/lib/libsfml-graphics-s-d.a
 spacefighters.exe: C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/lib/libsfml-audio-s-d.a
@@ -273,7 +289,7 @@ spacefighters.exe: C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/lib/libFLAC
 spacefighters.exe: CMakeFiles/spacefighters.dir/linklibs.rsp
 spacefighters.exe: CMakeFiles/spacefighters.dir/objects1.rsp
 spacefighters.exe: CMakeFiles/spacefighters.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable spacefighters.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable spacefighters.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\spacefighters.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

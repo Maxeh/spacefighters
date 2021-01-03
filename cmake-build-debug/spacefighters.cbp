@@ -141,16 +141,22 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/SpaceButton.cpp">
-			<Option target="spacefighters"/>
-		</Unit>
-		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/SpaceButton.hpp">
-			<Option target="spacefighters"/>
-		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceButton.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceButton.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/CMakeLists.txt">

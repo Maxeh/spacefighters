@@ -18,11 +18,13 @@ public:
     void loadSound(const std::string& name, const std::string& fileName);
     void playSound(const std::string& name);
     void stopSound(const std::string& name);
+    bool isSoundPlaying(const std::string& name);
     void freeResources();
 private:
-    std::map<std::string, sf::Texture> textures;
-    std::map<std::string, sf::Font> fonts;
-    std::map<std::string, sf::Sound> sounds;
+    std::map<std::string, sf::Texture> texturesMap;
+    std::map<std::string, sf::Font> fontsMap;
+    std::map<std::string, sf::Sound> soundsMap;
+    std::map<std::string, bool> soundsPlayingMap;
 };
 
 #endif

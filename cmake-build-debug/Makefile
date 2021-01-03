@@ -385,33 +385,6 @@ src/ScreenManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.s
 .PHONY : src/ScreenManager.cpp.s
 
-src/SpaceButton.obj: src/SpaceButton.cpp.obj
-
-.PHONY : src/SpaceButton.obj
-
-# target to build an object file
-src/SpaceButton.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.obj
-.PHONY : src/SpaceButton.cpp.obj
-
-src/SpaceButton.i: src/SpaceButton.cpp.i
-
-.PHONY : src/SpaceButton.i
-
-# target to preprocess a source file
-src/SpaceButton.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.i
-.PHONY : src/SpaceButton.cpp.i
-
-src/SpaceButton.s: src/SpaceButton.cpp.s
-
-.PHONY : src/SpaceButton.s
-
-# target to generate assembly for a file
-src/SpaceButton.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/SpaceButton.cpp.s
-.PHONY : src/SpaceButton.cpp.s
-
 src/SplashScreen/SplashScreen.obj: src/SplashScreen/SplashScreen.cpp.obj
 
 .PHONY : src/SplashScreen/SplashScreen.obj
@@ -438,6 +411,60 @@ src/SplashScreen/SplashScreen.s: src/SplashScreen/SplashScreen.cpp.s
 src/SplashScreen/SplashScreen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.s
 .PHONY : src/SplashScreen/SplashScreen.cpp.s
+
+src/Utils/SpaceButton.obj: src/Utils/SpaceButton.cpp.obj
+
+.PHONY : src/Utils/SpaceButton.obj
+
+# target to build an object file
+src/Utils/SpaceButton.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.obj
+.PHONY : src/Utils/SpaceButton.cpp.obj
+
+src/Utils/SpaceButton.i: src/Utils/SpaceButton.cpp.i
+
+.PHONY : src/Utils/SpaceButton.i
+
+# target to preprocess a source file
+src/Utils/SpaceButton.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.i
+.PHONY : src/Utils/SpaceButton.cpp.i
+
+src/Utils/SpaceButton.s: src/Utils/SpaceButton.cpp.s
+
+.PHONY : src/Utils/SpaceButton.s
+
+# target to generate assembly for a file
+src/Utils/SpaceButton.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceButton.cpp.s
+.PHONY : src/Utils/SpaceButton.cpp.s
+
+src/Utils/SpaceHeader.obj: src/Utils/SpaceHeader.cpp.obj
+
+.PHONY : src/Utils/SpaceHeader.obj
+
+# target to build an object file
+src/Utils/SpaceHeader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.obj
+.PHONY : src/Utils/SpaceHeader.cpp.obj
+
+src/Utils/SpaceHeader.i: src/Utils/SpaceHeader.cpp.i
+
+.PHONY : src/Utils/SpaceHeader.i
+
+# target to preprocess a source file
+src/Utils/SpaceHeader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.i
+.PHONY : src/Utils/SpaceHeader.cpp.i
+
+src/Utils/SpaceHeader.s: src/Utils/SpaceHeader.cpp.s
+
+.PHONY : src/Utils/SpaceHeader.s
+
+# target to generate assembly for a file
+src/Utils/SpaceHeader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/Utils/SpaceHeader.cpp.s
+.PHONY : src/Utils/SpaceHeader.cpp.s
 
 # Help Target
 help:
@@ -475,12 +502,15 @@ help:
 	@echo ... src/ScreenManager.obj
 	@echo ... src/ScreenManager.i
 	@echo ... src/ScreenManager.s
-	@echo ... src/SpaceButton.obj
-	@echo ... src/SpaceButton.i
-	@echo ... src/SpaceButton.s
 	@echo ... src/SplashScreen/SplashScreen.obj
 	@echo ... src/SplashScreen/SplashScreen.i
 	@echo ... src/SplashScreen/SplashScreen.s
+	@echo ... src/Utils/SpaceButton.obj
+	@echo ... src/Utils/SpaceButton.i
+	@echo ... src/Utils/SpaceButton.s
+	@echo ... src/Utils/SpaceHeader.obj
+	@echo ... src/Utils/SpaceHeader.i
+	@echo ... src/Utils/SpaceHeader.s
 .PHONY : help
 
 

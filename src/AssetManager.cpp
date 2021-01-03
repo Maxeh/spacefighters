@@ -1,31 +1,30 @@
 #include "AssetManager.hpp"
-#include <SFML/Audio.hpp>
 
 void AssetManager::loadTexture(const std::string& name, const std::string& fileName, bool smooth) {
 
     sf::Texture texture;
     if (texture.loadFromFile(fileName)) {
         texture.setSmooth(smooth);
-        this->textures[name] = texture;
+        this->texturesMap[name] = texture;
     }
 }
 
 sf::Texture &AssetManager::getTexture(const std::string& name) {
     
-    return this->textures.at(name);
+    return this->texturesMap.at(name);
 }
 
 void AssetManager::loadFont(const std::string& name, const std::string& fileName) {
     
     sf::Font font;
     if (font.loadFromFile(fileName)) {
-        this->fonts[name] = font;
+        this->fontsMap[name] = font;
     }
 }
 
 sf::Font &AssetManager::getFont(const std::string& name) {
     
-    return this->fonts.at(name);
+    return this->fontsMap.at(name);
 }
 
 void AssetManager::loadSound(const std::string& name, const std::string& fileName) {
@@ -34,27 +33,35 @@ void AssetManager::loadSound(const std::string& name, const std::string& fileNam
     auto* soundBuffer = new sf::SoundBuffer;
     if (soundBuffer->loadFromFile(fileName)) {
         sound.setBuffer(*soundBuffer);
-        this->sounds[name] = sound;
+        this->soundsMap[name] = sound;
     }
 }
 
 void AssetManager::playSound(const std::string &name) {
 
-    this->sounds[name].setLoop(true);
-    this->sounds[name].play();
+    this->soundsPlayingMap[name] = true;
+    this->soundsMap[name].setLoop(true);
+    this->soundsMap[name].play();
 }
 
 void AssetManager::stopSound(const std::string &name) {
 
-    this->sounds[name].stop();
+    this->soundsPlayingMap[name] = false;
+    this->soundsMap[name].stop();
 }
 
 void AssetManager::freeResources() {
 
-    for (std::pair<std::string, sf::Sound> sound : this->sounds) {
+    for (std::pair<std::string, sf::Sound> sound : this->soundsMap) {
         delete sound.second.getBuffer();
     }
-    this->sounds.erase(this->sounds.begin(), this->sounds.end());
-    this->textures.erase(this->textures.begin(), this->textures.end());
-    this->fonts.erase(this->fonts.begin(), this->fonts.end());
+    this->soundsMap.erase(this->soundsMap.begin(), this->soundsMap.end());
+    this->soundsPlayingMap.erase(this->soundsPlayingMap.begin(), this->soundsPlayingMap.end());
+    this->texturesMap.erase(this->texturesMap.begin(), this->texturesMap.end());
+    this->fontsMap.erase(this->fontsMap.begin(), this->fontsMap.end());
+}
+
+bool AssetManager::isSoundPlaying(const std::string& name) {
+
+    return soundsPlayingMap[name];
 }

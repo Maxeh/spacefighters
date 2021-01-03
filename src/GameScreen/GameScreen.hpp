@@ -5,10 +5,11 @@
 #include "../Screen.hpp"
 #include "../Constants.hpp"
 #include "../GameManager.hpp"
-#include "../SpaceButton.hpp"
+#include "../Utils/SpaceButton.hpp"
 #include "Asteroid.hpp"
 #include "Spaceship.hpp"
 #include "Missile.hpp"
+#include "../Utils/SpaceHeader.hpp"
 
 class GameScreen : public Screen {
 private:
@@ -29,17 +30,7 @@ private:
     bool isPause = false;
     bool soundOn = true;
 
-    std::string* xString;
-
-    sf::Color* colorRed;
-    sf::Color* colorLightBlue;
-    sf::Color* colorDarkBlue;
-
-    SpaceButton* closeButton;
-    SpaceButton* soundButton;
-    sf::Sprite* soundButtonSprite;
-    bool closeButtonHovered = false;
-    bool soundButtonHovered = false;
+    SpaceHeader* spaceHeader;
 
     int initialWindowX = 0;
     int initialWindowY = 0;
@@ -64,7 +55,7 @@ private:
     static float randomFloatBetween(float fMin, float fMax);
 public:
     explicit GameScreen(std::shared_ptr<GameManager::GameData> gameData);
-    ~GameScreen() = default;
+    ~GameScreen();
     void init() override;
     void handleInput() override;
     void update() override;

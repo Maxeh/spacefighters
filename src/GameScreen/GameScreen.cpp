@@ -5,24 +5,21 @@
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
     gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 100) {}
 
+GameScreen::~GameScreen() {
+
+    delete spaceHeader;
+}
+
 void GameScreen::init() {
 
-    xString = new std::string("x");
-
-    colorRed = new COLOR_RED;
-    colorLightBlue = new COLOR_LIGHT_BLUE;
-    colorDarkBlue = new COLOR_DARK_BLUE;
-
-    closeButton = new SpaceButton(WINDOW_WIDTH - 47, 12, 35, 35);
-    soundButton = new SpaceButton(WINDOW_WIDTH - 90, 12, 35, 35);
-    soundButtonSprite = new sf::Sprite;
+    spaceHeader = new SpaceHeader(gameData);
 
     gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
     gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
     gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/bg123.png", false);
     gameData->assetManager.loadTexture(ASTEROID_TEXTURE, "res/asteroid-60x54.png", false);
     gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
-    gameData->assetManager.loadFont(DEFAULT_FONT, "res/space_age.ttf");
+    gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
 
     for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
         int asteroidsInRow = (int) (WINDOW_WIDTH / ASTEROID_WIDTH + 1);
@@ -95,7 +92,7 @@ void GameScreen::handleInput() {
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
                     mouseButtonPressed = true;
-                    for (SpaceButton *button : {closeButton, soundButton}) {
+                    for (SpaceButton *button : {spaceHeader->getSoundButton(), spaceHeader->getCloseButton()}) {
                         if (button->contains(mouseCoordsWindow)) {
                             mouseButtonPressed = false;
                             break; // break for-loop
@@ -115,8 +112,8 @@ void GameScreen::handleInput() {
                 {
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
-                    closeButtonHovered = closeButton->contains(mouseCoordsInWindow);
-                    soundButtonHovered = soundButton->contains(mouseCoordsInWindow);
+                    spaceHeader->setSoundButtonHovered(spaceHeader->getSoundButton()->contains(mouseCoordsInWindow));
+                    spaceHeader->setCloseButtonHovered(spaceHeader->getCloseButton()->contains(mouseCoordsInWindow));
                 }
                 break;
             case sf::Event::MouseButtonReleased:
@@ -125,11 +122,7 @@ void GameScreen::handleInput() {
 
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
-                    if (closeButton->contains(mouseCoordsInWindow)) {
-                        gameData->assetManager.freeResources();
-                        std::exit(0);
-                    }
-                    if (soundButton->contains(mouseCoordsInWindow)) {
+                    if (spaceHeader->getSoundButton()->contains(mouseCoordsInWindow)) {
                         if (soundOn) {
                             soundOn = false;
                             gameData->assetManager.stopSound(GAME_SOUND);
@@ -137,6 +130,10 @@ void GameScreen::handleInput() {
                             soundOn = true;
                             gameData->assetManager.playSound(GAME_SOUND);
                         }
+                    }
+                    if (spaceHeader->getCloseButton()->contains(mouseCoordsInWindow)) {
+                        gameData->assetManager.freeResources();
+                        std::exit(0);
                     }
                 }
                 break;
@@ -297,50 +294,12 @@ void GameScreen::draw(float interpolation) {
     // border around window
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
     borderShape.setFillColor(COLOR_TRANSPARENT);
-    borderShape.setOutlineThickness(GAME_BORDER_SIZE);
+    borderShape.setOutlineThickness(WINDOW_BORDER_SIZE);
     borderShape.setOutlineColor(COLOR_DARK_BLUE);
-    borderShape.setPosition(GAME_BORDER_SIZE, GAME_BORDER_SIZE);
+    borderShape.setPosition(WINDOW_BORDER_SIZE, WINDOW_BORDER_SIZE);
     gameData->renderWindow.draw(borderShape);
 
-    // game header box
-    sf::RectangleShape headerShape(sf::Vector2f(WINDOW_WIDTH - 10, 50));
-    headerShape.setFillColor(sf::Color(COLOR_DARKER_BLUE));
-    headerShape.setPosition(GAME_BORDER_SIZE, GAME_BORDER_SIZE);
-    gameData->renderWindow.draw(headerShape);
-
-    // border of header
-    sf::RectangleShape headerBorder(sf::Vector2f(WINDOW_WIDTH - 10, 0));
-    headerBorder.setOutlineThickness(GAME_HEADER_BORDER_SIZE);
-    headerBorder.setOutlineColor(COLOR_LIGHT_BLUE);
-    headerBorder.setPosition(GAME_BORDER_SIZE, GAME_HEADER_HEIGHT);
-    gameData->renderWindow.draw(headerBorder);
-
-    // title text
-    sf::Text titleText;
-    titleText.setFont(gameData->assetManager.getFont(DEFAULT_FONT));
-    titleText.setString(GAME_HEADER_TITLE);
-    titleText.setCharacterSize(GAME_HEADER_TITLE_SIZE);
-    titleText.setFillColor(COLOR_LIGHT_BLUE);
-    titleText.setPosition(GAME_HEADER_TITLE_POSITION);
-    gameData->renderWindow.draw(titleText);
-
-    // close button
-    closeButton->setOutline(closeButtonHovered ? colorRed : colorLightBlue, GAME_HEADER_BUTTON_BORDER_SIZE);
-    closeButton->setFillColor(colorDarkBlue);
-    closeButton->setFont(&gameData->assetManager.getFont(DEFAULT_FONT));
-    closeButton->setText(xString, GAME_HEADER_BUTTON_CHAR_SIZE);
-    closeButton->setTextColor(closeButtonHovered ? colorRed : colorLightBlue);
-    closeButton->renderButtonOnWindow(gameData->renderWindow);
-
-    // sound button
-    soundButton->setOutline(soundButtonHovered ? colorRed : colorLightBlue, GAME_HEADER_BUTTON_BORDER_SIZE);
-    soundButton->setFillColor(colorDarkBlue);
-    std::string soundIcon = soundOn ? SOUND_ON_TEXTURE : SOUND_OFF_TEXTURE;
-    sf::Texture& soundTexture = gameData->assetManager.getTexture(soundIcon);
-    soundButtonSprite->setTexture(soundTexture);
-    soundButton->setSprite(soundButtonSprite);
-    soundButton->setSpriteColor(soundButtonHovered ? colorRed : colorLightBlue);
-    soundButton->renderButtonOnWindow(gameData->renderWindow);
+    spaceHeader->draw();
 
     gameData->renderWindow.display();
 }

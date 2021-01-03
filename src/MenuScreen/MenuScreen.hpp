@@ -3,38 +3,31 @@
 
 #include "../Screen.hpp"
 #include "../GameManager.hpp"
-#include "../SpaceButton.hpp"
+#include "../Utils/SpaceButton.hpp"
+#include "../Utils/SpaceHeader.hpp"
 
 class MenuScreen : public Screen {
 private:
-    const int BUTTON_CHAR_SIZE = 30;
-    const float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
-    const int MENU_TITLE_CHAR_SIZE = 100;
-    const float MENU_TITLE_BORDER_SIZE = 5.f;
     const std::string MENU_TITLE_STRING = "MENU";
+    const float MENU_TITLE_BORDER_SIZE = 5.f;
+    const int MENU_TITLE_CHAR_SIZE = 100;
+    const float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
+    const int BUTTON_CHAR_SIZE = 30;
 
     std::shared_ptr<GameManager::GameData> gameData;
-
-    std::string* xString;
+    SpaceHeader* spaceHeader;
     std::string* singlePlayerString;
     std::string* twoPlayerString;
     std::string* highscoreString;
     std::string* aboutString;
-
     sf::Color* colorRed;
     sf::Color* colorLightBlue;
     sf::Color* colorDarkBlue;
-
     SpaceButton* singlePlayerButton;
     SpaceButton* twoPlayerButton;
     SpaceButton* highscoreButton;
     SpaceButton* aboutButton;
-    SpaceButton* closeButton;
-    SpaceButton* soundButton;
-    sf::Sprite* soundButtonSprite;
 
-    bool closeButtonHovered = false;
-    bool soundButtonHovered = false;
     bool singlePlayerButtonHovered = false;
     bool twoPlayerButtonHovered = false;
     bool highscoreButtonHovered = false;

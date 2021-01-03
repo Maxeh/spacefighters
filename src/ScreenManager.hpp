@@ -9,9 +9,9 @@ class ScreenManager {
 private:
     std::stack<std::unique_ptr<Screen>> screens;
     std::unique_ptr<Screen> newScreen;
-    bool isRemoving;
-    bool isAdding;
-    bool isReplacing;
+    bool isRemoving = false;
+    bool isAdding = false;
+    bool isReplacing = false;
 public:
     ScreenManager() = default;
     ~ScreenManager() = default;
