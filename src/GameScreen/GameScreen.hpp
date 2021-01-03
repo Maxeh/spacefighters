@@ -26,9 +26,14 @@ private:
     const float SPACESHIP_DEFAULT_ACCELERATION = 1;
     const float SPACESHIP_DEFAULT_VELOCITY = 15;
     const float SPACESHIP_MAX_VELOCITY = 40;
-    const float HEADER_HEIGHT = 54;
     bool isPause = false;
     bool soundOn = true;
+
+    std::string* xString;
+
+    sf::Color* colorRed;
+    sf::Color* colorLightBlue;
+    sf::Color* colorDarkBlue;
 
     SpaceButton* closeButton;
     SpaceButton* soundButton;

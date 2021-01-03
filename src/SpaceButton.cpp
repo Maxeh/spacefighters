@@ -3,7 +3,9 @@
 #include <iostream>
 #include "SpaceButton.hpp"
 
-SpaceButton::SpaceButton(float x, float y, float width, float height) : x(x), y(y), width(width), height(height) {}
+SpaceButton::SpaceButton(float x, float y, float width, float height) :
+    x(x), y(y), width(width), height(height),
+    buttonShape(new sf::RectangleShape(sf::Vector2f(width, height))) {}
 
 SpaceButton::~SpaceButton() {
     
@@ -59,8 +61,7 @@ void SpaceButton::setTextColor(sf::Color* textColor) {
 }
 
 void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {
-    
-    buttonShape = new sf::RectangleShape(sf::Vector2f(width, height));
+
     buttonShape->setPosition(x, y);
 
     if (fillColor) {

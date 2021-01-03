@@ -7,15 +7,22 @@ GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
 
 void GameScreen::init() {
 
+    xString = new std::string("x");
+
+    colorRed = new COLOR_RED;
+    colorLightBlue = new COLOR_LIGHT_BLUE;
+    colorDarkBlue = new COLOR_DARK_BLUE;
+
     closeButton = new SpaceButton(WINDOW_WIDTH - 47, 12, 35, 35);
     soundButton = new SpaceButton(WINDOW_WIDTH - 90, 12, 35, 35);
     soundButtonSprite = new sf::Sprite;
 
-    gameData->assetManager.loadTexture("soundOn", "res/soundOn.png", false);
-    gameData->assetManager.loadTexture("soundOff", "res/soundOff.png", true);
-    gameData->assetManager.loadTexture("background", "res/bg123.png", false);
-    gameData->assetManager.loadTexture("asteroid", "res/asteroid-60x54.png", false);
-    gameData->assetManager.loadTexture("spaceship", "res/spaceship-75x74.png", false);
+    gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
+    gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
+    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/bg123.png", false);
+    gameData->assetManager.loadTexture(ASTEROID_TEXTURE, "res/asteroid-60x54.png", false);
+    gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
+    gameData->assetManager.loadFont(DEFAULT_FONT, "res/space_age.ttf");
 
     for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
         int asteroidsInRow = (int) (WINDOW_WIDTH / ASTEROID_WIDTH + 1);
@@ -125,10 +132,10 @@ void GameScreen::handleInput() {
                     if (soundButton->contains(mouseCoordsInWindow)) {
                         if (soundOn) {
                             soundOn = false;
-                            gameData->assetManager.stopSound(MENU_SOUND);
+                            gameData->assetManager.stopSound(GAME_SOUND);
                         } else {
                             soundOn = true;
-                            gameData->assetManager.playSound(MENU_SOUND);
+                            gameData->assetManager.playSound(GAME_SOUND);
                         }
                     }
                 }
@@ -174,7 +181,7 @@ void GameScreen::update() {
 
                         sf::Sprite asteroidSprite;
                         asteroidSprite.setOrigin(ASTEROID_WIDTH / 2, ASTEROID_HEIGHT / 2);
-                        asteroidSprite.setTexture(gameData->assetManager.getTexture("asteroid"));
+                        asteroidSprite.setTexture(gameData->assetManager.getTexture(ASTEROID_TEXTURE));
                         float xPos = asteroid.getX() + ASTEROID_WIDTH / 2;
                         float yPos = asteroid.getY() + ASTEROID_HEIGHT / 2;
                         asteroidSprite.setPosition(xPos, yPos);
@@ -231,7 +238,7 @@ void GameScreen::draw(float interpolation) {
 
     // background
     sf::RectangleShape backgroundShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    backgroundShape.setFillColor(COLOR_DARK_BLUE_2);
+    backgroundShape.setFillColor(COLOR_DARKER_BLUE);
     gameData->renderWindow.draw(backgroundShape);
 
     for (auto& missile : missiles) {
@@ -249,7 +256,7 @@ void GameScreen::draw(float interpolation) {
             if (asteroid.isVisible()) {
                 sf::Sprite sprite;
                 sprite.setOrigin(ASTEROID_WIDTH / 2, ASTEROID_HEIGHT / 2);
-                sprite.setTexture(gameData->assetManager.getTexture("asteroid"));
+                sprite.setTexture(gameData->assetManager.getTexture(ASTEROID_TEXTURE));
                 float posX = asteroid.getX() + ASTEROID_WIDTH / 2 + interpolation * ASTEROID_VELOCITY;
                 float posY = asteroid.getY() + ASTEROID_HEIGHT / 2;
                 sprite.setPosition(posX, posY);
@@ -261,7 +268,7 @@ void GameScreen::draw(float interpolation) {
 
     // spaceship
     sf::Sprite sprite;
-    sprite.setTexture(gameData->assetManager.getTexture("spaceship"));
+    sprite.setTexture(gameData->assetManager.getTexture(SPACESHIP_TEXTURE));
     if (movingLeft) {
         if (spaceship.getX() - velocity * interpolation > SPACESHIP_MAX_LEFT_POSITION) {
             sprite.setPosition(spaceship.getX() - velocity * interpolation, spaceship.getY());
@@ -289,51 +296,50 @@ void GameScreen::draw(float interpolation) {
 
     // border around window
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
-    borderShape.setFillColor(sf::Color(255, 255, 255, 0));
-    borderShape.setOutlineThickness(5.f);
-    borderShape.setOutlineColor(COLOR_DARK_BLUE_1);
-    borderShape.setPosition(5.f, 5.f);
+    borderShape.setFillColor(COLOR_TRANSPARENT);
+    borderShape.setOutlineThickness(GAME_BORDER_SIZE);
+    borderShape.setOutlineColor(COLOR_DARK_BLUE);
+    borderShape.setPosition(GAME_BORDER_SIZE, GAME_BORDER_SIZE);
     gameData->renderWindow.draw(borderShape);
 
-    // top border box
-    sf::RectangleShape topBorderShape(sf::Vector2f(WINDOW_WIDTH - 10, 50));
-    topBorderShape.setFillColor(sf::Color(COLOR_DARK_BLUE_2));
-    topBorderShape.setPosition(5.f, 5.f);
-    gameData->renderWindow.draw(topBorderShape);
+    // game header box
+    sf::RectangleShape headerShape(sf::Vector2f(WINDOW_WIDTH - 10, 50));
+    headerShape.setFillColor(sf::Color(COLOR_DARKER_BLUE));
+    headerShape.setPosition(GAME_BORDER_SIZE, GAME_BORDER_SIZE);
+    gameData->renderWindow.draw(headerShape);
 
-    // top border
-    sf::RectangleShape borderShape2(sf::Vector2f(WINDOW_WIDTH - 10, 0));
-    borderShape2.setFillColor(sf::Color(129, 129, 129));
-    borderShape2.setOutlineThickness(1.f);
-    borderShape2.setOutlineColor(COLOR_LIGHT_BLUE);
-    borderShape2.setPosition(5.f, 54.f);
-    gameData->renderWindow.draw(borderShape2);
+    // border of header
+    sf::RectangleShape headerBorder(sf::Vector2f(WINDOW_WIDTH - 10, 0));
+    headerBorder.setOutlineThickness(GAME_HEADER_BORDER_SIZE);
+    headerBorder.setOutlineColor(COLOR_LIGHT_BLUE);
+    headerBorder.setPosition(GAME_BORDER_SIZE, GAME_HEADER_HEIGHT);
+    gameData->renderWindow.draw(headerBorder);
 
     // title text
     sf::Text titleText;
-    titleText.setFont(gameData->assetManager.getFont("menuFont"));
-    titleText.setString("spacefighters");
-    titleText.setCharacterSize(25);
+    titleText.setFont(gameData->assetManager.getFont(DEFAULT_FONT));
+    titleText.setString(GAME_HEADER_TITLE);
+    titleText.setCharacterSize(GAME_HEADER_TITLE_SIZE);
     titleText.setFillColor(COLOR_LIGHT_BLUE);
-    titleText.setPosition(20, 12);
+    titleText.setPosition(GAME_HEADER_TITLE_POSITION);
     gameData->renderWindow.draw(titleText);
 
     // close button
-    closeButton->setOutline(closeButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
-    closeButton->setFillColor(new COLOR_DARK_BLUE_1);
-    closeButton->setFont(&gameData->assetManager.getFont("menuFont"));
-    closeButton->setText(new std::string("x"), 30);
-    closeButton->setTextColor(closeButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    closeButton->setOutline(closeButtonHovered ? colorRed : colorLightBlue, GAME_HEADER_BUTTON_BORDER_SIZE);
+    closeButton->setFillColor(colorDarkBlue);
+    closeButton->setFont(&gameData->assetManager.getFont(DEFAULT_FONT));
+    closeButton->setText(xString, GAME_HEADER_BUTTON_CHAR_SIZE);
+    closeButton->setTextColor(closeButtonHovered ? colorRed : colorLightBlue);
     closeButton->renderButtonOnWindow(gameData->renderWindow);
 
     // sound button
-    soundButton->setOutline(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE, 1.f);
-    soundButton->setFillColor(new COLOR_DARK_BLUE_1);
-    std::string soundIcon = soundOn ? "soundOn" : "soundOff";
+    soundButton->setOutline(soundButtonHovered ? colorRed : colorLightBlue, GAME_HEADER_BUTTON_BORDER_SIZE);
+    soundButton->setFillColor(colorDarkBlue);
+    std::string soundIcon = soundOn ? SOUND_ON_TEXTURE : SOUND_OFF_TEXTURE;
     sf::Texture& soundTexture = gameData->assetManager.getTexture(soundIcon);
     soundButtonSprite->setTexture(soundTexture);
     soundButton->setSprite(soundButtonSprite);
-    soundButton->setSpriteColor(soundButtonHovered ? new COLOR_RED : new COLOR_LIGHT_BLUE);
+    soundButton->setSpriteColor(soundButtonHovered ? colorRed : colorLightBlue);
     soundButton->renderButtonOnWindow(gameData->renderWindow);
 
     gameData->renderWindow.display();
@@ -380,5 +386,5 @@ float GameScreen::getAsteroidStartY() const {
 
     return ((float) WINDOW_HEIGHT / 2) - (((float) NUMBER_OF_ASTEROID_ROWS / 2) * ASTEROID_HEIGHT) -
         (((float) NUMBER_OF_ASTEROID_ROWS / 2) * ASTEROID_VERTICAL_SPACE) +
-        (ASTEROID_VERTICAL_SPACE / 2) + (HEADER_HEIGHT / 2);
+        (ASTEROID_VERTICAL_SPACE / 2) + (GAME_HEADER_HEIGHT / 2);
 }
