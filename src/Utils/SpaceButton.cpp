@@ -8,58 +8,50 @@ SpaceButton::SpaceButton(float x, float y, float width, float height) :
     buttonShape(new sf::RectangleShape(sf::Vector2f(width, height))) {}
 
 SpaceButton::~SpaceButton() {
-    
-    delete outlineColor;
-    delete fillColor;
-    delete textString;
-    delete textColor;
+
     delete buttonShape;
-    delete sprite;
-    delete spriteColor;
 }
 
 bool SpaceButton::contains(const sf::Vector2f& point) {
-    
+
     return buttonShape && buttonShape->getGlobalBounds().contains(point);
 }
 
-void SpaceButton::setOutline(sf::Color* outlineColor, float outlineThickness) {
+void SpaceButton::setOutline(sf::Color* outlineColor_, float outlineThickness_) {
 
-    // TODO delete old when set again
-
-    this->outlineColor = outlineColor;
-    this->outlineThickness = outlineThickness;
+    outlineColor = outlineColor_;
+    outlineThickness = outlineThickness_;
 }
 
-void SpaceButton::setFillColor(sf::Color* fillColor) {
-    
-    this->fillColor = fillColor;
+void SpaceButton::setFillColor(sf::Color* fillColor_) {
+
+    fillColor = fillColor_;
 }
 
-void SpaceButton::setSprite(sf::Sprite* sprite) {
-    
-    this->sprite = sprite;
+void SpaceButton::setSprite(sf::Sprite* sprite_) {
+
+    sprite = sprite_;
 }
 
-void SpaceButton::setSpriteColor(sf::Color* spriteColor) {
-    
-    this->spriteColor = spriteColor;
+void SpaceButton::setSpriteColor(sf::Color* spriteColor_) {
+
+    spriteColor = spriteColor_;
 }
 
-void SpaceButton::setFont(sf::Font* textFont) {
-    
-    this->textFont = textFont;
+void SpaceButton::setFont(sf::Font* textFont_) {
+
+    textFont = textFont_;
 }
 
-void SpaceButton::setText(std::string* textString, int textCharacterSize) {
-    
-    this->textString = textString;
-    this->textCharacterSize = textCharacterSize;
+void SpaceButton::setText(std::string* textString_, int textCharacterSize_) {
+
+    textString = textString_;
+    textCharacterSize = textCharacterSize_;
 }
 
-void SpaceButton::setTextColor(sf::Color* textColor) {
-    
-    this->textColor = textColor;
+void SpaceButton::setTextColor(sf::Color* textColor_) {
+
+    textColor = textColor_;
 }
 
 void SpaceButton::renderButtonOnWindow(sf::RenderWindow& renderWindow) {

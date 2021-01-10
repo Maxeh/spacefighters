@@ -16,10 +16,12 @@ public:
 private:
     const int MAX_FRAME_SKIP = 5;
     const int UPDATE_INTERVAL = 40;
+
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
+
     void run();
-    int getClockTimeInMillis(sf::Clock& clock);
-    float getInterpolation(sf::Clock& clock, int nextUpdateInMillis);
+    float getInterpolation(sf::Clock& clock, int nextUpdateInMillis) const;
+    static int getClockTimeInMillis(sf::Clock& clock);
 };
 
 #endif

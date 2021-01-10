@@ -13,6 +13,12 @@ SpaceHeader::SpaceHeader(std::shared_ptr<GameManager::GameData> gameData) :
 
 SpaceHeader::~SpaceHeader() {
 
+    delete soundButtonSprite;
+    delete buttonColor;
+    delete buttonOutlineColor;
+    delete buttonHoverOutlineColor;
+    delete closeString;
+
     delete soundButton;
     delete closeButton;
 }
@@ -42,7 +48,8 @@ void SpaceHeader::draw() {
     gameData->renderWindow.draw(titleText);
 
     // close button
-    closeButton->setOutline(closeButtonHovered ? buttonHoverOutlineColor : buttonOutlineColor, HEADER_BUTTON_BORDER_SIZE);
+    closeButton->setOutline(closeButtonHovered ? buttonHoverOutlineColor : buttonOutlineColor,
+        HEADER_BUTTON_BORDER_SIZE);
     closeButton->setFillColor(buttonColor);
     closeButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     closeButton->setText(closeString, HEADER_BUTTON_CHAR_SIZE);
@@ -50,7 +57,8 @@ void SpaceHeader::draw() {
     closeButton->renderButtonOnWindow(gameData->renderWindow);
 
     // sound button
-    soundButton->setOutline(soundButtonHovered ? buttonHoverOutlineColor : buttonOutlineColor, HEADER_BUTTON_BORDER_SIZE);
+    soundButton->setOutline(soundButtonHovered ? buttonHoverOutlineColor : buttonOutlineColor,
+        HEADER_BUTTON_BORDER_SIZE);
     soundButton->setFillColor(buttonColor);
     std::string soundIcon = gameData->assetManager.isSoundPlaying(GAME_SOUND) ? SOUND_ON_TEXTURE : SOUND_OFF_TEXTURE;
     sf::Texture& soundTexture = gameData->assetManager.getTexture(soundIcon);
@@ -60,22 +68,22 @@ void SpaceHeader::draw() {
     soundButton->renderButtonOnWindow(gameData->renderWindow);
 }
 
-SpaceButton *SpaceHeader::getSoundButton() {
+SpaceButton* SpaceHeader::getSoundButton() {
 
     return soundButton;
 }
 
-SpaceButton *SpaceHeader::getCloseButton() {
+SpaceButton* SpaceHeader::getCloseButton() {
 
     return closeButton;
 }
 
-void SpaceHeader::setSoundButtonHovered(bool hovered) {
+void SpaceHeader::setSoundButtonHovered(bool soundButtonHovered_) {
 
-    soundButtonHovered = hovered;
+    soundButtonHovered = soundButtonHovered_;
 }
 
-void SpaceHeader::setCloseButtonHovered(bool hovered) {
+void SpaceHeader::setCloseButtonHovered(bool closeButtonHovered_) {
 
-    closeButtonHovered = hovered;
+    closeButtonHovered = closeButtonHovered_;
 }

@@ -4,7 +4,8 @@
 #include "../Constants.hpp"
 #include "../GameScreen/GameScreen.hpp"
 
-MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameData(gameData) {
+MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
+    gameData(gameData) {
 
     singlePlayerString = new std::string("player vs. computer");
     twoPlayerString = new std::string("player vs. player");
@@ -31,6 +32,16 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) : gameDa
 
 MenuScreen::~MenuScreen() {
 
+    delete singlePlayerString;
+    delete twoPlayerString;
+    delete highscoreString;
+    delete aboutString;
+
+    delete colorRed;
+    delete colorLightBlue;
+    delete colorDarkBlue;
+
+    delete spaceHeader;
     delete singlePlayerButton;
     delete twoPlayerButton;
     delete highscoreButton;
@@ -56,12 +67,12 @@ void MenuScreen::handleInput() {
                     sf::Vector2i mousePositionGlobal = sf::Mouse::getPosition();
                     mousePositionWhenPressedX = mousePositionGlobal.x;
                     mousePositionWhenPressedY = mousePositionGlobal.y;
-    
+
                     // only start moving window when no button was pressed
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
                     mouseButtonPressed = true;
-                    for (SpaceButton *button : {spaceHeader->getSoundButton(), spaceHeader->getCloseButton(),
+                    for (SpaceButton* button : {spaceHeader->getSoundButton(), spaceHeader->getCloseButton(),
                         singlePlayerButton, twoPlayerButton, highscoreButton, aboutButton}) {
                         if (button->contains(mouseCoordsWindow)) {
                             mouseButtonPressed = false;
@@ -100,18 +111,18 @@ void MenuScreen::handleInput() {
                     if (spaceHeader->getSoundButton()->contains(mouseCoordsInWindow)) {
                         if (soundOn) {
                             soundOn = false;
-                            this->gameData->assetManager.stopSound(GAME_SOUND);
+                            gameData->assetManager.stopSound(GAME_SOUND);
                         } else {
                             soundOn = true;
-                            this->gameData->assetManager.playSound(GAME_SOUND);
+                            gameData->assetManager.playSound(GAME_SOUND);
                         }
                     }
                     if (spaceHeader->getCloseButton()->contains(mouseCoordsInWindow)) {
-                        this->gameData->assetManager.freeResources();
+                        gameData->assetManager.freeResources();
                         std::exit(0);
                     }
                     if (singlePlayerButton->contains(mouseCoordsInWindow)) {
-                        this->gameData->screenManager.addScreen(std::make_unique<GameScreen>(this->gameData), false);
+                        gameData->screenManager.addScreen(std::make_unique<GameScreen>(gameData), false);
                         break;
                     }
                     if (twoPlayerButton->contains(mouseCoordsInWindow)) {
@@ -142,10 +153,10 @@ void MenuScreen::update() {
 void MenuScreen::draw(float interpolation) {
 
     gameData->renderWindow.clear(sf::Color::White);
-    
+
     // background
     sf::RectangleShape backgroundShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    backgroundShape.setTexture(&this->gameData->assetManager.getTexture(BACKGROUND_TEXTURE));
+    backgroundShape.setTexture(&gameData->assetManager.getTexture(BACKGROUND_TEXTURE));
     backgroundShape.setFillColor(COLOR_BLUE);
     gameData->renderWindow.draw(backgroundShape);
 
@@ -166,7 +177,7 @@ void MenuScreen::draw(float interpolation) {
     menuText.setString(MENU_TITLE_STRING);
     menuText.setCharacterSize(MENU_TITLE_CHAR_SIZE);
     menuText.setFillColor(COLOR_LIGHT_BLUE);
-    menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2,  100);
+    menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2, 100);
     menuText.setOutlineColor(COLOR_DARK_BLUE);
     menuText.setOutlineThickness(MENU_TITLE_BORDER_SIZE);
     gameData->renderWindow.draw(menuText);

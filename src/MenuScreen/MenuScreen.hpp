@@ -7,12 +7,24 @@
 #include "../Utils/SpaceHeader.hpp"
 
 class MenuScreen : public Screen {
-private:
     const std::string MENU_TITLE_STRING = "MENU";
     const float MENU_TITLE_BORDER_SIZE = 5.f;
     const int MENU_TITLE_CHAR_SIZE = 100;
     const float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
     const int BUTTON_CHAR_SIZE = 30;
+
+    int initialWindowX = 0;
+    int initialWindowY = 0;
+    int mousePositionWhenPressedX = 0;
+    int mousePositionWhenPressedY = 0;
+    int mousePositionWhenMovedDiffX = 0;
+    int mousePositionWhenMovedDiffY = 0;
+    bool mouseButtonPressed = false;
+    bool soundOn = true;
+    bool singlePlayerButtonHovered = false;
+    bool twoPlayerButtonHovered = false;
+    bool highscoreButtonHovered = false;
+    bool aboutButtonHovered = false;
 
     std::shared_ptr<GameManager::GameData> gameData;
     SpaceHeader* spaceHeader;
@@ -27,20 +39,6 @@ private:
     SpaceButton* twoPlayerButton;
     SpaceButton* highscoreButton;
     SpaceButton* aboutButton;
-
-    bool singlePlayerButtonHovered = false;
-    bool twoPlayerButtonHovered = false;
-    bool highscoreButtonHovered = false;
-    bool aboutButtonHovered = false;
-    
-    int initialWindowX = 0;
-    int initialWindowY = 0;
-    int mousePositionWhenPressedX = 0;
-    int mousePositionWhenPressedY = 0;
-    int mousePositionWhenMovedDiffX = 0;
-    int mousePositionWhenMovedDiffY = 0;
-    bool mouseButtonPressed = false;
-    bool soundOn = true;
 public:
     explicit MenuScreen(std::shared_ptr<GameManager::GameData> gameData);
     ~MenuScreen();

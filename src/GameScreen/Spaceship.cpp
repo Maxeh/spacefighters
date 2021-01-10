@@ -1,10 +1,12 @@
 #include <iostream>
 #include "Spaceship.hpp"
 
-Spaceship::Spaceship(float x, float y) : x(x), y(y) {}
+Spaceship::Spaceship(float x, float y) :
+    x(x), y(y) {}
 
-void Spaceship::moveX(float x) {
-    this->x += x;
+void Spaceship::moveX(float x_) {
+
+    x += x_;
 }
 
 bool Spaceship::isReloading() {
@@ -18,27 +20,31 @@ void Spaceship::reload() {
 }
 
 float Spaceship::getX() const {
+
     return x;
 }
 
-void Spaceship::setX(float x) {
-    this->x = x;
-}
-
 float Spaceship::getY() const {
+
     return y;
 }
 
-int Spaceship::getEnergy() {
+int Spaceship::getEnergy() const {
+
     return energy;
 }
 
-int Spaceship::getHealth() {
+int Spaceship::getHealth() const {
+
     return health;
 }
 
-int Spaceship::getShield() {
+int Spaceship::getShield() const {
+
     return shield;
 }
 
+void Spaceship::setX(float x_) {
 
+    x = x_;
+}

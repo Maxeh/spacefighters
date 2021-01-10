@@ -1,6 +1,5 @@
 #include <iostream>
 #include "GameScreen.hpp"
-#include "../Constants.hpp"
 
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
     gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 100) {}
@@ -8,6 +7,10 @@ GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
 GameScreen::~GameScreen() {
 
     delete spaceHeader;
+    for (auto asteroids : asteroidsArray) {
+        asteroids.erase(asteroids.begin(), asteroids.end());
+    }
+    missiles.erase(missiles.begin(), missiles.end());
 }
 
 void GameScreen::init() {
@@ -92,7 +95,7 @@ void GameScreen::handleInput() {
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
                     mouseButtonPressed = true;
-                    for (SpaceButton *button : {spaceHeader->getSoundButton(), spaceHeader->getCloseButton()}) {
+                    for (SpaceButton* button : {spaceHeader->getSoundButton(), spaceHeader->getCloseButton()}) {
                         if (button->contains(mouseCoordsWindow)) {
                             mouseButtonPressed = false;
                             break; // break for-loop
@@ -330,8 +333,8 @@ void GameScreen::moveSpaceship(float v) {
 
 int GameScreen::randomIntBetween(float fMin, float fMax) {
 
-    int iMin = static_cast<int>(fMin);
-    int iMax = static_cast<int>(fMax);
+    int iMin = (int) fMin;
+    int iMax = (int) fMax;
     return rand() % (iMax - iMin + 1) + iMin; // NOLINT(cert-msc50-cpp)
 }
 

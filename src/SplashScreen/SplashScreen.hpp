@@ -5,7 +5,6 @@
 #include "../GameManager.hpp"
 
 class SplashScreen : public Screen {
-private:
     std::shared_ptr<GameManager::GameData> gameData;
     sf::Clock clock;
 public:

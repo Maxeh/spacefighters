@@ -10,7 +10,7 @@ void Asteroid::rotate() {
 
 void Asteroid::move() {
 
-    this->x += velocity;
+    x += velocity;
 }
 
 float Asteroid::getX() const {
@@ -33,14 +33,14 @@ float Asteroid::getAngle() const {
     return angle;
 }
 
-void Asteroid::setVisible(bool _visible) {
-
-    this->visible = _visible;
-}
-
-bool Asteroid::isVisible() {
+bool Asteroid::isVisible() const {
 
     return visible;
+}
+
+void Asteroid::setVisible(bool _visible) {
+
+    visible = _visible;
 }
 
 

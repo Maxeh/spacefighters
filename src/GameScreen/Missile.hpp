@@ -2,7 +2,6 @@
 #define SPACEFIGHTERS_MISSILE_HPP
 
 class Missile {
-private:
     float x;
     float y;
     float width = 5;
@@ -13,13 +12,13 @@ public:
     Missile(float x, float y);
     ~Missile() = default;
     void move();
-    float getX();
-    float getY();
-    float getWidth();
-    float getHeight();
-    float getSpeed();
-    void setVisible(bool visible);
-    bool isVisible();
+    float getX() const;
+    float getY() const;
+    float getWidth() const;
+    float getHeight() const;
+    float getSpeed() const;
+    bool isVisible() const;
+    void setVisible(bool visible_);
 };
 
 #endif

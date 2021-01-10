@@ -16,12 +16,12 @@ public:
     void moveX(float x);
     void reload();
     bool isReloading();
-    void setX(float x);
     float getX() const;
     float getY() const;
-    int getEnergy();
-    int getHealth();
-    int getShield();
+    int getEnergy() const;
+    int getHealth() const;
+    int getShield() const;
+    void setX(float x);
 };
 
 #endif

@@ -16,8 +16,8 @@ public:
     float getY() const;
     float getAngle() const;
     float getRotation() const;
+    bool isVisible() const;
     void setVisible(bool _visible);
-    bool isVisible();
 };
 
 #endif

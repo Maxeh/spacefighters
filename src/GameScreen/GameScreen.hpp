@@ -12,7 +12,6 @@
 #include "../Utils/SpaceHeader.hpp"
 
 class GameScreen : public Screen {
-private:
     const int NUMBER_OF_ASTEROID_ROWS = 6;
     const float ASTEROID_WIDTH = 60;
     const float ASTEROID_HEIGHT = 54;
@@ -27,11 +26,9 @@ private:
     const float SPACESHIP_DEFAULT_ACCELERATION = 1;
     const float SPACESHIP_DEFAULT_VELOCITY = 15;
     const float SPACESHIP_MAX_VELOCITY = 40;
+
     bool isPause = false;
     bool soundOn = true;
-
-    SpaceHeader* spaceHeader;
-
     int initialWindowX = 0;
     int initialWindowY = 0;
     int mousePositionWhenPressedX = 0;
@@ -39,17 +36,18 @@ private:
     int mousePositionWhenMovedDiffX = 0;
     int mousePositionWhenMovedDiffY = 0;
     bool mouseButtonPressed = false;
-    
     float velocity = SPACESHIP_DEFAULT_VELOCITY;
     float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
     bool movingLeft = false;
     bool movingRight = false;
     float lastInterpolation = 0;
 
+    SpaceHeader* spaceHeader;
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;
     Spaceship spaceship;
+
     void moveSpaceship(float v);
     static int randomIntBetween(float fMin, float fMax);
     static float randomFloatBetween(float fMin, float fMax);
@@ -62,7 +60,6 @@ public:
     void draw(float interpolation) override;
     void resume() override;
     void pause() override;
-
     float getAsteroidStartY() const;
 };
 
