@@ -145,13 +145,23 @@ void GameScreen::handleInput() {
         }
     }
 
-
     // TODO gameloop + space release timer reset + balken unten + not left/right gleichzeitig
-    // TODO UI use constants
 
-    // Checking key is pressed need extra handling
+    // if the user tabs out of the game, the ongoing movement should be handled correctly
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)){
+        if (movingLeft) {
+            moveSpaceship(-velocity * lastInterpolation);
+            velocity = SPACESHIP_DEFAULT_VELOCITY;
+            movingLeft = false;
+        }
+        if (movingRight) {
+            moveSpaceship(velocity * lastInterpolation);
+            velocity = SPACESHIP_DEFAULT_VELOCITY;
+            movingRight = false;
+        }
+    }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !movingRight) {
         movingLeft = true;
         moveSpaceship(-velocity);
         if (velocity < SPACESHIP_MAX_VELOCITY) {
@@ -159,7 +169,7 @@ void GameScreen::handleInput() {
         }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !movingLeft) {
         movingRight = true;
         moveSpaceship(velocity);
         if (velocity < SPACESHIP_MAX_VELOCITY) {
@@ -187,7 +197,7 @@ void GameScreen::update() {
                         asteroidSprite.setPosition(xPos, yPos);
                         asteroidSprite.rotate(asteroid.getRotation());
                         // workaround for better real object collision
-//                        asteroidSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+//                        asteroidSprite.setScale(sf::Vector2f(0.7f, 0f));
 
                         if (missileShape.getGlobalBounds().intersects(asteroidSprite.getGlobalBounds())) {
                             asteroid.setVisible(false);
@@ -287,10 +297,31 @@ void GameScreen::draw(float interpolation) {
     gameData->renderWindow.draw(sprite);
 
     // health
-//    sf::RectangleShape healthShape(sf::Vector2f(WINDOW_WIDTH - 10, 10));
-//    healthShape.setFillColor(COLOR_RED);
-//    healthShape.setPosition(5, WINDOW_HEIGHT - 10);
-//    gameData->renderWindow.draw(healthShape);
+    sf::RectangleShape healthShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+    healthShape.setOutlineColor(COLOR_DARKER_BLUE);
+    healthShape.setFillColor(COLOR_RED);
+    healthShape.setPosition(5, WINDOW_HEIGHT - 30);
+    gameData->renderWindow.draw(healthShape);
+
+//    sf::RectangleShape healthShape2(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+//    healthShape2.setOutlineColor(COLOR_DARKER_BLUE);
+//    healthShape2.setFillColor(COLOR_BLUE);
+//    healthShape2.setPosition(5, WINDOW_HEIGHT - 30);
+//    gameData->renderWindow.draw(healthShape2);
+
+    // shield
+    sf::RectangleShape shieldShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+    shieldShape.setOutlineColor(COLOR_DARKER_BLUE);
+    shieldShape.setFillColor(COLOR_BLUE);
+    shieldShape.setPosition(5 + (float) WINDOW_WIDTH / 3, WINDOW_HEIGHT - 30);
+    gameData->renderWindow.draw(shieldShape);
+
+    // energy
+    sf::RectangleShape energyShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+    energyShape.setOutlineColor(COLOR_DARKER_BLUE);
+    shieldShape.setFillColor(COLOR_DARKER_BLUE);
+    energyShape.setPosition(5 + (float) WINDOW_WIDTH / 3 * 2, WINDOW_HEIGHT - 30);
+    gameData->renderWindow.draw(energyShape);
 
     /** draw not game related UI elements **/
 
