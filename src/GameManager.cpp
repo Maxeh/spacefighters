@@ -20,33 +20,27 @@ void GameManager::run() {
     sf::Clock fpsClock;
     int fpsCounter = 0;
     int nextUpdateInMillis = getClockTimeInMillis(gameClock);
-    while (gameData->renderWindow.isOpen()) {
 
-        int loops = 0; // on slow hardware we can skip frames
-        while(getClockTimeInMillis(gameClock) >= nextUpdateInMillis && loops < MAX_FRAME_SKIP) {
+    while (gameData->renderWindow.isOpen()) {
+        // dont use interpolation predication technique, as this would make the drawing and
+        // collision detection much more complicated; we just draw same frames again;
+        // we can be quite sure that we can run 50 fps
+        if (getClockTimeInMillis(gameClock) >= nextUpdateInMillis) {
             gameData->screenManager.processScreenChanges();
             gameData->screenManager.getActiveScreen()->handleInput();
             gameData->screenManager.getActiveScreen()->update();
             nextUpdateInMillis += UPDATE_INTERVAL;
-            loops++;
-        }
 
-        // rendering is done as often as possible using prediction technique
-        float interpolation = getInterpolation(gameClock, nextUpdateInMillis);
-        gameData->screenManager.getActiveScreen()->draw(interpolation);
+            gameData->screenManager.getActiveScreen()->draw();
 
-        fpsCounter++;
-        if (fpsClock.getElapsedTime().asMilliseconds() >= 1000) {
-//            std::cout << "FPS: " << fpsCounter << std::endl;
-            fpsCounter = 0;
-            fpsClock.restart();
+            fpsCounter++;
+            if (fpsClock.getElapsedTime().asMilliseconds() >= 1000) {
+                std::cout << "FPS: " << fpsCounter << std::endl;
+                fpsCounter = 0;
+                fpsClock.restart();
+            }
         }
     }
-}
-
-float GameManager::getInterpolation(sf::Clock &clock, int nextUpdateInMillis) const {
-
-    return float(getClockTimeInMillis(clock) + UPDATE_INTERVAL - nextUpdateInMillis) / float(UPDATE_INTERVAL);
 }
 
 int GameManager::getClockTimeInMillis(sf::Clock& clock) {

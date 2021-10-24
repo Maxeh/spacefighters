@@ -29,14 +29,12 @@ class MenuScreen : public Screen {
     std::shared_ptr<GameManager::GameData> gameData;
     SpaceHeader* spaceHeader;
     std::string* singlePlayerString;
-    std::string* twoPlayerString;
     std::string* highscoreString;
     std::string* aboutString;
     sf::Color* colorRed;
     sf::Color* colorLightBlue;
     sf::Color* colorDarkBlue;
     SpaceButton* singlePlayerButton;
-    SpaceButton* twoPlayerButton;
     SpaceButton* highscoreButton;
     SpaceButton* aboutButton;
 public:
@@ -45,7 +43,7 @@ public:
     void init() override;
     void handleInput() override;
     void update() override;
-    void draw(float interpolation) override;
+    void draw() override;
     void resume() override;
     void pause() override;
 };

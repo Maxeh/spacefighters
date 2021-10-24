@@ -10,16 +10,17 @@
 #include "Spaceship.hpp"
 #include "Missile.hpp"
 #include "../Utils/SpaceHeader.hpp"
+#include "Collision.hpp"
 
 class GameScreen : public Screen {
-    const int NUMBER_OF_ASTEROID_ROWS = 6;
+    const int NUMBER_OF_ASTEROID_ROWS = 4;
     const float ASTEROID_WIDTH = 60;
     const float ASTEROID_HEIGHT = 54;
     const float ASTEROID_VERTICAL_SPACE = 30;
     const float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
     const float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
-    const float ASTEROID_ROTATION_ANGLE[2] = {-5, 5};
-    const float ASTEROID_VELOCITY = 8;
+    const float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
+    const float ASTEROID_VELOCITY = 1;
     const float SPACESHIP_WIDTH = 75;
     const float SPACESHIP_MAX_LEFT_POSITION = 5;
     const float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
@@ -40,12 +41,12 @@ class GameScreen : public Screen {
     float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
     bool movingLeft = false;
     bool movingRight = false;
-    float lastInterpolation = 0;
 
     SpaceHeader* spaceHeader;
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;
+    std::vector<Collision> collisions;
     Spaceship spaceship;
 
     void moveSpaceship(float v);
@@ -57,7 +58,7 @@ public:
     void init() override;
     void handleInput() override;
     void update() override;
-    void draw(float interpolation) override;
+    void draw() override;
     void resume() override;
     void pause() override;
     float getAsteroidStartY() const;

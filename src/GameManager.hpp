@@ -14,13 +14,11 @@ public:
     };
     GameManager(int width, int height, const std::string& title);
 private:
-    const int MAX_FRAME_SKIP = 5;
-    const int UPDATE_INTERVAL = 40;
+    const int UPDATE_INTERVAL = 1000 / 75; // ~75 fps
 
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
 
     void run();
-    float getInterpolation(sf::Clock& clock, int nextUpdateInMillis) const;
     static int getClockTimeInMillis(sf::Clock& clock);
 };
 

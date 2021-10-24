@@ -6,8 +6,8 @@ SpaceHeader::SpaceHeader(std::shared_ptr<GameManager::GameData> gameData) :
     soundButton(new SpaceButton(WINDOW_WIDTH - 90, 12, 35, 35)),
     closeButton(new SpaceButton(WINDOW_WIDTH - 47, 12, 35, 35)),
     soundButtonSprite(new sf::Sprite),
-    buttonColor(new COLOR_DARK_BLUE),
-    buttonOutlineColor(new COLOR_LIGHT_BLUE),
+    buttonColor(new COLOR_DARK_BLUE2),
+    buttonOutlineColor(new COLOR_LIGHT_BLUE2),
     buttonHoverOutlineColor(new COLOR_RED),
     closeString(new std::string("x")) {}
 
@@ -43,7 +43,7 @@ void SpaceHeader::draw() {
     titleText.setFont(gameData->assetManager.getFont(GAME_FONT));
     titleText.setString(HEADER_TITLE);
     titleText.setCharacterSize(HEADER_TITLE_SIZE);
-    titleText.setFillColor(COLOR_LIGHT_BLUE);
+    titleText.setFillColor(COLOR_LIGHT_BLUE2);
     titleText.setPosition(HEADER_TITLE_POSITION);
     gameData->renderWindow.draw(titleText);
 

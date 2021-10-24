@@ -250,6 +250,33 @@ src/GameScreen/Asteroid.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.s
 .PHONY : src/GameScreen/Asteroid.cpp.s
 
+src/GameScreen/Collision.obj: src/GameScreen/Collision.cpp.obj
+
+.PHONY : src/GameScreen/Collision.obj
+
+# target to build an object file
+src/GameScreen/Collision.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Collision.cpp.obj
+.PHONY : src/GameScreen/Collision.cpp.obj
+
+src/GameScreen/Collision.i: src/GameScreen/Collision.cpp.i
+
+.PHONY : src/GameScreen/Collision.i
+
+# target to preprocess a source file
+src/GameScreen/Collision.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Collision.cpp.i
+.PHONY : src/GameScreen/Collision.cpp.i
+
+src/GameScreen/Collision.s: src/GameScreen/Collision.cpp.s
+
+.PHONY : src/GameScreen/Collision.s
+
+# target to generate assembly for a file
+src/GameScreen/Collision.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/src/GameScreen/Collision.cpp.s
+.PHONY : src/GameScreen/Collision.cpp.s
+
 src/GameScreen/GameScreen.obj: src/GameScreen/GameScreen.cpp.obj
 
 .PHONY : src/GameScreen/GameScreen.obj
@@ -487,6 +514,9 @@ help:
 	@echo ... src/GameScreen/Asteroid.obj
 	@echo ... src/GameScreen/Asteroid.i
 	@echo ... src/GameScreen/Asteroid.s
+	@echo ... src/GameScreen/Collision.obj
+	@echo ... src/GameScreen/Collision.i
+	@echo ... src/GameScreen/Collision.s
 	@echo ... src/GameScreen/GameScreen.obj
 	@echo ... src/GameScreen/GameScreen.i
 	@echo ... src/GameScreen/GameScreen.s

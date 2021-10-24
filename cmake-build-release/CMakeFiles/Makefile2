@@ -93,12 +93,12 @@ clean: CMakeFiles/spacefighters.dir/clean
 CMakeFiles/spacefighters.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\spacefighters.dir\build.make CMakeFiles/spacefighters.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-release\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target spacefighters"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-release\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target spacefighters"
 .PHONY : CMakeFiles/spacefighters.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/spacefighters.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-release\CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-release\CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/spacefighters.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Maximilian\Documents\Projects\spacefighters\cmake-build-release\CMakeFiles 0
 .PHONY : CMakeFiles/spacefighters.dir/rule

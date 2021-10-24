@@ -872,6 +872,8 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/AssetManager.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
 
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
+
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp
 iostream
 -
@@ -897,6 +899,8 @@ Missile.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
 ../Utils/SpaceHeader.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
+Collision.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
 

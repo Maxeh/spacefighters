@@ -108,6 +108,12 @@
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp">
 			<Option target="spacefighters"/>
 		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.cpp">
+			<Option target="spacefighters"/>
+		</Unit>
+		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp">
+			<Option target="spacefighters"/>
+		</Unit>
 		<Unit filename="C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp">
 			<Option target="spacefighters"/>
 		</Unit>
