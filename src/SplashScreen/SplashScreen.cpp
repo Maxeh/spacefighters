@@ -39,7 +39,7 @@ void SplashScreen::draw() {
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
     borderShape.setFillColor(sf::Color(255, 255, 255, 0));
     borderShape.setOutlineThickness(5.f);
-    borderShape.setOutlineColor(COLOR_DARK_BLUE2);
+    borderShape.setOutlineColor(COLOR_DARK_BLUE);
     borderShape.setPosition(5.f, 5.f);
     gameData->renderWindow.draw(borderShape);
 

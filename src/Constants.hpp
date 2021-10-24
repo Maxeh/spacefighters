@@ -6,11 +6,10 @@
 #define WINDOW_BORDER_SIZE 5.f
 #define SPLASH_SCREEN_TIME 3000
 #define COLOR_TRANSPARENT sf::Color(255, 255, 255, 0)
-#define COLOR_LIGHT_BLUE sf::Color(0,0,0)
-#define COLOR_LIGHT_BLUE2 sf::Color(30, 115, 180)
-#define COLOR_BLUE sf::Color(30, 39, 56)
-#define COLOR_DARK_BLUE sf::Color(37, 56, 124)
-#define COLOR_DARK_BLUE2 sf::Color(24, 31, 45)
+#define COLOR_BLACK sf::Color(0,0,0)
+#define COLOR_CYAN sf::Color(30, 115, 180)
+#define COLOR_BLUE sf::Color(37, 56, 124)
+#define COLOR_DARK_BLUE sf::Color(24, 31, 45)
 #define COLOR_DARKER_BLUE sf::Color(4, 6, 12)
 #define COLOR_RED sf::Color(165, 23, 23)
 #define GAME_HEADER_HEIGHT 54.f

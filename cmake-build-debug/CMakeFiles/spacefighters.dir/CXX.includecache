@@ -870,44 +870,6 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.hpp
 AssetManager.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/AssetManager.hpp
 
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
-
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
-
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp
-iostream
--
-GameScreen.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
-
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
-memory
--
-../Screen.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
-../Constants.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
-../GameManager.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.hpp
-../Utils/SpaceButton.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceButton.hpp
-Asteroid.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
-Spaceship.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
-Missile.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
-../Utils/SpaceHeader.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
-Collision.hpp
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
-
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
-
-C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
-SFML/System/Clock.hpp
--
-
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.hpp
@@ -921,6 +883,12 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceButton.hpp
 SFML/Graphics.hpp
 -
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.cpp
+SpaceHeader.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
+../Constants.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
 memory

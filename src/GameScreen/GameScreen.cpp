@@ -361,7 +361,7 @@ void GameScreen::draw() {
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
     borderShape.setFillColor(COLOR_TRANSPARENT);
     borderShape.setOutlineThickness(WINDOW_BORDER_SIZE);
-    borderShape.setOutlineColor(COLOR_DARK_BLUE2);
+    borderShape.setOutlineColor(COLOR_DARK_BLUE);
     borderShape.setPosition(WINDOW_BORDER_SIZE, WINDOW_BORDER_SIZE);
     gameData->renderWindow.draw(borderShape);
 

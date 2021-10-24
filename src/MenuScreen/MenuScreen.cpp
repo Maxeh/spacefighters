@@ -12,8 +12,8 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
     aboutString = new std::string("about");
 
     colorRed = new COLOR_RED;
-    colorLightBlue = new COLOR_LIGHT_BLUE;
-    colorDarkBlue = new COLOR_DARK_BLUE;
+    colorLightBlue = new COLOR_BLACK;
+    colorDarkBlue = new COLOR_BLUE;
 
     spaceHeader = new SpaceHeader(gameData);
     singlePlayerButton = new SpaceButton(50, 300, WINDOW_WIDTH - 100, 50);
@@ -155,7 +155,7 @@ void MenuScreen::draw() {
     sf::RectangleShape borderShape(sf::Vector2f(WINDOW_WIDTH - 10, WINDOW_HEIGHT - 10));
     borderShape.setFillColor(COLOR_TRANSPARENT);
     borderShape.setOutlineThickness(WINDOW_BORDER_SIZE);
-    borderShape.setOutlineColor(COLOR_DARK_BLUE2);
+    borderShape.setOutlineColor(COLOR_DARK_BLUE);
     borderShape.setPosition(WINDOW_BORDER_SIZE, WINDOW_BORDER_SIZE);
     gameData->renderWindow.draw(borderShape);
 
@@ -167,9 +167,9 @@ void MenuScreen::draw() {
     menuText.setFont(gameData->assetManager.getFont(GAME_FONT));
     menuText.setString(MENU_TITLE_STRING);
     menuText.setCharacterSize(MENU_TITLE_CHAR_SIZE);
-    menuText.setFillColor(COLOR_LIGHT_BLUE);
+    menuText.setFillColor(COLOR_BLACK);
     menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2, 100);
-    menuText.setOutlineColor(COLOR_DARK_BLUE);
+    menuText.setOutlineColor(COLOR_BLUE);
     menuText.setOutlineThickness(MENU_TITLE_BORDER_SIZE);
     gameData->renderWindow.draw(menuText);
 
