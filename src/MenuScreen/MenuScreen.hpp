@@ -8,7 +8,7 @@
 
 class MenuScreen : public Screen {
     const std::string MENU_TITLE_STRING = "MENU";
-    const float MENU_TITLE_BORDER_SIZE = 5.f;
+    const float MENU_TITLE_BORDER_SIZE = 2.f;
     const int MENU_TITLE_CHAR_SIZE = 100;
     const float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
     const int BUTTON_CHAR_SIZE = 30;
@@ -22,7 +22,6 @@ class MenuScreen : public Screen {
     bool mouseButtonPressed = false;
     bool soundOn = true;
     bool singlePlayerButtonHovered = false;
-    bool twoPlayerButtonHovered = false;
     bool highscoreButtonHovered = false;
     bool aboutButtonHovered = false;
 

@@ -167,9 +167,9 @@ void MenuScreen::draw() {
     menuText.setFont(gameData->assetManager.getFont(GAME_FONT));
     menuText.setString(MENU_TITLE_STRING);
     menuText.setCharacterSize(MENU_TITLE_CHAR_SIZE);
-    menuText.setFillColor(COLOR_BLACK);
+    menuText.setFillColor(COLOR_CYAN);
     menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2, 100);
-    menuText.setOutlineColor(COLOR_BLUE);
+    menuText.setOutlineColor(COLOR_BLACK);
     menuText.setOutlineThickness(MENU_TITLE_BORDER_SIZE);
     gameData->renderWindow.draw(menuText);
 

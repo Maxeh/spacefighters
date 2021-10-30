@@ -14,7 +14,7 @@ public:
     };
     GameManager(int width, int height, const std::string& title);
 private:
-    const int UPDATE_INTERVAL = 1000 / 75; // ~75 fps
+    const int UPDATE_INTERVAL = 1000 / 50; // ~50 fps
 
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
 

@@ -25,7 +25,7 @@ class GameScreen : public Screen {
     const float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
     const float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
     const float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
-    const float ASTEROID_VELOCITY = 1;
+    const float ASTEROID_VELOCITY = 2;
     const float SPACESHIP_WIDTH = 75;
     const float SPACESHIP_MAX_LEFT_POSITION = 5;
     const float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;

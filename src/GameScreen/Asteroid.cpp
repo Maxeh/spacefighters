@@ -1,7 +1,7 @@
 #include "Asteroid.hpp"
 
-Asteroid::Asteroid(float x, float y, float v, float rotation) :
-    x(x), y(y), velocity(v), angle(rotation), rotation(rotation) {}
+Asteroid::Asteroid(float x, float y, float rotation) :
+    x(x), y(y), angle(rotation), rotation(rotation) {}
 
 void Asteroid::rotate() {
 

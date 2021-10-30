@@ -6,7 +6,7 @@ class Missile {
     float y;
     float width = 5;
     float height = 5;
-    float velocity = 2;
+    float velocity = 5;
     bool visible = true;
 public:
     Missile(float x, float y);

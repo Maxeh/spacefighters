@@ -36,8 +36,7 @@ void GameScreen::init() {
             float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
             x -= (float) randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
             float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
-            float v = ASTEROID_VELOCITY;
-            asteroidsArray[i].emplace_back(x, y, v, r);
+            asteroidsArray[i].emplace_back(x, y, r);
             if (randomIntBetween(0.0, 1.0) > 0.8)
                 asteroidsArray[i].back().setVisible(false);
         }
@@ -254,8 +253,7 @@ void GameScreen::update() {
             float x = asteroids.at(asteroids.size() - 1).getX();
             x -= (float) randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
             float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
-            float v = ASTEROID_VELOCITY;
-            asteroids.emplace_back(x, y, v, r);
+            asteroids.emplace_back(x, y, r);
         }
     }
 

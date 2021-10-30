@@ -6,10 +6,10 @@ class Asteroid {
     float y;
     float angle;
     float rotation;
-    float velocity;
+    float velocity = 2;
     bool visible = true;
 public:
-    explicit Asteroid(float x, float y, float v, float rotation);
+    explicit Asteroid(float x, float y, float rotation);
     void rotate();
     void move();
     float getX() const;
