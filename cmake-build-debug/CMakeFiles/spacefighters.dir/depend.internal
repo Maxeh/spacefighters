@@ -293,6 +293,7 @@ CMakeFiles/spacefighters.dir/src/GameManager.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.hpp
@@ -405,6 +406,7 @@ CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/ScreenManager.hpp
@@ -413,6 +415,9 @@ CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj
 CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.cpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+CMakeFiles/spacefighters.dir/src/GameScreen/Monster.cpp.obj
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.cpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
 CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj
  C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Config.hpp
  C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/System/Clock.hpp
@@ -519,6 +524,7 @@ CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/MenuScreen/MenuScreen.cpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/MenuScreen/MenuScreen.hpp
@@ -629,6 +635,7 @@ CMakeFiles/spacefighters.dir/src/SplashScreen/SplashScreen.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/MenuScreen/MenuScreen.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp

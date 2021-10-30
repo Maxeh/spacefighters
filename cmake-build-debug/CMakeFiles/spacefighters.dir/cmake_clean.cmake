@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/spacefighters.dir/src/GameScreen/Collision.cpp.obj"
   "CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj"
   "CMakeFiles/spacefighters.dir/src/GameScreen/Missile.cpp.obj"
+  "CMakeFiles/spacefighters.dir/src/GameScreen/Monster.cpp.obj"
   "CMakeFiles/spacefighters.dir/src/GameScreen/Spaceship.cpp.obj"
   "CMakeFiles/spacefighters.dir/src/MenuScreen/MenuScreen.cpp.obj"
   "CMakeFiles/spacefighters.dir/src/ScreenManager.cpp.obj"

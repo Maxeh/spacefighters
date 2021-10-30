@@ -11,7 +11,7 @@
 #define COLOR_BLUE sf::Color(37, 56, 124)
 #define COLOR_DARK_BLUE sf::Color(24, 31, 45)
 #define COLOR_DARKER_BLUE sf::Color(4, 6, 12)
-#define COLOR_RED sf::Color(165, 23, 23)
+#define COLOR_RED sf::Color(255, 187, 66)
 #define GAME_HEADER_HEIGHT 54.f
 #define GAME_SOUND std::string("GAME_SOUND")
 #define GAME_FONT "GAME_FONT"

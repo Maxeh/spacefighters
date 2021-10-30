@@ -11,8 +11,13 @@
 #include "Missile.hpp"
 #include "../Utils/SpaceHeader.hpp"
 #include "Collision.hpp"
+#include "Monster.hpp"
 
 class GameScreen : public Screen {
+    const int NUMBER_OF_MONSTERS_ROWS = 2;
+    const int NUMBER_OF_MONSTERS_IN_ROW = 8;
+    const float MONSTER_WIDTH = 62;
+    const float MONSTER_HEIGHT = 45;
     const int NUMBER_OF_ASTEROID_ROWS = 4;
     const float ASTEROID_WIDTH = 60;
     const float ASTEROID_HEIGHT = 54;
@@ -47,6 +52,7 @@ class GameScreen : public Screen {
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;
     std::vector<Collision> collisions;
+    std::vector<Monster> monsters;
     Spaceship spaceship;
 
     void moveSpaceship(float v);

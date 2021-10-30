@@ -23,8 +23,10 @@ void GameScreen::init() {
     gameData->assetManager.loadTexture(ASTEROID_TEXTURE, "res/asteroid-60x54.png", false);
     gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
     gameData->assetManager.loadTexture("EXP", "res/exp2.png", false);
+    gameData->assetManager.loadTexture("MONSTER", "res/inv3.png", false);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
 
+    // fill row after row from right to left
     for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
         int asteroidsInRow = (int) (WINDOW_WIDTH / ASTEROID_WIDTH + 1);
         for (int e = 0; e < asteroidsInRow; e++) {
@@ -40,6 +42,18 @@ void GameScreen::init() {
                 asteroidsArray[i].back().setVisible(false);
         }
     }
+
+    for (int i = 0; i < NUMBER_OF_MONSTERS_ROWS; i++) {
+        int z = WINDOW_WIDTH - 200;
+        int monstersInRow = (int) (z / (MONSTER_WIDTH+34));
+        float offset = (WINDOW_WIDTH - (monstersInRow * (MONSTER_WIDTH+34))) / 2;
+        for (int e = 0; e < monstersInRow; e++) {
+            float y = 80;
+            float x = (34 + MONSTER_WIDTH) * e + offset;
+            monsters.emplace_back(x, y);
+        }
+    }
+
 }
 
 bool isPauseKey(const sf::Keyboard::Key& key) {
@@ -210,6 +224,8 @@ void GameScreen::update() {
                 }
 
                 // TODO add spaceship collision
+
+                // TODO add monster collision
             }
         }
     }
@@ -249,6 +265,16 @@ void GameScreen::update() {
         collision.updatePhase();
         if (collision.isMaxPhase()) {
             collisions.erase(collisions.begin() + i);
+            i--;
+        }
+    }
+
+    // update monsters
+    for (int i = 0; i < monsters.size(); i++) {
+        auto& monster = monsters.at(i);
+        monster.updateState();
+        if (monster.isDestroyed()) {
+            monsters.erase(monsters.begin() + i);
             i--;
         }
     }
@@ -300,12 +326,23 @@ void GameScreen::draw() {
         }
     }
 
+    // explosions
     for (auto& collision : collisions) {
         sf::Sprite sprite1;
         sprite1.setTexture(gameData->assetManager.getTexture("EXP"));
         sprite1.setPosition(collision.getX() - 14,collision.getY() - 14);
         sprite1.setTextureRect(sf::IntRect(collision.getCords()[0], collision.getCords()[1],30,26));
         gameData->renderWindow.draw(sprite1);
+    }
+
+    // monsters
+    for (auto& monster: monsters) {
+        sf::Sprite sprite;
+        sprite.setTexture(gameData->assetManager.getTexture("MONSTER"));
+        sprite.setPosition(monster.getX(),monster.getY());
+        sprite.setTextureRect(sf::IntRect(monster.getSpritePositions()[0],
+            monster.getSpritePositions()[1], MONSTER_WIDTH, MONSTER_HEIGHT));
+        gameData->renderWindow.draw(sprite);
     }
 
     // spaceship

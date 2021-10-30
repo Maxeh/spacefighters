@@ -13,7 +13,7 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
 
     colorRed = new COLOR_RED;
     colorLightBlue = new COLOR_BLACK;
-    colorDarkBlue = new COLOR_BLUE;
+    colorDarkBlue = new COLOR_CYAN;
 
     spaceHeader = new SpaceHeader(gameData);
     singlePlayerButton = new SpaceButton(50, 300, WINDOW_WIDTH - 100, 50);
