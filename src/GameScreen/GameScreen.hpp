@@ -18,6 +18,8 @@ class GameScreen : public Screen {
     const int NUMBER_OF_MONSTERS_IN_ROW = 8;
     const float MONSTER_WIDTH = 62;
     const float MONSTER_HEIGHT = 45;
+    const float MONSTER_HORIZONTAL_DISTANCE = 34;
+    const float MONSTER_VERTICAL_DISTANCE = 80;
     const int NUMBER_OF_ASTEROID_ROWS = 4;
     const float ASTEROID_WIDTH = 60;
     const float ASTEROID_HEIGHT = 54;
@@ -46,13 +48,15 @@ class GameScreen : public Screen {
     float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
     bool movingLeft = false;
     bool movingRight = false;
+    bool right = true;
+    bool left = false;
 
     SpaceHeader* spaceHeader;
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;
     std::vector<Collision> collisions;
-    std::vector<Monster> monsters;
+    std::array<std::vector<Monster>, 2> monstersArray;
     Spaceship spaceship;
 
     void moveSpaceship(float v);

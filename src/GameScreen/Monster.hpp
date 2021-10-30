@@ -3,7 +3,7 @@
 
 class Monster {
     float SPRITE_POSITIONS[2][2] = { {0 ,0}, {0, 49} };
-    int MAX_TICKS = 10;
+    int MAX_TICKS = 50;
 
     float x;
     float y;
@@ -17,7 +17,10 @@ public:
     float getY() const;
     bool isDestroyed() const;
     void setDestroyed(bool destroyed);
-    void updateState();
+    void updateState(bool right);
+    int getDirection() const;
+
+    void setX(float x);
 };
 
 #endif

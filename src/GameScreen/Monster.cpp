@@ -28,12 +28,22 @@ void Monster::setDestroyed(bool _destroyed) {
     destroyed = _destroyed;
 }
 
-void Monster::updateState() {
+void Monster::updateState(bool right) {
 
     if (++ticks == MAX_TICKS) {
         state = state == 1 ? 0 : 1;
+        if (right) {
+            x+=62;
+        } else {
+            x-=62;
+        }
         ticks = 0;
     }
+}
+
+void Monster::setX(float x) {
+
+    Monster::x = x;
 }
 
 

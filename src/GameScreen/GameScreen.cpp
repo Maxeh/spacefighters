@@ -43,16 +43,16 @@ void GameScreen::init() {
     }
 
     for (int i = 0; i < NUMBER_OF_MONSTERS_ROWS; i++) {
-        int z = WINDOW_WIDTH - 200;
-        int monstersInRow = (int) (z / (MONSTER_WIDTH+34));
-        float offset = (WINDOW_WIDTH - (monstersInRow * (MONSTER_WIDTH+34))) / 2;
+        float z = WINDOW_WIDTH - 200;
+        int monstersInRow = (int) (z / (MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
+        float offset = (WINDOW_WIDTH - ((float) monstersInRow * (MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE))) / 2;
         for (int e = 0; e < monstersInRow; e++) {
-            float y = 80;
-            float x = (34 + MONSTER_WIDTH) * e + offset;
-            monsters.emplace_back(x, y);
+            float y = MONSTER_VERTICAL_DISTANCE * (float) i + MONSTER_VERTICAL_DISTANCE;
+            float x = (MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE) * (float) e + offset +
+                MONSTER_HORIZONTAL_DISTANCE / 2;
+            monstersArray[i].emplace_back(x, y);
         }
     }
-
 }
 
 bool isPauseKey(const sf::Keyboard::Key& key) {
@@ -268,12 +268,30 @@ void GameScreen::update() {
     }
 
     // update monsters
-    for (int i = 0; i < monsters.size(); i++) {
-        auto& monster = monsters.at(i);
-        monster.updateState();
-        if (monster.isDestroyed()) {
-            monsters.erase(monsters.begin() + i);
-            i--;
+    auto& lastMonster = monstersArray[0].at(monstersArray[0].size() - 1);
+    auto& firstMonster = monstersArray[0].at(0);
+
+    if (right) {
+        if (lastMonster.getX() > (WINDOW_WIDTH - MONSTER_WIDTH * 2)) {
+            right = false;
+            left = true;
+        }
+    } else if (left) {
+        if (firstMonster.getX() < MONSTER_WIDTH) {
+            left = false;
+            right = true;
+        }
+    }
+
+    for (int i = 0; i < 2; i++) {
+        auto& monsters = monstersArray[i];
+        for (int e = 0; e < monsters.size(); e++) {
+            auto& monster = monsters.at(e);
+            monster.updateState(right);
+            if (monster.isDestroyed()) {
+                monsters.erase(monsters.begin() + e);
+                e--;
+            }
         }
     }
 }
@@ -334,13 +352,15 @@ void GameScreen::draw() {
     }
 
     // monsters
-    for (auto& monster: monsters) {
-        sf::Sprite sprite;
-        sprite.setTexture(gameData->assetManager.getTexture("MONSTER"));
-        sprite.setPosition(monster.getX(),monster.getY());
-        sprite.setTextureRect(sf::IntRect(monster.getSpritePositions()[0],
-            monster.getSpritePositions()[1], MONSTER_WIDTH, MONSTER_HEIGHT));
-        gameData->renderWindow.draw(sprite);
+    for (auto& monsters : monstersArray) {
+        for (auto& monster: monsters) {
+            sf::Sprite sprite;
+            sprite.setTexture(gameData->assetManager.getTexture("MONSTER"));
+            sprite.setPosition(monster.getX(),monster.getY());
+            sprite.setTextureRect(sf::IntRect(monster.getSpritePositions()[0],
+                monster.getSpritePositions()[1], MONSTER_WIDTH, MONSTER_HEIGHT));
+            gameData->renderWindow.draw(sprite);
+        }
     }
 
     // spaceship
