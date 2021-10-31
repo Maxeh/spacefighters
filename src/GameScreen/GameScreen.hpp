@@ -14,26 +14,22 @@
 #include "Monster.hpp"
 
 class GameScreen : public Screen {
-    const int NUMBER_OF_MONSTERS_ROWS = 2;
-    const int NUMBER_OF_MONSTERS_IN_ROW = 8;
-    const float MONSTER_WIDTH = 62;
-    const float MONSTER_HEIGHT = 45;
-    const float MONSTER_HORIZONTAL_DISTANCE = 34;
-    const float MONSTER_VERTICAL_DISTANCE = 80;
-    const int NUMBER_OF_ASTEROID_ROWS = 4;
-    const float ASTEROID_WIDTH = 60;
-    const float ASTEROID_HEIGHT = 54;
-    const float ASTEROID_VERTICAL_SPACE = 30;
-    const float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
-    const float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
-    const float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
-    const float ASTEROID_VELOCITY = 2;
-    const float SPACESHIP_WIDTH = 75;
-    const float SPACESHIP_MAX_LEFT_POSITION = 5;
-    const float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
-    const float SPACESHIP_DEFAULT_ACCELERATION = 1;
-    const float SPACESHIP_DEFAULT_VELOCITY = 15;
-    const float SPACESHIP_MAX_VELOCITY = 40;
+    int NUMBER_OF_MONSTER_ROWS = 2;
+    float MONSTER_HORIZONTAL_DISTANCE = 34;
+    float MONSTER_VERTICAL_DISTANCE = 80;
+    int NUMBER_OF_ASTEROID_ROWS = 4;
+    float ASTEROID_WIDTH = 60;
+    float ASTEROID_HEIGHT = 54;
+    float ASTEROID_VERTICAL_SPACE = 30;
+    float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
+    float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
+    float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
+    float SPACESHIP_WIDTH = 75;
+    float SPACESHIP_MAX_LEFT_POSITION = 5;
+    float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
+    float SPACESHIP_DEFAULT_ACCELERATION = 1;
+    float SPACESHIP_DEFAULT_VELOCITY = 15;
+    float SPACESHIP_MAX_VELOCITY = 40;
 
     bool isPause = false;
     bool soundOn = true;
@@ -48,8 +44,8 @@ class GameScreen : public Screen {
     float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
     bool movingLeft = false;
     bool movingRight = false;
-    bool right = true;
-    bool left = false;
+    bool monstersMovingRight = true;
+    bool monstersMovingLeft = false;
 
     SpaceHeader* spaceHeader;
     std::shared_ptr<GameManager::GameData> gameData;
@@ -60,7 +56,7 @@ class GameScreen : public Screen {
     Spaceship spaceship;
 
     void moveSpaceship(float v);
-    static int randomIntBetween(float fMin, float fMax);
+    float getAsteroidStartY() const;
     static float randomFloatBetween(float fMin, float fMax);
 public:
     explicit GameScreen(std::shared_ptr<GameManager::GameData> gameData);
@@ -71,7 +67,6 @@ public:
     void draw() override;
     void resume() override;
     void pause() override;
-    float getAsteroidStartY() const;
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <SFML/System/Clock.hpp>
 
 class Spaceship {
-    const int RELOAD_TIME = 200;
+    int RELOAD_TIME = 200;
     float x;
     float y;
     int energy = 1000;
