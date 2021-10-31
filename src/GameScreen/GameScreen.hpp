@@ -24,6 +24,7 @@ class GameScreen : public Screen {
     float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
     float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
     float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
+    float ASTEROID_PROBABILITY = 0.75;
     float SPACESHIP_WIDTH = 75;
     float SPACESHIP_MAX_LEFT_POSITION = 5;
     float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
@@ -46,6 +47,7 @@ class GameScreen : public Screen {
     bool movingRight = false;
     bool monstersMovingRight = true;
     bool monstersMovingLeft = false;
+    int points = 0;
 
     SpaceHeader* spaceHeader;
     std::shared_ptr<GameManager::GameData> gameData;

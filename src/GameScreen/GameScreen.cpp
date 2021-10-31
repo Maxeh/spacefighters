@@ -2,7 +2,7 @@
 #include "GameScreen.hpp"
 
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 100) {}
+    gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 120) {}
 
 GameScreen::~GameScreen() {
 
@@ -25,6 +25,7 @@ void GameScreen::init() {
     gameData->assetManager.loadTexture(EXPLOSION_TEXTURE, "res/exp2.png", false);
     gameData->assetManager.loadTexture(MONSTER_TEXTURE, "res/inv3.png", false);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
+    gameData->assetManager.loadFont(POINTS_FONT, "res/font.ttf");
 
     // fill row after row from right to left
     for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
@@ -37,7 +38,7 @@ void GameScreen::init() {
             x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
             float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
             asteroidsArray[i].emplace_back(x, y, r);
-            if (randomFloatBetween(0.0, 1.0) > 0.8)
+            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
                 asteroidsArray[i].back().setVisible(false);
         }
     }
@@ -218,7 +219,7 @@ void GameScreen::update() {
                         shape.rotate(asteroid.getRotation());
 
                         if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
-//                            asteroid.setVisible(false);
+////                            asteroid.setVisible(false);
                             missile.setVisible(false);
                             collisions.emplace_back(missile.getX(), missile.getY());
                         }
@@ -245,6 +246,7 @@ void GameScreen::update() {
                         monster.setDestroyed(true);
                         missile.setVisible(false);
                         collisions.emplace_back(missile.getX(), missile.getY());
+                        points += 1000;
                     }
                 }
             }
@@ -279,6 +281,8 @@ void GameScreen::update() {
             x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
             float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
             asteroids.emplace_back(x, y, r);
+            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
+                asteroids.back().setVisible(false);
         }
     }
 
@@ -432,30 +436,35 @@ void GameScreen::draw() {
     gameData->renderWindow.draw(sprite);
 
     // health
-    sf::RectangleShape healthShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 30));
+    sf::RectangleShape healthShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
     healthShape.setOutlineColor(COLOR_DARKER_BLUE);
-    healthShape.setFillColor(COLOR_RED);
-    healthShape.setPosition(5, WINDOW_HEIGHT - 30);
+    healthShape.setFillColor(COLOR_DARK_BLUE);
+    healthShape.setPosition(5, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(healthShape);
 
-//    sf::RectangleShape healthShape2(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
-//    healthShape2.setOutlineColor(COLOR_DARKER_BLUE);
-//    healthShape2.setFillColor(COLOR_BLUE);
-//    healthShape2.setPosition(5, WINDOW_HEIGHT - 30);
-//    gameData->renderWindow.draw(healthShape2);
-
-    // shield
-    sf::RectangleShape shieldShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 30));
-    shieldShape.setOutlineColor(COLOR_DARKER_BLUE);
-    shieldShape.setFillColor(COLOR_BLUE);
-    shieldShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3, WINDOW_HEIGHT - 30);
+    // points
+    sf::RectangleShape shieldShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
+    shieldShape.setOutlineColor(COLOR_CYAN);
+    shieldShape.setFillColor(COLOR_CYAN);
+    shieldShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(shieldShape);
 
+    // points text
+    sf::Text pointsText;
+    pointsText.setFont(gameData->assetManager.getFont(POINTS_FONT));
+    pointsText.setCharacterSize(20);
+    pointsText.setFillColor(COLOR_BLACK);
+    std::string stringPoints = std::to_string(points);
+    int offset = 7 * stringPoints.length();
+    pointsText.setString(stringPoints);
+    pointsText.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 + (static_cast<float>(WINDOW_WIDTH) / 3 / 2) - offset, WINDOW_HEIGHT - 35);
+    gameData->renderWindow.draw(pointsText);
+
     // energy
-    sf::RectangleShape energyShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 30));
+    sf::RectangleShape energyShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
     energyShape.setOutlineColor(COLOR_DARKER_BLUE);
-    shieldShape.setFillColor(COLOR_DARKER_BLUE);
-    energyShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 * 2, WINDOW_HEIGHT - 30);
+    energyShape.setFillColor(COLOR_DARK_BLUE);
+    energyShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 * 2, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(energyShape);
 
     /** draw not game related UI elements **/

@@ -8,13 +8,13 @@
 #define COLOR_TRANSPARENT sf::Color(255, 255, 255, 0)
 #define COLOR_BLACK sf::Color(0,0,0)
 #define COLOR_CYAN sf::Color(30, 115, 180)
-#define COLOR_BLUE sf::Color(37, 56, 124)
 #define COLOR_DARK_BLUE sf::Color(24, 31, 45)
 #define COLOR_DARKER_BLUE sf::Color(4, 6, 12)
 #define COLOR_RED sf::Color(255, 187, 66)
 #define GAME_HEADER_HEIGHT 54.f
 #define GAME_SOUND std::string("GAME_SOUND")
 #define GAME_FONT "GAME_FONT"
+#define POINTS_FONT "POINTS_FONT"
 #define SOUND_ON_TEXTURE "SOUND_ON"
 #define SOUND_OFF_TEXTURE "SOUND_OFF"
 #define BACKGROUND_TEXTURE "BACKGROUND"
