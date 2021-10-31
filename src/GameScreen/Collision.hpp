@@ -9,16 +9,15 @@ class Collision {
         {90, 0},{60, 0},{30, 0},{0, 0}};
     float x;
     float y;
-    int phase;
+    int state = 0;
     int ticks = 0;
-
 public:
-    Collision(float x, float y, int phase);
+    explicit Collision(float x, float y);
     float getX() const;
     float getY() const;
-    float* getCords();
-    void updatePhase();
-    bool isMaxPhase();
+    float* getSpritePositions();
+    void updateState();
+    bool isMaxState();
 };
 
 #endif

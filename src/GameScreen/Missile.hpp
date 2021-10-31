@@ -16,7 +16,6 @@ public:
     float getY() const;
     float getWidth() const;
     float getHeight() const;
-    float getSpeed() const;
     bool isVisible() const;
     void setVisible(bool visible_);
 };

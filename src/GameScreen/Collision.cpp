@@ -1,7 +1,7 @@
 #include "Collision.hpp"
 
-Collision::Collision(float x, float y, int phase) :
-    x(x), y(y), phase(phase) {}
+Collision::Collision(float x, float y) :
+    x(x), y(y) {}
 
 float Collision::getX() const {
 
@@ -13,22 +13,22 @@ float Collision::getY() const {
     return y;
 }
 
-void Collision::updatePhase() {
+void Collision::updateState() {
 
     if (++ticks == MAX_TICKS) {
-        phase++;
+        state++;
         ticks = 0;
     }
 }
 
-float* Collision::getCords() {
+float* Collision::getSpritePositions() {
 
-    return POSITIONS[phase];
+    return POSITIONS[state];
 }
 
-bool Collision::isMaxPhase() {
+bool Collision::isMaxState() {
 
-    return phase == sizeof(POSITIONS) / sizeof(POSITIONS[0]);
+    return state == sizeof(POSITIONS) / sizeof(POSITIONS[0]);
 }
 
 

@@ -28,11 +28,6 @@ float Asteroid::getRotation() const {
     return rotation;
 }
 
-float Asteroid::getAngle() const {
-
-    return angle;
-}
-
 bool Asteroid::isVisible() const {
 
     return visible;

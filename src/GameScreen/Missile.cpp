@@ -33,11 +33,6 @@ float Missile::getHeight() const {
     return height;
 }
 
-float Missile::getSpeed() const {
-
-    return velocity;
-}
-
 void Missile::setVisible(bool visible_) {
 
     visible = visible_;

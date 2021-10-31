@@ -220,7 +220,7 @@ void GameScreen::update() {
                         if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
 //                            asteroid.setVisible(false);
                             missile.setVisible(false);
-                            collisions.emplace_back(missile.getX(), missile.getY(), 1);
+                            collisions.emplace_back(missile.getX(), missile.getY());
                         }
                     }
                 }
@@ -244,7 +244,7 @@ void GameScreen::update() {
                     if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
                         monster.setDestroyed(true);
                         missile.setVisible(false);
-                        collisions.emplace_back(missile.getX(), missile.getY(), 1);
+                        collisions.emplace_back(missile.getX(), missile.getY());
                     }
                 }
             }
@@ -285,8 +285,8 @@ void GameScreen::update() {
     // update collisions
     for (int i = 0; i < collisions.size(); i++) {
         auto& collision = collisions.at(i);
-        collision.updatePhase();
-        if (collision.isMaxPhase()) {
+        collision.updateState();
+        if (collision.isMaxState()) {
             collisions.erase(collisions.begin() + i);
             i--;
         }
@@ -333,7 +333,7 @@ void GameScreen::update() {
         auto& monsters = monstersArray[i];
         for (int e = 0; e < monsters.size(); e++) {
             auto& monster = monsters.at(e);
-            monster.updateState(monstersMovingLeft);
+            monster.updateState(monstersMovingRight);
             if (monster.isDestroyed()) {
                 monsters.erase(monsters.begin() + e);
                 e--;
@@ -394,7 +394,7 @@ void GameScreen::draw() {
         sf::Sprite sprite;
         sprite.setTexture(gameData->assetManager.getTexture(EXPLOSION_TEXTURE));
         sprite.setPosition(collision.getX() - 14,collision.getY() - 14);
-        sprite.setTextureRect(sf::IntRect(collision.getCords()[0], collision.getCords()[1],
+        sprite.setTextureRect(sf::IntRect(collision.getSpritePositions()[0], collision.getSpritePositions()[1],
             30,26));
         gameData->renderWindow.draw(sprite);
     }

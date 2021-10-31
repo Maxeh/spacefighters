@@ -882,6 +882,10 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/AssetManager.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
 
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.cpp
+Collision.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
+
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp
@@ -913,6 +917,10 @@ Collision.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
 Monster.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.cpp
+Missile.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
 
