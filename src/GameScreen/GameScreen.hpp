@@ -31,9 +31,10 @@ class GameScreen : public Screen {
     float SPACESHIP_DEFAULT_ACCELERATION = 1;
     float SPACESHIP_DEFAULT_VELOCITY = 15;
     float SPACESHIP_MAX_VELOCITY = 40;
+    int MAX_LEVEL_COMPLETE_TICKS = 200;
 
-    bool isPause = false;
     bool soundOn = true;
+    bool isPause = false;
     int initialWindowX = 0;
     int initialWindowY = 0;
     int mousePositionWhenPressedX = 0;
@@ -47,6 +48,9 @@ class GameScreen : public Screen {
     bool movingRight = false;
     bool monstersMovingRight = true;
     bool monstersMovingLeft = false;
+    int levelCompleteTicks = 0;
+    bool levelComplete = false;
+    int level = 1;
     int points = 0;
 
     SpaceHeader* spaceHeader;
@@ -57,6 +61,8 @@ class GameScreen : public Screen {
     std::array<std::vector<Monster>, 2> monstersArray;
     Spaceship spaceship;
 
+    void initAsteroids();
+    void initMonsters();
     void moveSpaceship(float v);
     float getAsteroidStartY() const;
     static float randomFloatBetween(float fMin, float fMax);

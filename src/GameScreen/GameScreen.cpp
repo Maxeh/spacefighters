@@ -27,34 +27,8 @@ void GameScreen::init() {
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
     gameData->assetManager.loadFont(POINTS_FONT, "res/font.ttf");
 
-    // fill row after row from right to left
-    for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
-        int asteroidsInRow = static_cast<int>(WINDOW_WIDTH / ASTEROID_WIDTH + 1);
-        for (int e = 0; e < asteroidsInRow; e++) {
-            float y = getAsteroidStartY();
-            y = y + static_cast<float>(i) * ASTEROID_HEIGHT + static_cast<float>(i) * ASTEROID_VERTICAL_SPACE;
-            y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
-            float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
-            x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
-            asteroidsArray[i].emplace_back(x, y, r);
-            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
-                asteroidsArray[i].back().setVisible(false);
-        }
-    }
-
-    for (int i = 0; i < NUMBER_OF_MONSTER_ROWS; i++) {
-        float z = WINDOW_WIDTH - 200;
-        int monstersInRow = static_cast<int>(z / (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
-        float monstersWidth = (static_cast<float>(monstersInRow) *
-            (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
-        float offset = (WINDOW_WIDTH - monstersWidth) / 2 + MONSTER_HORIZONTAL_DISTANCE / 2;
-        for (int e = 0; e < monstersInRow; e++) {
-            float y = MONSTER_VERTICAL_DISTANCE * static_cast<float>(i) + MONSTER_VERTICAL_DISTANCE;
-            float x = (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE) * static_cast<float>(e) + offset;
-            monstersArray[i].emplace_back(x, y);
-        }
-    }
+    initAsteroids();
+    initMonsters();
 }
 
 bool isPauseKey(const sf::Keyboard::Key& key) {
@@ -80,7 +54,7 @@ void GameScreen::handleInput() {
                     isPause = !isPause;
                 }
                 if (isSpaceKey(event.key.code)) {
-                    if (!spaceship.isReloading()) {
+                    if (!levelComplete && !spaceship.isReloading()) {
                         float x = spaceship.getX();
                         float y = spaceship.getY();
                         missiles.emplace_back(x + 4, y);
@@ -220,8 +194,8 @@ void GameScreen::update() {
 
                         if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
 ////                            asteroid.setVisible(false);
-                            missile.setVisible(false);
-                            collisions.emplace_back(missile.getX(), missile.getY());
+//                            missile.setVisible(false);
+//                            collisions.emplace_back(missile.getX(), missile.getY());
                         }
                     }
                 }
@@ -232,14 +206,16 @@ void GameScreen::update() {
                     sf::RectangleShape missileShape(sf::Vector2f(missile.getWidth(), missile.getHeight()));
                     missileShape.setPosition(missile.getX(), missile.getY());
 
+                    // Use factor 0.9 for better collision detection, this is not completely accurate,
+                    // but implementing pixel accurate collision detection would be an overkill
                     sf::RectangleShape shape(sf::Vector2f(
-                        Monster::MONSTER_WIDTH * 0.8,
-                        Monster::MONSTER_HEIGHT * 0.8));
+                        Monster::MONSTER_WIDTH * 0.9,
+                        Monster::MONSTER_HEIGHT * 0.9));
                     shape.setOrigin(
-                        static_cast<float>(Monster::MONSTER_WIDTH * 0.8 / 2),
-                        static_cast<float>(Monster::MONSTER_HEIGHT * 0.8 / 2));
-                    auto posX = monster.getX() + Monster::MONSTER_WIDTH * 0.8 / 2;
-                    auto posY = monster.getY() + Monster::MONSTER_HEIGHT * 0.8 / 2;
+                        static_cast<float>(Monster::MONSTER_WIDTH * 0.9 / 2),
+                        static_cast<float>(Monster::MONSTER_HEIGHT * 0.9 / 2));
+                    auto posX = monster.getX() + Monster::MONSTER_WIDTH * 0.9 / 2;
+                    auto posY = monster.getY() + Monster::MONSTER_HEIGHT * 0.9 / 2;
                     shape.setPosition(posX, posY);
 
                     if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
@@ -316,7 +292,13 @@ void GameScreen::update() {
     }
     // if one is empty, the other is also empty
     if (lastMonsterPtr == nullptr && firstMonsterPtr == nullptr) {
-        std::cout << "WIN" << std::endl;
+        levelComplete = true;
+        if (++levelCompleteTicks == MAX_LEVEL_COMPLETE_TICKS) {
+            initMonsters();
+            level++;
+            levelComplete = false;
+            levelCompleteTicks = 0;
+        }
         return;
     }
 
@@ -397,9 +379,9 @@ void GameScreen::draw() {
     for (auto& collision : collisions) {
         sf::Sprite sprite;
         sprite.setTexture(gameData->assetManager.getTexture(EXPLOSION_TEXTURE));
-        sprite.setPosition(collision.getX() - 14,collision.getY() - 14);
+        sprite.setPosition(collision.getX() - 14, collision.getY() - 14);
         sprite.setTextureRect(sf::IntRect(collision.getSpritePositions()[0], collision.getSpritePositions()[1],
-            30,26));
+            30, 26));
         gameData->renderWindow.draw(sprite);
     }
 
@@ -408,7 +390,7 @@ void GameScreen::draw() {
         for (auto& monster: monsters) {
             sf::Sprite sprite;
             sprite.setTexture(gameData->assetManager.getTexture(MONSTER_TEXTURE));
-            sprite.setPosition(monster.getX(),monster.getY());
+            sprite.setPosition(monster.getX(), monster.getY());
             sprite.setTextureRect(sf::IntRect(monster.getSpritePositions()[0],
                 monster.getSpritePositions()[1], Monster::MONSTER_WIDTH, Monster::MONSTER_HEIGHT));
             gameData->renderWindow.draw(sprite);
@@ -455,9 +437,11 @@ void GameScreen::draw() {
     pointsText.setCharacterSize(20);
     pointsText.setFillColor(COLOR_BLACK);
     std::string stringPoints = std::to_string(points);
-    int offset = 7 * stringPoints.length();
+    float offsetPointsString = stringPoints.length() * 7.f;
     pointsText.setString(stringPoints);
-    pointsText.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 + (static_cast<float>(WINDOW_WIDTH) / 3 / 2) - offset, WINDOW_HEIGHT - 35);
+    pointsText.setPosition(
+        5 + static_cast<float>(WINDOW_WIDTH) / 3 + (static_cast<float>(WINDOW_WIDTH) / 3 / 2) - offsetPointsString,
+        WINDOW_HEIGHT - 35);
     gameData->renderWindow.draw(pointsText);
 
     // energy
@@ -466,6 +450,18 @@ void GameScreen::draw() {
     energyShape.setFillColor(COLOR_DARK_BLUE);
     energyShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 * 2, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(energyShape);
+
+    // level text
+    if (levelComplete) {
+        sf::Text levelText;
+        levelText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        levelText.setCharacterSize(50);
+        levelText.setFillColor(COLOR_CYAN);
+        float offsetLevelString = 150;
+        levelText.setString("LEVEL " + std::to_string(level + 1));
+        levelText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetLevelString, 100);
+        gameData->renderWindow.draw(levelText);
+    }
 
     /** draw not game related UI elements **/
 
@@ -491,6 +487,38 @@ void GameScreen::pause() {
 }
 
 // -------------------------
+void GameScreen::initAsteroids() {
+    // fill row after row from right to left
+    for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
+        int asteroidsInRow = static_cast<int>(WINDOW_WIDTH / ASTEROID_WIDTH + 1);
+        for (int e = 0; e < asteroidsInRow; e++) {
+            float y = getAsteroidStartY();
+            y = y + static_cast<float>(i) * ASTEROID_HEIGHT + static_cast<float>(i) * ASTEROID_VERTICAL_SPACE;
+            y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
+            float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
+            x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
+            asteroidsArray[i].emplace_back(x, y, r);
+            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
+                asteroidsArray[i].back().setVisible(false);
+        }
+    }
+}
+
+void GameScreen::initMonsters() {
+    for (int i = 0; i < NUMBER_OF_MONSTER_ROWS; i++) {
+        float z = WINDOW_WIDTH - 200;
+        int monstersInRow = static_cast<int>(z / (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
+        float monstersWidth = (static_cast<float>(monstersInRow) *
+            (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
+        float offset = (WINDOW_WIDTH - monstersWidth) / 2 + MONSTER_HORIZONTAL_DISTANCE / 2;
+        for (int e = 0; e < monstersInRow; e++) {
+            float y = MONSTER_VERTICAL_DISTANCE * static_cast<float>(i) + MONSTER_VERTICAL_DISTANCE;
+            float x = (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE) * static_cast<float>(e) + offset;
+            monstersArray[i].emplace_back(x, y);
+        }
+    }
+}
 
 void GameScreen::moveSpaceship(float v) {
 
