@@ -4,24 +4,39 @@
 #include <SFML/System/Clock.hpp>
 
 class Spaceship {
-    int RELOAD_TIME = 200;
+private:
+    static const int RELOAD_TIME = 200;
+    static constexpr float DEFAULT_VELOCITY = 15;
+    static constexpr float MAX_VELOCITY = 40;
     float x;
     float y;
-    int energy = 1000;
     int health = 1000;
-    int shield = 1000;
+    int energy = 1000;
+    bool movingLeft = false;
+    bool movingRight = false;
     sf::Clock reloadTime;
+    float velocity = Spaceship::DEFAULT_VELOCITY;
 public:
+    static constexpr float SPACESHIP_WIDTH = 75;
+    static constexpr float SPACESHIP_HEIGHT = 100;
     explicit Spaceship(float x, float y);
-    void moveX(float x);
-    void reload();
-    bool isReloading();
     float getX() const;
-    float getY() const;
-    int getEnergy() const;
-    int getHealth() const;
-    int getShield() const;
     void setX(float x);
+    void moveX(float x);
+    float getY() const;
+    int getHealth() const;
+    int getEnergy() const;
+    bool isReloading();
+    void reload();
+    float getVelocity() const;
+    void resetVelocity();
+    void accelerate();
+
+
+    bool isMovingLeft() const;
+    void setMovingLeft(bool movingLeft);
+    bool isMovingRight() const;
+    void setMovingRight(bool movingRight);
 };
 
 #endif

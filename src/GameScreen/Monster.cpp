@@ -1,12 +1,9 @@
 #include "Monster.hpp"
 
+const float Monster::SPRITE_POSITIONS[2][2] = { {0 ,0}, {0, 49} };
+
 Monster::Monster(float x, float y) :
     x(x), y(y) {}
-
-float* Monster::getSpritePositions() {
-
-    return SPRITE_POSITIONS[state];
-}
 
 float Monster::getX() const {
 
@@ -16,6 +13,11 @@ float Monster::getX() const {
 float Monster::getY() const {
 
     return y;
+}
+
+const float* Monster::getSpritePositions() const {
+
+    return SPRITE_POSITIONS[state];
 }
 
 bool Monster::isDestroyed() const {
@@ -44,4 +46,3 @@ void Monster::updateState(bool monstersMovingRight) {
         moveTicks = 0;
     }
 }
-

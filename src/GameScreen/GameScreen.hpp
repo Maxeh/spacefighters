@@ -14,24 +14,19 @@
 #include "Monster.hpp"
 
 class GameScreen : public Screen {
-    int NUMBER_OF_MONSTER_ROWS = 2;
-    float MONSTER_HORIZONTAL_DISTANCE = 34;
-    float MONSTER_VERTICAL_DISTANCE = 80;
-    int NUMBER_OF_ASTEROID_ROWS = 4;
-    float ASTEROID_WIDTH = 60;
-    float ASTEROID_HEIGHT = 54;
-    float ASTEROID_VERTICAL_SPACE = 30;
-    float ASTEROID_HORIZONTAL_SPACE_MIN = ASTEROID_WIDTH;
-    float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
-    float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
-    float ASTEROID_PROBABILITY = 0.5;
-    float SPACESHIP_WIDTH = 75;
-    float SPACESHIP_MAX_LEFT_POSITION = 5;
-    float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - SPACESHIP_WIDTH - 5;
-    float SPACESHIP_DEFAULT_ACCELERATION = 1;
-    float SPACESHIP_DEFAULT_VELOCITY = 15;
-    float SPACESHIP_MAX_VELOCITY = 40;
-    int MAX_LEVEL_COMPLETE_TICKS = 200;
+private:
+    static const int NUMBER_OF_MONSTER_ROWS = 2;
+    static constexpr float MONSTER_HORIZONTAL_DISTANCE = 34;
+    static constexpr float MONSTER_VERTICAL_DISTANCE = 80;
+    static const int NUMBER_OF_ASTEROID_ROWS = 4;
+    static constexpr float ASTEROID_VERTICAL_SPACE = 30;
+    static constexpr float ASTEROID_HORIZONTAL_SPACE_MIN = Asteroid::ASTEROID_WIDTH;
+    static constexpr float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
+    static constexpr float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
+    static constexpr float ASTEROID_PROBABILITY = 0.5;
+    static constexpr float SPACESHIP_MAX_LEFT_POSITION = 5;
+    static constexpr float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - Spaceship::SPACESHIP_WIDTH - 5;
+    static const int MAX_LEVEL_COMPLETE_TICKS = 200;
 
     bool soundOn = true;
     bool isPause = false;
@@ -42,10 +37,6 @@ class GameScreen : public Screen {
     int mousePositionWhenMovedDiffX = 0;
     int mousePositionWhenMovedDiffY = 0;
     bool mouseButtonPressed = false;
-    float velocity = SPACESHIP_DEFAULT_VELOCITY;
-    float acceleration = SPACESHIP_DEFAULT_ACCELERATION;
-    bool movingLeft = false;
-    bool movingRight = false;
     bool monstersMovingRight = true;
     bool monstersMovingLeft = false;
     int levelCompleteTicks = 0;

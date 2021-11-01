@@ -1,12 +1,36 @@
-#include <iostream>
 #include "Spaceship.hpp"
 
 Spaceship::Spaceship(float x, float y) :
     x(x), y(y) {}
 
+float Spaceship::getX() const {
+
+    return x;
+}
+
+void Spaceship::setX(float x_) {
+
+    x = x_;
+}
+
 void Spaceship::moveX(float x_) {
 
     x += x_;
+}
+
+float Spaceship::getY() const {
+
+    return y;
+}
+
+int Spaceship::getHealth() const {
+
+    return health;
+}
+
+int Spaceship::getEnergy() const {
+
+    return energy;
 }
 
 bool Spaceship::isReloading() {
@@ -19,32 +43,39 @@ void Spaceship::reload() {
     reloadTime.restart();
 }
 
-float Spaceship::getX() const {
+float Spaceship::getVelocity() const {
 
-    return x;
+    return velocity;
 }
 
-float Spaceship::getY() const {
+void Spaceship::resetVelocity() {
 
-    return y;
+    Spaceship::velocity = DEFAULT_VELOCITY;
 }
 
-int Spaceship::getEnergy() const {
+void Spaceship::accelerate() {
 
-    return energy;
+    if (Spaceship::velocity < Spaceship::MAX_VELOCITY) {
+        Spaceship::velocity += 1;
+    }
 }
 
-int Spaceship::getHealth() const {
+bool Spaceship::isMovingLeft() const {
 
-    return health;
+    return movingLeft;
 }
 
-int Spaceship::getShield() const {
+void Spaceship::setMovingLeft(bool movingLeft) {
 
-    return shield;
+    Spaceship::movingLeft = movingLeft;
 }
 
-void Spaceship::setX(float x_) {
+bool Spaceship::isMovingRight() const {
 
-    x = x_;
+    return movingRight;
+}
+
+void Spaceship::setMovingRight(bool movingRight) {
+
+    Spaceship::movingRight = movingRight;
 }
