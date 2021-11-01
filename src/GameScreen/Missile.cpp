@@ -1,7 +1,7 @@
 #include "Missile.hpp"
 
-Missile::Missile(float x, float y, MissileDirection missileDirection, MissileOwner missileOwner) :
-    x(x), y(y), missileDirection(missileDirection), missileOwner(missileOwner) {}
+Missile::Missile(float x, float y, MissileDirection missileDirection) :
+    x(x), y(y), missileDirection(missileDirection) {}
 
 void Missile::move() {
 
@@ -42,9 +42,4 @@ float Missile::getHeight() const {
 void Missile::setVisible(bool visible_) {
 
     visible = visible_;
-}
-
-MissileOwner Missile::getMissileOwner() const {
-
-    return missileOwner;
 }

@@ -1,7 +1,7 @@
 #include "Collision.hpp"
 
-Collision::Collision(float x, float y) :
-    x(x), y(y) {}
+Collision::Collision(float x, float y, MissileDirection missileDirection) :
+    x(x), y(y), missileDirection(missileDirection) {}
 
 float Collision::getX() const {
 
@@ -23,12 +23,17 @@ void Collision::updateState() {
 
 float* Collision::getSpritePositions() {
 
-    return POSITIONS[state];
+    return SPRITE_POSITIONS[state];
 }
 
 bool Collision::isMaxState() {
 
-    return state == sizeof(POSITIONS) / sizeof(POSITIONS[0]);
+    return state == sizeof(SPRITE_POSITIONS) / sizeof(SPRITE_POSITIONS[0]);
+}
+
+MissileDirection Collision::getMissileDirection() const {
+
+    return missileDirection;
 }
 
 
