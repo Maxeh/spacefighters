@@ -261,7 +261,7 @@ void GameScreen::update() {
             y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
             float x = asteroids.at(asteroids.size() - 1).getX();
             x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE_MIN, ASTEROID_ROTATION_ANGLE_MAX);
             asteroids.emplace_back(x, y, r);
             if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
                 asteroids.back().setVisible(false);
@@ -513,7 +513,7 @@ void GameScreen::initAsteroids() {
             y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
             float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
             x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE_MIN, ASTEROID_ROTATION_ANGLE_MAX);
             asteroidsArray[i].emplace_back(x, y, r);
             if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
                 asteroidsArray[i].back().setVisible(false);
@@ -556,7 +556,7 @@ float GameScreen::randomFloatBetween(float fMin, float fMax) {
     return fMin + randDouble * (fMax - fMin);
 }
 
-float GameScreen::getAsteroidStartY() const {
+float GameScreen::getAsteroidStartY() {
 
     return ((float) WINDOW_HEIGHT / 2) - (((float) NUMBER_OF_ASTEROID_ROWS / 2) * Asteroid::ASTEROID_HEIGHT) -
         (((float) NUMBER_OF_ASTEROID_ROWS / 2) * ASTEROID_VERTICAL_SPACE) +

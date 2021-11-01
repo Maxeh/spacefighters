@@ -48,10 +48,10 @@ void SplashScreen::draw() {
 
 void SplashScreen::resume() {
 
-    // no resume implementation for splash screen
+    // no resume on splash screen
 }
 
 void SplashScreen::pause() {
 
-    // no pause implementation for splash screen
+    // no pause on splash screen
 }

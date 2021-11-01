@@ -4,8 +4,28 @@
 #include "../Constants.hpp"
 #include "../GameScreen/GameScreen.hpp"
 
+const std::string MenuScreen::MENU_TITLE_STRING = "MENU"; // NOLINT(cert-err58-cpp)
+
 MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData) {
+    gameData(gameData) {}
+
+MenuScreen::~MenuScreen() {
+
+    delete singlePlayerString;
+    delete highscoreString;
+    delete aboutString;
+
+    delete colorRed;
+    delete colorLightBlue;
+    delete colorDarkBlue;
+
+    delete spaceHeader;
+    delete singlePlayerButton;
+    delete highscoreButton;
+    delete aboutButton;
+}
+
+void MenuScreen::init() {
 
     singlePlayerString = new std::string("player vs. computer");
     highscoreString = new std::string("highscore");
@@ -26,26 +46,6 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
     gameData->assetManager.loadSound(GAME_SOUND, "res/space.wav");
     gameData->assetManager.playSound(GAME_SOUND);
-}
-
-MenuScreen::~MenuScreen() {
-
-    delete singlePlayerString;
-    delete highscoreString;
-    delete aboutString;
-
-    delete colorRed;
-    delete colorLightBlue;
-    delete colorDarkBlue;
-
-    delete spaceHeader;
-    delete singlePlayerButton;
-    delete highscoreButton;
-    delete aboutButton;
-}
-
-void MenuScreen::init() {
-
 }
 
 void MenuScreen::handleInput() {
@@ -148,7 +148,6 @@ void MenuScreen::draw() {
     // background
     sf::RectangleShape backgroundShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     backgroundShape.setTexture(&gameData->assetManager.getTexture(BACKGROUND_TEXTURE));
-//    backgroundShape.setFillColor(COLOR_BLUE);
     gameData->renderWindow.draw(backgroundShape);
 
     // border around window
@@ -174,7 +173,8 @@ void MenuScreen::draw() {
     gameData->renderWindow.draw(menuText);
 
     // singlePlayerButton
-    singlePlayerButton->setOutline(singlePlayerButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    singlePlayerButton->setOutline(singlePlayerButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     singlePlayerButton->setFillColor(colorDarkBlue);
     singlePlayerButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     singlePlayerButton->setText(singlePlayerString, BUTTON_CHAR_SIZE);
@@ -182,7 +182,8 @@ void MenuScreen::draw() {
     singlePlayerButton->renderButtonOnWindow(gameData->renderWindow);
 
     // highscore button
-    highscoreButton->setOutline(highscoreButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    highscoreButton->setOutline(highscoreButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     highscoreButton->setFillColor(colorDarkBlue);
     highscoreButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     highscoreButton->setText(highscoreString, BUTTON_CHAR_SIZE);
@@ -190,7 +191,8 @@ void MenuScreen::draw() {
     highscoreButton->renderButtonOnWindow(gameData->renderWindow);
 
     // about button
-    aboutButton->setOutline(aboutButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    aboutButton->setOutline(aboutButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     aboutButton->setFillColor(colorDarkBlue);
     aboutButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     aboutButton->setText(aboutString, BUTTON_CHAR_SIZE);

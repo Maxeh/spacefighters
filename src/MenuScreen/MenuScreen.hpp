@@ -7,11 +7,12 @@
 #include "../Utils/SpaceHeader.hpp"
 
 class MenuScreen : public Screen {
-    const std::string MENU_TITLE_STRING = "MENU";
-    const float MENU_TITLE_BORDER_SIZE = 2.f;
-    const int MENU_TITLE_CHAR_SIZE = 100;
-    const float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
-    const int BUTTON_CHAR_SIZE = 30;
+private:
+    static const std::string MENU_TITLE_STRING;
+    static constexpr float MENU_TITLE_BORDER_SIZE = 2.f;
+    static const int MENU_TITLE_CHAR_SIZE = 100;
+    static constexpr float BUTTON_DEFAULT_BORDER_SIZE = 2.f;
+    static const int BUTTON_CHAR_SIZE = 30;
 
     int initialWindowX = 0;
     int initialWindowY = 0;

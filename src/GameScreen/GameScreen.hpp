@@ -22,7 +22,8 @@ private:
     static constexpr float ASTEROID_VERTICAL_SPACE = 30;
     static constexpr float ASTEROID_HORIZONTAL_SPACE_MIN = Asteroid::ASTEROID_WIDTH;
     static constexpr float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
-    static constexpr float ASTEROID_ROTATION_ANGLE[2] = {-2, 2};
+    static constexpr float ASTEROID_ROTATION_ANGLE_MIN = -2;
+    static constexpr float ASTEROID_ROTATION_ANGLE_MAX = 2;
     static constexpr float ASTEROID_PROBABILITY = 0.5;
     static constexpr float SPACESHIP_MAX_LEFT_POSITION = 5;
     static constexpr float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - Spaceship::SPACESHIP_WIDTH - 5;
@@ -55,7 +56,7 @@ private:
     void initAsteroids();
     void initMonsters();
     void moveSpaceship(float v);
-    float getAsteroidStartY() const;
+    static float getAsteroidStartY();
     static float randomFloatBetween(float fMin, float fMax);
 public:
     explicit GameScreen(std::shared_ptr<GameManager::GameData> gameData);
