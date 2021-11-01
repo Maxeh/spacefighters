@@ -8,7 +8,7 @@ SpaceHeader::SpaceHeader(std::shared_ptr<GameManager::GameData> gameData) :
     soundButtonSprite(new sf::Sprite),
     buttonColor(new COLOR_DARK_BLUE),
     buttonOutlineColor(new COLOR_CYAN),
-    buttonHoverOutlineColor(new COLOR_RED),
+    buttonHoverOutlineColor(new COLOR_ORANGE),
     closeString(new std::string("x")) {}
 
 SpaceHeader::~SpaceHeader() {

@@ -11,7 +11,7 @@ MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
     highscoreString = new std::string("highscore");
     aboutString = new std::string("about");
 
-    colorRed = new COLOR_RED;
+    colorRed = new COLOR_ORANGE;
     colorLightBlue = new COLOR_BLACK;
     colorDarkBlue = new COLOR_CYAN;
 
