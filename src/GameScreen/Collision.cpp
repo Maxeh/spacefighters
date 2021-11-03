@@ -8,8 +8,14 @@ const float Collision::SPRITE_POSITIONS[12][2] = {
 Collision::Collision(float x, float y, MissileDirection missileDirection) :
     x(x), y(y), missileDirection(missileDirection) {}
 
+Collision::Collision(float x, float y, Spaceship* spaceship, MissileDirection missileDirection) :
+    x(x), y(y), spaceship(spaceship), missileDirection(missileDirection) {}
+
 float Collision::getX() const {
 
+    if (spaceship) {
+        return spaceship->getX() + x;
+    }
     return x;
 }
 

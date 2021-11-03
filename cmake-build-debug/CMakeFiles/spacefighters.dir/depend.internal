@@ -304,9 +304,14 @@ CMakeFiles/spacefighters.dir/src/GameScreen/Asteroid.cpp.obj
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.cpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
 CMakeFiles/spacefighters.dir/src/GameScreen/Collision.cpp.obj
+ C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Config.hpp
+ C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/System/Clock.hpp
+ C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/System/Export.hpp
+ C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/System/Time.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.cpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
  C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
 CMakeFiles/spacefighters.dir/src/GameScreen/GameScreen.cpp.obj
  C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Audio.hpp
  C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Audio/AlResource.hpp

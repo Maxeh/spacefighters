@@ -56,7 +56,7 @@ void GameScreen::handleInput() {
                 if (isSpaceKey(event.key.code)) {
                     if (!levelComplete && !spaceship.isReloading()) {
                         float x = spaceship.getX();
-                        float y = spaceship.getY();
+                        float y = spaceship.getY() - Missile::MISSILE_HEIGHT;
                         missiles.emplace_back(x + 4, y, MissileDirection::UP);
                         missiles.emplace_back(x + Spaceship::SPACESHIP_WIDTH - 6, y,
                             MissileDirection::UP);
@@ -170,6 +170,7 @@ void GameScreen::update() {
     // collision detection using shapes
     for (auto& missile : missiles) {
         if (missile.isVisible()) {
+            // asteroid collisions
             for (auto& asteroids : asteroidsArray) {
                 for (auto& asteroid : asteroids) {
                     if (asteroid.isVisible()) {
@@ -197,6 +198,7 @@ void GameScreen::update() {
                 }
             }
 
+            // monster collisions
             for (auto& monsters : monstersArray) {
                 for (auto& monster : monsters) {
                     sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
@@ -207,12 +209,7 @@ void GameScreen::update() {
                     sf::RectangleShape shape(sf::Vector2f(
                         Monster::MONSTER_WIDTH * 0.9,
                         Monster::MONSTER_HEIGHT * 0.9));
-                    shape.setOrigin(
-                        static_cast<float>(Monster::MONSTER_WIDTH * 0.9 / 2),
-                        static_cast<float>(Monster::MONSTER_HEIGHT * 0.9 / 2));
-                    auto posX = monster.getX() + Monster::MONSTER_WIDTH * 0.9 / 2;
-                    auto posY = monster.getY() + Monster::MONSTER_HEIGHT * 0.9 / 2;
-                    shape.setPosition(posX, posY);
+                    shape.setPosition(monster.getX(), monster.getY());
 
                     if (!monster.isDestroyed() && missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
                         monster.setDestroyed(true);
@@ -223,8 +220,37 @@ void GameScreen::update() {
                 }
             }
 
-            // TODO add spaceship collision
-            // TODO add missile collision
+            { // spaceship collision
+                sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                missileShape.setPosition(missile.getX(), missile.getY());
+                sf::RectangleShape spaceshipShape(sf::Vector2f(Spaceship::SPACESHIP_WIDTH, Spaceship::SPACESHIP_HEIGHT));
+                spaceshipShape.setPosition(spaceship.getX(), spaceship.getY());
+
+                if (missileShape.getGlobalBounds().intersects(spaceshipShape.getGlobalBounds())) {
+                    missile.setVisible(false);
+                    collisions.emplace_back(missile.getX() - spaceship.getX(), missile.getY(),
+                        &spaceship, missile.getMissileDirection());
+                }
+            }
+
+            // missile collision
+            for (auto& missile2 : missiles) {
+                if (&missile == &missile2) {
+                    continue;
+                }
+                if (missile2.isVisible()) {
+                    sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                    missileShape.setPosition(missile.getX(), missile.getY());
+                    sf::RectangleShape missile2Shape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                    missile2Shape.setPosition(missile2.getX(), missile2.getY());
+
+                    if (missileShape.getGlobalBounds().intersects(missile2Shape.getGlobalBounds())) {
+                        missile.setVisible(false);
+                        missile2.setVisible(false);
+                        collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+                    }
+                }
+            }
         }
     }
 

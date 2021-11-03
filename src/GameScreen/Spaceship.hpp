@@ -18,7 +18,7 @@ private:
     float velocity = Spaceship::DEFAULT_VELOCITY;
 public:
     static constexpr float SPACESHIP_WIDTH = 75;
-    static constexpr float SPACESHIP_HEIGHT = 100;
+    static constexpr float SPACESHIP_HEIGHT = 74;
     explicit Spaceship(float x, float y);
     float getX() const;
     void setX(float x);

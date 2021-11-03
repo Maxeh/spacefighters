@@ -2,6 +2,7 @@
 #define SPACEFIGHTERS_COLLISION_HPP
 
 #include "Missile.hpp"
+#include "Spaceship.hpp"
 
 class Collision {
 private:
@@ -12,10 +13,12 @@ private:
     int state = 0;
     int ticks = 0;
     MissileDirection missileDirection;
+    Spaceship* spaceship = nullptr;
 public:
     static constexpr float COLLISION_WIDTH = 30;
     static constexpr float COLLISION_HEIGHT = 26;
-    explicit Collision(float x, float y, MissileDirection missileDirection);
+    Collision(float x, float y, MissileDirection missileDirection);
+    Collision(float x, float y, Spaceship* spaceship, MissileDirection missileDirection);
     float getX() const;
     float getY() const;
     MissileDirection getMissileDirection() const;
