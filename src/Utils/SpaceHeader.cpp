@@ -1,8 +1,11 @@
 #include "SpaceHeader.hpp"
 #include "../Constants.hpp"
 
+const std::string SpaceHeader::HEADER_TITLE = "spacefighters"; // NOLINT(cert-err58-cpp)
+const sf::Vector2f SpaceHeader::HEADER_TITLE_POSITION = sf::Vector2f(20, 12); // NOLINT(cert-err58-cpp)
+
 SpaceHeader::SpaceHeader(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData),
+    gameData(std::move(gameData)),
     soundButton(new SpaceButton(WINDOW_WIDTH - 90, 12, 35, 35)),
     closeButton(new SpaceButton(WINDOW_WIDTH - 47, 12, 35, 35)),
     soundButtonSprite(new sf::Sprite),

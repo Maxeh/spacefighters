@@ -850,6 +850,14 @@ SFML/Config.hpp
 
 C:/Users/Maximilian/Documents/Projects/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 
+C:/Users/Maximilian/Documents/Projects/spacefighters/main.cpp
+SFML/Window.hpp
+-
+src/Constants.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
+src/GameManager.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.hpp
+
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/AssetManager.hpp
 string
 -
@@ -861,6 +869,16 @@ SFML/Audio.hpp
 -
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.cpp
+iostream
+-
+GameManager.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.hpp
+GameScreen/GameScreen.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
+SplashScreen/SplashScreen.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.hpp
 SFML/Graphics/RenderWindow.hpp
@@ -875,6 +893,12 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Asteroid.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Collision.hpp
 Missile.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.cpp
+iostream
+-
+GameScreen.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/GameScreen.hpp
 memory
@@ -903,6 +927,10 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Missile.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Monster.hpp
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.cpp
+Spaceship.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameScreen/Spaceship.hpp
 SFML/System/Clock.hpp
@@ -943,6 +971,8 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/Screen.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.cpp
 SplashScreen.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/SplashScreen/SplashScreen.hpp
+utility
+-
 ../Constants.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
 ../GameScreen/GameScreen.hpp
@@ -959,6 +989,12 @@ C:/Users/Maximilian/Documents/Projects/spacefighters/src/GameManager.hpp
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceButton.hpp
 SFML/Graphics.hpp
 -
+
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.cpp
+SpaceHeader.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
+../Constants.hpp
+C:/Users/Maximilian/Documents/Projects/spacefighters/src/Constants.hpp
 
 C:/Users/Maximilian/Documents/Projects/spacefighters/src/Utils/SpaceHeader.hpp
 memory

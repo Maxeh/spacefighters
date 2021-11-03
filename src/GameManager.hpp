@@ -14,12 +14,9 @@ public:
     };
     GameManager(int width, int height, const std::string& title);
 private:
-    const int UPDATE_INTERVAL = 1000 / 50; // ~50 fps
-
+    static const int UPDATE_INTERVAL = 1000 / 50; // ~50 fps
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
-
-    void run();
-    static int getClockTimeInMillis(sf::Clock& clock);
+    void runGame();
 };
 
 #endif

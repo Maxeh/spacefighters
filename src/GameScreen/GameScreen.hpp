@@ -45,7 +45,7 @@ private:
     int level = 1;
     int points = 0;
 
-    SpaceHeader* spaceHeader;
+    SpaceHeader* spaceHeader = nullptr;
     std::shared_ptr<GameManager::GameData> gameData;
     std::array<std::vector<Asteroid>, 6> asteroidsArray;
     std::vector<Missile> missiles;

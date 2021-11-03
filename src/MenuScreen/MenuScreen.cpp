@@ -7,7 +7,7 @@
 const std::string MenuScreen::MENU_TITLE_STRING = "MENU"; // NOLINT(cert-err58-cpp)
 
 MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData) {}
+    gameData(std::move(gameData)) {}
 
 MenuScreen::~MenuScreen() {
 
@@ -89,7 +89,6 @@ void MenuScreen::handleInput() {
                 {
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
-
                     spaceHeader->setSoundButtonHovered(spaceHeader->getSoundButton()->contains(mouseCoordsInWindow));
                     spaceHeader->setCloseButtonHovered(spaceHeader->getCloseButton()->contains(mouseCoordsInWindow));
                     singlePlayerButtonHovered = singlePlayerButton->contains(mouseCoordsInWindow);

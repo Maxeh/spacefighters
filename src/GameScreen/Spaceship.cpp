@@ -65,9 +65,9 @@ bool Spaceship::isMovingLeft() const {
     return movingLeft;
 }
 
-void Spaceship::setMovingLeft(bool movingLeft) {
+void Spaceship::setMovingLeft(bool _movingLeft) {
 
-    Spaceship::movingLeft = movingLeft;
+    Spaceship::movingLeft = _movingLeft;
 }
 
 bool Spaceship::isMovingRight() const {
@@ -75,7 +75,7 @@ bool Spaceship::isMovingRight() const {
     return movingRight;
 }
 
-void Spaceship::setMovingRight(bool movingRight) {
+void Spaceship::setMovingRight(bool _movingRight) {
 
-    Spaceship::movingRight = movingRight;
+    Spaceship::movingRight = _movingRight;
 }

@@ -27,16 +27,16 @@ private:
     bool aboutButtonHovered = false;
 
     std::shared_ptr<GameManager::GameData> gameData;
-    SpaceHeader* spaceHeader;
-    std::string* singlePlayerString;
-    std::string* highscoreString;
-    std::string* aboutString;
-    sf::Color* colorRed;
-    sf::Color* colorLightBlue;
-    sf::Color* colorDarkBlue;
-    SpaceButton* singlePlayerButton;
-    SpaceButton* highscoreButton;
-    SpaceButton* aboutButton;
+    SpaceHeader* spaceHeader = nullptr;
+    std::string* singlePlayerString = nullptr;
+    std::string* highscoreString = nullptr;
+    std::string* aboutString = nullptr;
+    sf::Color* colorRed = nullptr;
+    sf::Color* colorLightBlue = nullptr;
+    sf::Color* colorDarkBlue = nullptr;
+    SpaceButton* singlePlayerButton = nullptr;
+    SpaceButton* highscoreButton = nullptr;
+    SpaceButton* aboutButton = nullptr;
 public:
     explicit MenuScreen(std::shared_ptr<GameManager::GameData> gameData);
     ~MenuScreen();

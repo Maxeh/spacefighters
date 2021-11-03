@@ -1,10 +1,11 @@
 #include "SplashScreen.hpp"
+#include <utility>
 #include "../Constants.hpp"
 #include "../GameScreen/GameScreen.hpp"
 #include "../MenuScreen/MenuScreen.hpp"
 
 SplashScreen::SplashScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData) {};
+    gameData(std::move(gameData)) {};
 
 void SplashScreen::init() {
 

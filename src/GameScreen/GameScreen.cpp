@@ -2,7 +2,7 @@
 #include "GameScreen.hpp"
 
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - Spaceship::SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 120) {}
+    gameData(std::move(gameData)), spaceship((float) WINDOW_WIDTH / 2 - Spaceship::SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 120) {}
 
 GameScreen::~GameScreen() {
 
@@ -137,8 +137,6 @@ void GameScreen::handleInput() {
                 break;
         }
     }
-
-    // TODO gameloop + space release timer reset + balken unten + not left/right gleichzeitig
 
     // if the user tabs out of the game, the ongoing movement should be handled correctly
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)){

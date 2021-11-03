@@ -4,7 +4,7 @@
 
 int main()
 {
-    srand(time(nullptr));
+    srand(time(nullptr)); // NOLINT(cert-msc51-cpp)
     GameManager gameManager(WINDOW_WIDTH, WINDOW_HEIGHT, "Spacefighters");
     return EXIT_SUCCESS;
 }
