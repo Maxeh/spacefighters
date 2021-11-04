@@ -11,8 +11,8 @@ private:
     bool visible = true;
     MissileDirection missileDirection;
 public:
-    static constexpr float MISSILE_WIDTH = 5;
-    static constexpr float MISSILE_HEIGHT = 5;
+    static constexpr float MISSILE_WIDTH = 6;
+    static constexpr float MISSILE_HEIGHT = 6;
     Missile(float x, float y, MissileDirection missileDirection);
     float getX() const;
     float getY() const;

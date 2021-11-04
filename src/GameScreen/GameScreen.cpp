@@ -200,27 +200,26 @@ void GameScreen::update() {
     // collision detection using shapes
     for (auto& missile : missiles) {
         if (missile.isVisible()) {
+            sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+            missileShape.setPosition(missile.getX(), missile.getY());
+
             // asteroid collisions
+            // use factor 0.8 for better collision detection, this is not completely accurate,
+            // but implementing pixel accurate collision detection would be an overkill
+            sf::RectangleShape asteroidShape(sf::Vector2f(
+                Asteroid::ASTEROID_WIDTH * 0.8,
+                Asteroid::ASTEROID_HEIGHT * 0.8));
+            asteroidShape.setOrigin(
+                static_cast<float>(Asteroid::ASTEROID_WIDTH * 0.8 / 2),
+                static_cast<float>(Asteroid::ASTEROID_HEIGHT * 0.8 / 2));
             for (auto& asteroids : asteroidsArray) {
                 for (auto& asteroid : asteroids) {
                     if (asteroid.isVisible()) {
-                        sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
-                        missileShape.setPosition(missile.getX(), missile.getY());
-
-                        // Use factor 0.8 for better collision detection, this is not completely accurate,
-                        // but implementing pixel accurate collision detection would be an overkill
-                        sf::RectangleShape shape(sf::Vector2f(
-                            Asteroid::ASTEROID_WIDTH * 0.8,
-                            Asteroid::ASTEROID_HEIGHT * 0.8));
-                        shape.setOrigin(
-                            static_cast<float>(Asteroid::ASTEROID_WIDTH * 0.8 / 2),
-                            static_cast<float>(Asteroid::ASTEROID_HEIGHT * 0.8 / 2));
                         auto posX = asteroid.getX() + Asteroid::ASTEROID_WIDTH * 0.8 / 2;
                         auto posY = asteroid.getY() + Asteroid::ASTEROID_HEIGHT * 0.8 / 2;
-                        shape.setPosition(posX, posY);
-                        shape.rotate(asteroid.getRotation());
-
-                        if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
+                        asteroidShape.setPosition(posX, posY);
+                        asteroidShape.rotate(asteroid.getRotation());
+                        if (missileShape.getGlobalBounds().intersects(asteroidShape.getGlobalBounds())) {
                             missile.setVisible(false);
                             collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
                         }
@@ -229,42 +228,38 @@ void GameScreen::update() {
             }
 
             // monster collisions
-            for (auto& monsters : monstersArray) {
-                for (auto& monster : monsters) {
-                    sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
-                    missileShape.setPosition(missile.getX(), missile.getY());
-
-                    // Use factor 0.9 for better collision detection, this is not completely accurate,
-                    // but implementing pixel accurate collision detection would be an overkill
-                    sf::RectangleShape shape(sf::Vector2f(
-                        Monster::MONSTER_WIDTH * 0.9,
-                        Monster::MONSTER_HEIGHT * 0.9));
-                    shape.setPosition(monster.getX(), monster.getY());
-
-                    if (!monster.isDestroyed() && missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
-                        monster.setDestroyed(true);
-                        missile.setVisible(false);
-                        collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
-                        points += 1000;
+            if (missile.getMissileDirection() == MissileDirection::UP) {
+                // use factor 0.9 for better collision detection, this is not completely accurate,
+                // but implementing pixel accurate collision detection would be an overkill
+                sf::RectangleShape shape(sf::Vector2f(
+                    Monster::MONSTER_WIDTH * 0.9,
+                    Monster::MONSTER_HEIGHT * 0.9));
+                for (auto& monsters : monstersArray) {
+                    for (auto& monster : monsters) {
+                        shape.setPosition(monster.getX(), monster.getY());
+                        bool notDestroyed = !monster.isDestroyed();
+                        if (notDestroyed && missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
+                            monster.setDestroyed(true);
+                            missile.setVisible(false);
+                            collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+                            points += 1000;
+                        }
                     }
                 }
             }
 
-            { // spaceship collision
-                sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
-                missileShape.setPosition(missile.getX(), missile.getY());
-                sf::RectangleShape spaceshipShape(sf::Vector2f(Spaceship::SPACESHIP_WIDTH, Spaceship::SPACESHIP_HEIGHT));
+            // spaceship collision
+            if (missile.getMissileDirection() == MissileDirection::DOWN) {
+                sf::RectangleShape spaceshipShape(sf::Vector2f(
+                    Spaceship::SPACESHIP_WIDTH, Spaceship::SPACESHIP_HEIGHT));
                 spaceshipShape.setPosition(spaceship.getX(), spaceship.getY());
-
                 if (missileShape.getGlobalBounds().intersects(spaceshipShape.getGlobalBounds())) {
                     missile.setVisible(false);
                     collisions.emplace_back(missile.getX() - spaceship.getX(), missile.getY(),
                         &spaceship, missile.getMissileDirection());
-
                     if (spaceship.getHealth() == 1) {
                         gameOver = true;
                         spaceship.setHealth(0);
-
                     } else {
                         spaceship.setHealth(spaceship.getHealth() - 1);
                     }
@@ -272,20 +267,21 @@ void GameScreen::update() {
             }
 
             // missile collision
-            for (auto& missile2 : missiles) {
-                if (&missile == &missile2) {
-                    continue;
-                }
-                if (missile2.isVisible()) {
-                    sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
-                    missileShape.setPosition(missile.getX(), missile.getY());
-                    sf::RectangleShape missile2Shape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
-                    missile2Shape.setPosition(missile2.getX(), missile2.getY());
-
-                    if (missileShape.getGlobalBounds().intersects(missile2Shape.getGlobalBounds())) {
-                        missile.setVisible(false);
-                        missile2.setVisible(false);
-                        collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+            // remove for better performance
+            if (missile.getMissileDirection() == MissileDirection::UP) {
+                for (auto& missile2 : missiles) {
+                    if (missile2.getMissileDirection() == MissileDirection::UP || &missile == &missile2) {
+                        continue;
+                    }
+                    if (missile2.isVisible()) {
+                        missileShape.setPosition(missile.getX(), missile.getY());
+                        sf::RectangleShape missile2Shape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                        missile2Shape.setPosition(missile2.getX(), missile2.getY());
+                        if (missileShape.getGlobalBounds().intersects(missile2Shape.getGlobalBounds())) {
+                            missile.setVisible(false);
+                            missile2.setVisible(false);
+                            collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+                        }
                     }
                 }
             }
