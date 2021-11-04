@@ -18,6 +18,7 @@ private:
     static const int NUMBER_OF_MONSTER_ROWS = 2;
     static constexpr float MONSTER_HORIZONTAL_DISTANCE = 34;
     static constexpr float MONSTER_VERTICAL_DISTANCE = 80;
+    static const int MONSTER_MISSILE_MAX_TICKS = 10;
     static const int NUMBER_OF_ASTEROID_ROWS = 4;
     static constexpr float ASTEROID_VERTICAL_SPACE = 30;
     static constexpr float ASTEROID_HORIZONTAL_SPACE_MIN = Asteroid::ASTEROID_WIDTH;
@@ -30,7 +31,7 @@ private:
     static constexpr float HEALTH_WIDTH = 30;
     static constexpr float HEALTH_HEIGHT = 26;
     static constexpr float HEALTH_HORIZONTAL_DISTANCE = 5;
-    static const int MAX_LEVEL_COMPLETE_TICKS = 200;
+    static const int LEVEL_COMPLETE_MAX_TICKS = 200;
 
     bool soundOn = true;
     bool isPause = false;
@@ -43,6 +44,7 @@ private:
     bool mouseButtonPressed = false;
     bool monstersMovingRight = true;
     bool monstersMovingLeft = false;
+    int monstersMissileTicks = 0;
     int levelCompleteTicks = 0;
     bool levelComplete = false;
     int level = 1;

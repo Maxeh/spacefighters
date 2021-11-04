@@ -4,13 +4,12 @@
 class Monster {
 private:
     static const float SPRITE_POSITIONS[2][2];
-    static const int MAX_STATE_TICKS = 20;
-    static const int MAX_MOVE_TICKS = 60;
+    static const int MAX_TICKS = 20;
+    static const int MIN_TICKS = 8;
     float x;
     float y;
     int state = 0;
-    int stateTicks = 0;
-    int moveTicks = 0;
+    int ticks = 0;
     bool destroyed = false;
 public:
     static constexpr float MONSTER_WIDTH = 62;
@@ -21,7 +20,7 @@ public:
     const float* getSpritePositions() const;
     bool isDestroyed() const;
     void setDestroyed(bool destroyed);
-    void updateState(bool right);
+    void updateState(bool right, int level);
 };
 
 #endif

@@ -30,19 +30,17 @@ void Monster::setDestroyed(bool _destroyed) {
     destroyed = _destroyed;
 }
 
-void Monster::updateState(bool monstersMovingRight) {
+void Monster::updateState(bool monstersMovingRight, int level) {
 
-    if (++stateTicks == MAX_STATE_TICKS) {
+    int i = MAX_TICKS - level + 1;
+    i = i < MIN_TICKS ? MIN_TICKS : i;
+    if (++ticks == i) {
         state = state == 1 ? 0 : 1;
-        stateTicks = 0;
-    }
-
-    if(++moveTicks == MAX_MOVE_TICKS) {
         if (monstersMovingRight) {
             x += MONSTER_WIDTH;
         } else {
             x -= MONSTER_WIDTH;
         }
-        moveTicks = 0;
+        ticks = 0;
     }
 }

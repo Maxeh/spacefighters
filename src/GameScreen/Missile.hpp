@@ -5,7 +5,7 @@ enum class MissileDirection {UP, DOWN};
 
 class Missile {
 private:
-    static constexpr float VELOCITY = 5;
+    static constexpr float VELOCITY = 6;
     float x;
     float y;
     bool visible = true;
