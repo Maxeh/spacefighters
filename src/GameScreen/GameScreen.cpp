@@ -24,6 +24,7 @@ void GameScreen::init() {
     gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
     gameData->assetManager.loadTexture(EXPLOSION_TEXTURE, "res/exp2.png", false);
     gameData->assetManager.loadTexture(MONSTER_TEXTURE, "res/inv3.png", false);
+    gameData->assetManager.loadTexture(HEART_TEXTURE, "res/heart.png", false);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
     gameData->assetManager.loadFont(POINTS_FONT, "res/font.ttf");
 
@@ -230,6 +231,15 @@ void GameScreen::update() {
                     missile.setVisible(false);
                     collisions.emplace_back(missile.getX() - spaceship.getX(), missile.getY(),
                         &spaceship, missile.getMissileDirection());
+
+                    if (spaceship.getHealth() == 1) {
+                        // game over
+                        std::cout << "gameOver" << std::endl;
+                        spaceship.setHealth(0);
+
+                    } else {
+                        spaceship.setHealth(spaceship.getHealth() - 1);
+                    }
                 }
             }
 
@@ -458,11 +468,22 @@ void GameScreen::draw() {
     gameData->renderWindow.draw(sprite);
 
     // health
-    sf::RectangleShape healthShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
+    float healthBoxWidth = static_cast<float>(WINDOW_WIDTH) / 3;
+    sf::RectangleShape healthShape(sf::Vector2f(healthBoxWidth, 40));
     healthShape.setOutlineColor(COLOR_DARKER_BLUE);
     healthShape.setFillColor(COLOR_DARK_BLUE);
     healthShape.setPosition(5, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(healthShape);
+    float healthWidth = HEALTH_WIDTH + HEALTH_HORIZONTAL_DISTANCE;
+    float offset = (healthBoxWidth - Spaceship::MAX_HEALTH * healthWidth) / 2 + HEALTH_HORIZONTAL_DISTANCE / 2;
+    for (int i = 0; i < Spaceship::MAX_HEALTH; i++) {
+        int left = i < spaceship.getHealth() ? 0 : HEALTH_WIDTH;
+        sf::Sprite healthSprite;
+        healthSprite.setTexture(gameData->assetManager.getTexture(HEART_TEXTURE));
+        healthSprite.setPosition(offset + healthWidth * i, WINDOW_HEIGHT - 33);
+        healthSprite.setTextureRect(sf::IntRect(left, 0, HEALTH_WIDTH, HEALTH_HEIGHT));
+        gameData->renderWindow.draw(healthSprite);
+    }
 
     // points
     sf::RectangleShape shieldShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));

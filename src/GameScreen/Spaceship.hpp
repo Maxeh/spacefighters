@@ -10,7 +10,7 @@ private:
     static constexpr float MAX_VELOCITY = 40;
     float x;
     float y;
-    int health = 1000;
+    int health = MAX_HEALTH;
     int energy = 1000;
     bool movingLeft = false;
     bool movingRight = false;
@@ -19,12 +19,15 @@ private:
 public:
     static constexpr float SPACESHIP_WIDTH = 75;
     static constexpr float SPACESHIP_HEIGHT = 74;
+    static const int MAX_HEALTH = 6;
+
     explicit Spaceship(float x, float y);
     float getX() const;
     void setX(float x);
     void moveX(float x);
     float getY() const;
     int getHealth() const;
+    void setHealth(int health);
     int getEnergy() const;
     bool isReloading();
     void reload();

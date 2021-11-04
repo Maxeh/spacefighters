@@ -28,6 +28,11 @@ int Spaceship::getHealth() const {
     return health;
 }
 
+void Spaceship::setHealth(int _health) {
+
+    Spaceship::health = _health;
+}
+
 int Spaceship::getEnergy() const {
 
     return energy;

@@ -27,6 +27,9 @@ private:
     static constexpr float ASTEROID_PROBABILITY = 0.5;
     static constexpr float SPACESHIP_MAX_LEFT_POSITION = 5;
     static constexpr float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - Spaceship::SPACESHIP_WIDTH - 5;
+    static constexpr float HEALTH_WIDTH = 30;
+    static constexpr float HEALTH_HEIGHT = 26;
+    static constexpr float HEALTH_HORIZONTAL_DISTANCE = 5;
     static const int MAX_LEVEL_COMPLETE_TICKS = 200;
 
     bool soundOn = true;
