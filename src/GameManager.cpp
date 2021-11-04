@@ -44,13 +44,13 @@ void GameManager::runGame() {
 
         ticks = 0;
         gameData->screenManager.getActiveScreen()->draw();
-        fpsCounter++;
-
-        if (fpsClock.getElapsedTime().asMilliseconds() > 1000) {
-            std::cout << fpsCounter << std::endl;
-            fpsCounter = 0;
-            fpsClock.restart();
-        }
+//        fpsCounter++;
+//
+//        if (fpsClock.getElapsedTime().asMilliseconds() > 1000) {
+//            std::cout << fpsCounter << std::endl;
+//            fpsCounter = 0;
+//            fpsClock.restart();
+//        }
     }
 }
 

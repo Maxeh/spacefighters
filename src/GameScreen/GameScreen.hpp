@@ -24,7 +24,7 @@ private:
     static constexpr float ASTEROID_HORIZONTAL_SPACE_MAX = 300;
     static constexpr float ASTEROID_ROTATION_ANGLE_MIN = -2;
     static constexpr float ASTEROID_ROTATION_ANGLE_MAX = 2;
-    static constexpr float ASTEROID_PROBABILITY = 0.5;
+    static constexpr float ASTEROID_PROBABILITY = 0.4;
     static constexpr float SPACESHIP_MAX_LEFT_POSITION = 5;
     static constexpr float SPACESHIP_MAX_RIGHT_POSITION = WINDOW_WIDTH - Spaceship::SPACESHIP_WIDTH - 5;
     static constexpr float HEALTH_WIDTH = 30;
@@ -47,6 +47,7 @@ private:
     bool levelComplete = false;
     int level = 1;
     int points = 0;
+    bool gameOver = false;
 
     SpaceHeader* spaceHeader = nullptr;
     std::shared_ptr<GameManager::GameData> gameData;

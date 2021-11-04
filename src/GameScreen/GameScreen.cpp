@@ -7,10 +7,13 @@ GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
 GameScreen::~GameScreen() {
 
     delete spaceHeader;
-    for (auto asteroids : asteroidsArray) {
-        asteroids.erase(asteroids.begin(), asteroids.end());
+    for (auto monsters : monstersArray) {
+        monsters.clear();
     }
-    missiles.erase(missiles.begin(), missiles.end());
+    for (auto asteroids : asteroidsArray) {
+        asteroids.clear();
+    }
+    missiles.clear();
 }
 
 void GameScreen::init() {
@@ -42,6 +45,11 @@ bool isSpaceKey(const sf::Keyboard::Key& key) {
     return key == sf::Keyboard::Space;
 }
 
+bool isEnterKey(const sf::Keyboard::Key& key) {
+
+    return key == sf::Keyboard::Enter;
+}
+
 void GameScreen::handleInput() {
 
     sf::Event event{};
@@ -62,6 +70,15 @@ void GameScreen::handleInput() {
                         missiles.emplace_back(x + Spaceship::SPACESHIP_WIDTH - 6, y,
                             MissileDirection::UP);
                         spaceship.reload();
+                    }
+                }
+                if (isEnterKey(event.key.code)) {
+                    if (gameOver) {
+                        initAsteroids();
+                        initMonsters();
+                        points = 0;
+                        spaceship.setHealth(Spaceship::MAX_HEALTH);
+                        gameOver = false;
                     }
                 }
                 break;
@@ -168,6 +185,18 @@ void GameScreen::handleInput() {
 
 void GameScreen::update() {
 
+    if (gameOver) {
+        for (auto& asteroids : asteroidsArray) {
+            asteroids.clear();
+        }
+        for (auto& monsters : monstersArray) {
+            monsters.clear();
+        }
+        missiles.clear();
+        collisions.clear();
+        return;
+    }
+
     // collision detection using shapes
     for (auto& missile : missiles) {
         if (missile.isVisible()) {
@@ -233,8 +262,7 @@ void GameScreen::update() {
                         &spaceship, missile.getMissileDirection());
 
                     if (spaceship.getHealth() == 1) {
-                        // game over
-                        std::cout << "gameOver" << std::endl;
+                        gameOver = true;
                         spaceship.setHealth(0);
 
                     } else {
@@ -480,7 +508,7 @@ void GameScreen::draw() {
         int left = i < spaceship.getHealth() ? 0 : HEALTH_WIDTH;
         sf::Sprite healthSprite;
         healthSprite.setTexture(gameData->assetManager.getTexture(HEART_TEXTURE));
-        healthSprite.setPosition(offset + healthWidth * i, WINDOW_HEIGHT - 33);
+        healthSprite.setPosition(offset + healthWidth * static_cast<float>(i), WINDOW_HEIGHT - 33);
         healthSprite.setTextureRect(sf::IntRect(left, 0, HEALTH_WIDTH, HEALTH_HEIGHT));
         gameData->renderWindow.draw(healthSprite);
     }
@@ -522,6 +550,28 @@ void GameScreen::draw() {
         levelText.setString("LEVEL " + std::to_string(level + 1));
         levelText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetLevelString, 100);
         gameData->renderWindow.draw(levelText);
+    }
+
+    // game over text
+    if (gameOver) {
+        sf::Text gameOverText;
+        gameOverText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        gameOverText.setCharacterSize(50);
+        gameOverText.setFillColor(COLOR_CYAN);
+        float offsetGameOverText = 190;
+        gameOverText.setString("game over");
+        gameOverText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetGameOverText, 300);
+
+        sf::Text newGameText;
+        newGameText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        newGameText.setCharacterSize(30);
+        newGameText.setFillColor(COLOR_CYAN);
+        float offsetNewGameText = 320;
+        newGameText.setString("- press enter for new game -");
+        newGameText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetNewGameText, 360);
+
+        gameData->renderWindow.draw(gameOverText);
+        gameData->renderWindow.draw(newGameText);
     }
 
     /** draw not game related UI elements **/
