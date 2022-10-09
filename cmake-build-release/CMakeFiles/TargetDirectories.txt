@@ -1,3 +1,0 @@
-C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-release/CMakeFiles/spacefighters.dir
-C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/Maximilian/Documents/Projects/spacefighters/cmake-build-release/CMakeFiles/rebuild_cache.dir

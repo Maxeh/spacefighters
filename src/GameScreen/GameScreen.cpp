@@ -22,11 +22,11 @@ void GameScreen::init() {
 
     gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
     gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
-    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/bg123.png", false);
+    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/background.png", false);
     gameData->assetManager.loadTexture(ASTEROID_TEXTURE, "res/asteroid-60x54.png", false);
     gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
-    gameData->assetManager.loadTexture(EXPLOSION_TEXTURE, "res/exp2.png", false);
-    gameData->assetManager.loadTexture(MONSTER_TEXTURE, "res/inv3.png", false);
+    gameData->assetManager.loadTexture(EXPLOSION_TEXTURE, "res/explosion.png", false);
+    gameData->assetManager.loadTexture(MONSTER_TEXTURE, "res/invader.png", false);
     gameData->assetManager.loadTexture(HEART_TEXTURE, "res/heart.png", false);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
     gameData->assetManager.loadFont(POINTS_FONT, "res/font.ttf");
@@ -437,18 +437,6 @@ void GameScreen::draw() {
                     float posY = asteroid.getY() + Asteroid::ASTEROID_HEIGHT / 2;
                     sprite.setPosition(posX, posY);
                     sprite.setRotation(asteroid.getRotation());
-
-                    // Debugging shape
-//                sf::RectangleShape rect;
-//                rect.setSize(sf::Vector2f(
-//                    (float) (sprite.getLocalBounds().MISSILE_WIDTH * 0.8),
-//                    (float) (sprite.getLocalBounds().MISSILE_HEIGHT * 0.8)));
-//                rect.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));
-//                rect.setOutlineColor(COLOR_ORANGE);
-//                rect.setOrigin((float) (ASTEROID_WIDTH * 0.8 / 2), (float) (ASTEROID_HEIGHT * 0.8 / 2));
-//                rect.setRotation(asteroid.getRotation());
-//                gameData->renderWindow.draw(rect);
-
                     gameData->renderWindow.draw(sprite);
                 }
             }

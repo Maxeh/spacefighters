@@ -44,7 +44,7 @@ void MenuScreen::init() {
     gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
     gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
-    gameData->assetManager.loadSound(GAME_SOUND, "res/space.wav");
+    gameData->assetManager.loadSound(GAME_SOUND, "res/space_sound.wav");
     gameData->assetManager.playSound(GAME_SOUND);
 }
 

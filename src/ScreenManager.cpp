@@ -14,21 +14,21 @@ void ScreenManager::removeScreen() {
 
 void ScreenManager::processScreenChanges() {
 
-    if (isRemoving && !screens.empty()) {
-        screens.pop();
-        if (!screens.empty()) {
-            screens.top()->resume();
-        }
-        isRemoving = false;
-    }
+//    if (isRemoving && !screens.empty()) {
+//        screens.pop();
+//        if (!screens.empty()) {
+//            screens.top()->resume();
+//        }
+//        isRemoving = false;
+//    }
     
     if (isAdding) {
         if (!screens.empty()) {
             if (isReplacing) {
                 screens.pop();
-            } else {
-                screens.top()->pause();
-            }
+            } //else {
+//                screens.top()->pause();
+//            }
         }
         
         screens.push(std::move(newScreen));

@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\spacefighters.dir/objects.a
+C:\Users\ehbau\Documents\Github\spacefighters\toolchain\mingw32\bin\ar.exe qc CMakeFiles\spacefighters.dir/objects.a @CMakeFiles\spacefighters.dir\objects1.rsp
+C:\Users\ehbau\Documents\Github\spacefighters\toolchain\mingw32\bin\g++.exe  -static -g -Wl,--whole-archive CMakeFiles\spacefighters.dir/objects.a -Wl,--no-whole-archive -o spacefighters.exe -Wl,--out-implib,libspacefighters.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\spacefighters.dir\linklibs.rsp
