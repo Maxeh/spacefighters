@@ -2,15 +2,18 @@
 #include "GameScreen.hpp"
 
 GameScreen::GameScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData), spaceship((float) WINDOW_WIDTH / 2 - SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 100) {}
+    gameData(std::move(gameData)), spaceship((float) WINDOW_WIDTH / 2 - Spaceship::SPACESHIP_WIDTH / 2, WINDOW_HEIGHT - 120) {}
 
 GameScreen::~GameScreen() {
 
     delete spaceHeader;
-    for (auto asteroids : asteroidsArray) {
-        asteroids.erase(asteroids.begin(), asteroids.end());
+    for (auto monsters : monstersArray) {
+        monsters.clear();
     }
-    missiles.erase(missiles.begin(), missiles.end());
+    for (auto asteroids : asteroidsArray) {
+        asteroids.clear();
+    }
+    missiles.clear();
 }
 
 void GameScreen::init() {
@@ -19,27 +22,17 @@ void GameScreen::init() {
 
     gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
     gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
-    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/bg123.png", false);
+    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/background.png", false);
     gameData->assetManager.loadTexture(ASTEROID_TEXTURE, "res/asteroid-60x54.png", false);
     gameData->assetManager.loadTexture(SPACESHIP_TEXTURE, "res/spaceship-75x74.png", false);
-    gameData->assetManager.loadTexture("EXP", "res/exp2.png", false);
+    gameData->assetManager.loadTexture(EXPLOSION_TEXTURE, "res/explosion.png", false);
+    gameData->assetManager.loadTexture(MONSTER_TEXTURE, "res/invader.png", false);
+    gameData->assetManager.loadTexture(HEART_TEXTURE, "res/heart.png", false);
     gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
+    gameData->assetManager.loadFont(POINTS_FONT, "res/font.ttf");
 
-    for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
-        int asteroidsInRow = (int) (WINDOW_WIDTH / ASTEROID_WIDTH + 1);
-        for (int e = 0; e < asteroidsInRow; e++) {
-            float y = getAsteroidStartY();
-            y = y + (float) i * ASTEROID_HEIGHT + (float) i * ASTEROID_VERTICAL_SPACE;
-            y = (float) randomIntBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
-            float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
-            x -= (float) randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
-            float v = ASTEROID_VELOCITY;
-            asteroidsArray[i].emplace_back(x, y, v, r);
-            if (randomIntBetween(0.0, 1.0) > 0.8)
-                asteroidsArray[i].back().setVisible(false);
-        }
-    }
+    initAsteroids();
+    initMonsters();
 }
 
 bool isPauseKey(const sf::Keyboard::Key& key) {
@@ -50,6 +43,11 @@ bool isPauseKey(const sf::Keyboard::Key& key) {
 bool isSpaceKey(const sf::Keyboard::Key& key) {
 
     return key == sf::Keyboard::Space;
+}
+
+bool isEnterKey(const sf::Keyboard::Key& key) {
+
+    return key == sf::Keyboard::Enter;
 }
 
 void GameScreen::handleInput() {
@@ -65,25 +63,36 @@ void GameScreen::handleInput() {
                     isPause = !isPause;
                 }
                 if (isSpaceKey(event.key.code)) {
-                    if (!spaceship.isReloading()) {
+                    if (!levelComplete && !spaceship.isReloading()) {
                         float x = spaceship.getX();
-                        float y = spaceship.getY();
-                        missiles.emplace_back(x + 4, y);
-                        missiles.emplace_back(x + SPACESHIP_WIDTH - 6, y);
+                        float y = spaceship.getY() - Missile::MISSILE_HEIGHT;
+                        missiles.emplace_back(x + 4, y, MissileDirection::UP);
+                        missiles.emplace_back(x + Spaceship::SPACESHIP_WIDTH - 6, y,
+                            MissileDirection::UP);
                         spaceship.reload();
+                    }
+                }
+                if (isEnterKey(event.key.code)) {
+                    if (gameOver) {
+                        initAsteroids();
+                        initMonsters();
+                        points = 0;
+                        level = 1;
+                        spaceship.setHealth(Spaceship::MAX_HEALTH);
+                        gameOver = false;
                     }
                 }
                 break;
             case sf::Event::KeyReleased:
                 if (event.key.code == sf::Keyboard::Left) {
-                    moveSpaceship(-velocity);
-                    velocity = SPACESHIP_DEFAULT_VELOCITY;
-                    movingLeft = false;
+                    moveSpaceship(-spaceship.getVelocity());
+                    spaceship.resetVelocity();
+                    spaceship.setMovingLeft(false);
                 }
                 if (event.key.code == sf::Keyboard::Right) {
-                    moveSpaceship(velocity);
-                    velocity = SPACESHIP_DEFAULT_VELOCITY;
-                    movingRight = false;
+                    moveSpaceship(spaceship.getVelocity());
+                    spaceship.resetVelocity();
+                    spaceship.setMovingRight(false);
                 }
                 break;
             case sf::Event::MouseButtonPressed:
@@ -148,68 +157,134 @@ void GameScreen::handleInput() {
         }
     }
 
-    // TODO gameloop + space release timer reset + balken unten + not left/right gleichzeitig
-
     // if the user tabs out of the game, the ongoing movement should be handled correctly
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)){
-        if (movingLeft) {
-            moveSpaceship(-velocity);
-            velocity = SPACESHIP_DEFAULT_VELOCITY;
-            movingLeft = false;
+        if (spaceship.isMovingLeft()) {
+            moveSpaceship(-spaceship.getVelocity());
+            spaceship.resetVelocity();
+            spaceship.setMovingLeft(false);
         }
-        if (movingRight) {
-            moveSpaceship(velocity);
-            velocity = SPACESHIP_DEFAULT_VELOCITY;
-            movingRight = false;
-        }
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !movingRight) {
-        movingLeft = true;
-        moveSpaceship(-velocity);
-        if (velocity < SPACESHIP_MAX_VELOCITY) {
-            velocity += acceleration;
+        if (spaceship.isMovingRight()) {
+            moveSpaceship(spaceship.getVelocity());
+            spaceship.resetVelocity();
+            spaceship.setMovingRight(false);
         }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !movingLeft) {
-        movingRight = true;
-        moveSpaceship(velocity);
-        if (velocity < SPACESHIP_MAX_VELOCITY) {
-            velocity += acceleration;
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !spaceship.isMovingRight()) {
+        spaceship.setMovingLeft(true);
+        moveSpaceship(-spaceship.getVelocity());
+        spaceship.accelerate();
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !spaceship.isMovingLeft()) {
+        spaceship.setMovingRight(true);
+        moveSpaceship(spaceship.getVelocity());
+        spaceship.accelerate();
     }
 }
 
 void GameScreen::update() {
 
+    if (gameOver) {
+        for (auto& asteroids : asteroidsArray) {
+            asteroids.clear();
+        }
+        for (auto& monsters : monstersArray) {
+            monsters.clear();
+        }
+        missiles.clear();
+        collisions.clear();
+        return;
+    }
+
     // collision detection using shapes
     for (auto& missile : missiles) {
         if (missile.isVisible()) {
+            sf::RectangleShape missileShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+            missileShape.setPosition(missile.getX(), missile.getY());
+
+            // asteroid collisions
+            // use factor 0.8 for better collision detection, this is not completely accurate,
+            // but implementing pixel accurate collision detection would be an overkill
+            sf::RectangleShape asteroidShape(sf::Vector2f(
+                Asteroid::ASTEROID_WIDTH * 0.8,
+                Asteroid::ASTEROID_HEIGHT * 0.8));
+            asteroidShape.setOrigin(
+                static_cast<float>(Asteroid::ASTEROID_WIDTH * 0.8 / 2),
+                static_cast<float>(Asteroid::ASTEROID_HEIGHT * 0.8 / 2));
             for (auto& asteroids : asteroidsArray) {
                 for (auto& asteroid : asteroids) {
                     if (asteroid.isVisible()) {
-                        sf::RectangleShape missileShape(sf::Vector2f(missile.getWidth(), missile.getHeight()));
-                        missileShape.setPosition(missile.getX(), missile.getY());
-
-                        // Use factor 0.8 for better collision detection, this is not completely accurate,
-                        // but implementing pixel accurate collision detection would be an overkill
-                        sf::RectangleShape shape(sf::Vector2f(ASTEROID_WIDTH * 0.8, ASTEROID_HEIGHT * 0.8));
-                        shape.setOrigin((float) (ASTEROID_WIDTH * 0.8 / 2), (float) (ASTEROID_HEIGHT * 0.8 / 2));
-                        auto posX = (float) (asteroid.getX() + ASTEROID_WIDTH * 0.8 / 2);
-                        auto posY = (float) (asteroid.getY() + ASTEROID_HEIGHT * 0.8 / 2);
-                        shape.setPosition(posX, posY);
-                        shape.rotate(asteroid.getRotation());
-
-                        if (missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
-//                            asteroid.setVisible(false);
+                        auto posX = asteroid.getX() + Asteroid::ASTEROID_WIDTH * 0.8 / 2;
+                        auto posY = asteroid.getY() + Asteroid::ASTEROID_HEIGHT * 0.8 / 2;
+                        asteroidShape.setPosition(posX, posY);
+                        asteroidShape.rotate(asteroid.getRotation());
+                        if (missileShape.getGlobalBounds().intersects(asteroidShape.getGlobalBounds())) {
                             missile.setVisible(false);
-                            collisions.emplace_back(missile.getX(), missile.getY(), 1);
+                            collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
                         }
                     }
                 }
+            }
 
-                // TODO add spaceship collision
+            // monster collisions
+            if (missile.getMissileDirection() == MissileDirection::UP) {
+                // use factor 0.9 for better collision detection, this is not completely accurate,
+                // but implementing pixel accurate collision detection would be an overkill
+                sf::RectangleShape shape(sf::Vector2f(
+                    Monster::MONSTER_WIDTH * 0.9,
+                    Monster::MONSTER_HEIGHT * 0.9));
+                for (auto& monsters : monstersArray) {
+                    for (auto& monster : monsters) {
+                        shape.setPosition(monster.getX(), monster.getY());
+                        bool notDestroyed = !monster.isDestroyed();
+                        if (notDestroyed && missileShape.getGlobalBounds().intersects(shape.getGlobalBounds())) {
+                            monster.setDestroyed(true);
+                            missile.setVisible(false);
+                            collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+                            points += 1000;
+                        }
+                    }
+                }
+            }
+
+            // spaceship collision
+            if (missile.getMissileDirection() == MissileDirection::DOWN) {
+                sf::RectangleShape spaceshipShape(sf::Vector2f(
+                    Spaceship::SPACESHIP_WIDTH, Spaceship::SPACESHIP_HEIGHT));
+                spaceshipShape.setPosition(spaceship.getX(), spaceship.getY());
+                if (missileShape.getGlobalBounds().intersects(spaceshipShape.getGlobalBounds())) {
+                    missile.setVisible(false);
+                    collisions.emplace_back(missile.getX() - spaceship.getX(), missile.getY(),
+                        &spaceship, missile.getMissileDirection());
+                    if (spaceship.getHealth() == 1) {
+                        gameOver = true;
+                        spaceship.setHealth(0);
+                    } else {
+                        spaceship.setHealth(spaceship.getHealth() - 1);
+                    }
+                }
+            }
+
+            // missile collision
+            // remove for better performance
+            if (missile.getMissileDirection() == MissileDirection::UP) {
+                for (auto& missile2 : missiles) {
+                    if (missile2.getMissileDirection() == MissileDirection::UP || &missile == &missile2) {
+                        continue;
+                    }
+                    if (missile2.isVisible()) {
+                        missileShape.setPosition(missile.getX(), missile.getY());
+                        sf::RectangleShape missile2Shape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                        missile2Shape.setPosition(missile2.getX(), missile2.getY());
+                        if (missileShape.getGlobalBounds().intersects(missile2Shape.getGlobalBounds())) {
+                            missile.setVisible(false);
+                            missile2.setVisible(false);
+                            collisions.emplace_back(missile.getX(), missile.getY(), missile.getMissileDirection());
+                        }
+                    }
+                }
             }
         }
     }
@@ -218,9 +293,16 @@ void GameScreen::update() {
     for (int i = 0; i < missiles.size(); i++) {
         auto& missile = missiles.at(i);
         missile.move();
-        if (missile.getY() < -missile.getHeight()) {
-            missiles.erase(missiles.begin() + i);
-            i--;
+        if (missile.getMissileDirection() == MissileDirection::UP) {
+            if (missile.getY() < -Missile::MISSILE_HEIGHT) {
+                missiles.erase(missiles.begin() + i);
+                i--;
+            }
+        } else {
+            if (missile.getY() > WINDOW_HEIGHT + Missile::MISSILE_HEIGHT) {
+                missiles.erase(missiles.begin() + i);
+                i--;
+            }
         }
     }
 
@@ -233,23 +315,93 @@ void GameScreen::update() {
         }
         if (asteroids.at(0).getX() > WINDOW_WIDTH) {
             asteroids.erase(asteroids.begin());
-            float y = getAsteroidStartY() + (float) i * ASTEROID_HEIGHT + (float) i * ASTEROID_VERTICAL_SPACE;
-            y = (float) randomIntBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
+            float y = getAsteroidStartY() + static_cast<float>(i) * Asteroid::ASTEROID_HEIGHT +
+                static_cast<float>(i) * ASTEROID_VERTICAL_SPACE;
+            y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
             float x = asteroids.at(asteroids.size() - 1).getX();
-            x -= (float) randomIntBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
-            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE[0], ASTEROID_ROTATION_ANGLE[1]);
-            float v = ASTEROID_VELOCITY;
-            asteroids.emplace_back(x, y, v, r);
+            x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE_MIN, ASTEROID_ROTATION_ANGLE_MAX);
+            asteroids.emplace_back(x, y, r);
+            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
+                asteroids.back().setVisible(false);
         }
     }
 
     // update collisions
     for (int i = 0; i < collisions.size(); i++) {
         auto& collision = collisions.at(i);
-        collision.updatePhase();
-        if (collision.isMaxPhase()) {
+        collision.updateState();
+        if (collision.isMaxState()) {
             collisions.erase(collisions.begin() + i);
             i--;
+        }
+    }
+
+    // find first and last monster of all rows to calculate direction
+    Monster* firstMonsterPtr = nullptr;
+    Monster* lastMonsterPtr = nullptr;
+    if (!monstersArray[0].empty()) {
+        firstMonsterPtr = &monstersArray[0].at(0);
+        lastMonsterPtr = &monstersArray[0].at(monstersArray[0].size() - 1);
+    }
+    for (int i = 1; i < NUMBER_OF_MONSTER_ROWS; i++) {
+        if (monstersArray[i].empty()) {
+            continue;
+        }
+        if (firstMonsterPtr == nullptr || firstMonsterPtr->getX() > monstersArray[i].at(0).getX()) {
+            firstMonsterPtr = &monstersArray[i].at(0);
+        }
+        if (lastMonsterPtr == nullptr || lastMonsterPtr->getX() < monstersArray[i].at(monstersArray[i].size() - 1).getX()) {
+            lastMonsterPtr = &monstersArray[i].at(monstersArray[i].size() - 1);
+        }
+    }
+    // if one is empty, the other is also empty
+    if (lastMonsterPtr == nullptr && firstMonsterPtr == nullptr) {
+        levelComplete = true;
+        if (++levelCompleteTicks == LEVEL_COMPLETE_MAX_TICKS) {
+            initMonsters();
+            level++;
+            levelComplete = false;
+            levelCompleteTicks = 0;
+        }
+        return;
+    }
+
+    if (monstersMovingRight) {
+        if (lastMonsterPtr->getX() > (WINDOW_WIDTH - Monster::MONSTER_WIDTH * 2)) {
+            monstersMovingRight = false;
+            monstersMovingLeft = true;
+        }
+    } else if (monstersMovingLeft) {
+        if (firstMonsterPtr->getX() < Monster::MONSTER_WIDTH) {
+            monstersMovingLeft = false;
+            monstersMovingRight = true;
+        }
+    }
+
+    // update monsters
+    std::map<int, Monster*> frontMonstersMap;
+    for (int i = 0; i < NUMBER_OF_MONSTER_ROWS; i++) {
+        auto& monsters = monstersArray[i];
+        for (int e = 0; e < monsters.size(); e++) {
+            auto& monster = monsters.at(e);
+            if (monster.isDestroyed()) {
+                monsters.erase(monsters.begin() + e);
+                e--;
+            } else {
+                monster.updateState(monstersMovingRight, level);
+                frontMonstersMap[monster.getX()] = &monster;
+            }
+        }
+    }
+    if (++monstersMissileTicks == MONSTER_MISSILE_MAX_TICKS) {
+        monstersMissileTicks = 0;
+        for (auto& m : frontMonstersMap) {
+            float probability = 0.98f - static_cast<float>(level) / 50;
+            probability = probability < 0.5 ? 0.5f : probability;
+            if (randomFloatBetween(0.0, 1.0) > probability) {
+                missiles.emplace_back(m.first, m.second->getY() + 50, MissileDirection::DOWN);
+            }
         }
     }
 }
@@ -263,97 +415,155 @@ void GameScreen::draw() {
     backgroundShape.setFillColor(COLOR_DARKER_BLUE);
     gameData->renderWindow.draw(backgroundShape);
 
-    for (auto& missile : missiles) {
-        if (missile.isVisible()) {
-            sf::RectangleShape borderShape(sf::Vector2f(missile.getWidth(), missile.getHeight()));
-            borderShape.setFillColor(COLOR_RED);
-            borderShape.setPosition(missile.getX(), missile.getY());
-            gameData->renderWindow.draw(borderShape);
+    if (!gameOver) {
+        // missiles
+        for (auto& missile : missiles) {
+            if (missile.isVisible()) {
+                sf::RectangleShape borderShape(sf::Vector2f(Missile::MISSILE_WIDTH, Missile::MISSILE_HEIGHT));
+                borderShape.setFillColor(missile.getMissileDirection() == MissileDirection::UP ? COLOR_ORANGE : COLOR_GREEN);
+                borderShape.setPosition(missile.getX(), missile.getY());
+                gameData->renderWindow.draw(borderShape);
+            }
         }
-    }
 
-    // asteroids
-    for (auto& asteroids : asteroidsArray) {
-        for (auto& asteroid : asteroids) {
-            if (asteroid.isVisible()) {
+        // asteroids
+        for (auto& asteroids : asteroidsArray) {
+            for (auto& asteroid : asteroids) {
+                if (asteroid.isVisible()) {
+                    sf::Sprite sprite;
+                    sprite.setOrigin(Asteroid::ASTEROID_WIDTH / 2, Asteroid::ASTEROID_HEIGHT / 2);
+                    sprite.setTexture(gameData->assetManager.getTexture(ASTEROID_TEXTURE));
+                    float posX = asteroid.getX() + Asteroid::ASTEROID_WIDTH / 2;
+                    float posY = asteroid.getY() + Asteroid::ASTEROID_HEIGHT / 2;
+                    sprite.setPosition(posX, posY);
+                    sprite.setRotation(asteroid.getRotation());
+                    gameData->renderWindow.draw(sprite);
+                }
+            }
+        }
+
+        // collisions
+        for (auto& collision : collisions) {
+            sf::Sprite sprite;
+            sprite.setTexture(gameData->assetManager.getTexture(EXPLOSION_TEXTURE));
+            float verticalAdjustment = collision.getMissileDirection() == MissileDirection::UP ? 1.f : -1.f;
+            sprite.setPosition(collision.getX(), collision.getY() - 5.f * verticalAdjustment);
+            sprite.setTextureRect(sf::IntRect(collision.getSpritePositions()[0],
+                collision.getSpritePositions()[1], Collision::COLLISION_WIDTH, Collision::COLLISION_HEIGHT));
+            gameData->renderWindow.draw(sprite);
+        }
+
+        // monsters
+        for (auto& monsters : monstersArray) {
+            for (auto& monster: monsters) {
                 sf::Sprite sprite;
-                sprite.setOrigin(ASTEROID_WIDTH / 2, ASTEROID_HEIGHT / 2);
-                sprite.setTexture(gameData->assetManager.getTexture(ASTEROID_TEXTURE));
-                float posX = asteroid.getX() + ASTEROID_WIDTH / 2;
-                float posY = asteroid.getY() + ASTEROID_HEIGHT / 2;
-                sprite.setPosition(posX, posY);
-                sprite.setRotation(asteroid.getRotation());
-
-                // Debugging shape
-//                sf::RectangleShape rect;
-//                rect.setSize(sf::Vector2f(
-//                    (float) (sprite.getLocalBounds().width * 0.8),
-//                    (float) (sprite.getLocalBounds().height * 0.8)));
-//                rect.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));
-//                rect.setOutlineColor(COLOR_RED);
-//                rect.setOrigin((float) (ASTEROID_WIDTH * 0.8 / 2), (float) (ASTEROID_HEIGHT * 0.8 / 2));
-//                rect.setRotation(asteroid.getRotation());
-//                gameData->renderWindow.draw(rect);
-
+                sprite.setTexture(gameData->assetManager.getTexture(MONSTER_TEXTURE));
+                sprite.setPosition(monster.getX(), monster.getY());
+                sprite.setTextureRect(sf::IntRect(monster.getSpritePositions()[0],
+                    monster.getSpritePositions()[1], Monster::MONSTER_WIDTH, Monster::MONSTER_HEIGHT));
                 gameData->renderWindow.draw(sprite);
             }
         }
-    }
 
-    for (auto& collision : collisions) {
-        sf::Sprite sprite1;
-        sprite1.setTexture(gameData->assetManager.getTexture("EXP"));
-        sprite1.setPosition(collision.getX() - 14,collision.getY() - 14);
-        sprite1.setTextureRect(sf::IntRect(collision.getCords()[0], collision.getCords()[1],30,26));
-        gameData->renderWindow.draw(sprite1);
-    }
-
-    // spaceship
-    sf::Sprite sprite;
-    sprite.setTexture(gameData->assetManager.getTexture(SPACESHIP_TEXTURE));
-    if (movingLeft) {
-        if (spaceship.getX() - velocity > SPACESHIP_MAX_LEFT_POSITION) {
-            sprite.setPosition(spaceship.getX() - velocity, spaceship.getY());
+        // spaceship
+        sf::Sprite sprite;
+        sprite.setTexture(gameData->assetManager.getTexture(SPACESHIP_TEXTURE));
+        if (spaceship.isMovingLeft()) {
+            if (spaceship.getX() - spaceship.getVelocity() > SPACESHIP_MAX_LEFT_POSITION) {
+                sprite.setPosition(spaceship.getX() - spaceship.getVelocity(), spaceship.getY());
+            } else {
+                sprite.setPosition(SPACESHIP_MAX_LEFT_POSITION, spaceship.getY());
+            }
+        } else if (spaceship.isMovingRight()) {
+            if (spaceship.getX() + spaceship.getVelocity() < SPACESHIP_MAX_RIGHT_POSITION) {
+                sprite.setPosition(spaceship.getX() + spaceship.getVelocity(), spaceship.getY());
+            } else {
+                sprite.setPosition(SPACESHIP_MAX_RIGHT_POSITION, spaceship.getY());
+            }
         } else {
-            sprite.setPosition(SPACESHIP_MAX_LEFT_POSITION, spaceship.getY());
+            sprite.setPosition(spaceship.getX(), spaceship.getY());
         }
-    } else if (movingRight) {
-        if (spaceship.getX() + velocity < SPACESHIP_MAX_RIGHT_POSITION) {
-            sprite.setPosition(spaceship.getX() + velocity, spaceship.getY());
-        } else {
-            sprite.setPosition(SPACESHIP_MAX_RIGHT_POSITION, spaceship.getY());
-        }
-    } else {
-        sprite.setPosition(spaceship.getX(), spaceship.getY());
+        gameData->renderWindow.draw(sprite);
     }
-    gameData->renderWindow.draw(sprite);
 
     // health
-    sf::RectangleShape healthShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+    float healthBoxWidth = static_cast<float>(WINDOW_WIDTH) / 3;
+    sf::RectangleShape healthShape(sf::Vector2f(healthBoxWidth, 40));
     healthShape.setOutlineColor(COLOR_DARKER_BLUE);
-    healthShape.setFillColor(COLOR_RED);
-    healthShape.setPosition(5, WINDOW_HEIGHT - 30);
+    healthShape.setFillColor(COLOR_DARK_BLUE);
+    healthShape.setPosition(5, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(healthShape);
+    float healthWidth = HEALTH_WIDTH + HEALTH_HORIZONTAL_DISTANCE;
+    float offset = (healthBoxWidth - Spaceship::MAX_HEALTH * healthWidth) / 2 + HEALTH_HORIZONTAL_DISTANCE / 2;
+    for (int i = 0; i < Spaceship::MAX_HEALTH; i++) {
+        int left = i < spaceship.getHealth() ? 0 : HEALTH_WIDTH;
+        sf::Sprite healthSprite;
+        healthSprite.setTexture(gameData->assetManager.getTexture(HEART_TEXTURE));
+        healthSprite.setPosition(offset + healthWidth * static_cast<float>(i), WINDOW_HEIGHT - 33);
+        healthSprite.setTextureRect(sf::IntRect(left, 0, HEALTH_WIDTH, HEALTH_HEIGHT));
+        gameData->renderWindow.draw(healthSprite);
+    }
 
-//    sf::RectangleShape healthShape2(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
-//    healthShape2.setOutlineColor(COLOR_DARKER_BLUE);
-//    healthShape2.setFillColor(COLOR_BLUE);
-//    healthShape2.setPosition(5, WINDOW_HEIGHT - 30);
-//    gameData->renderWindow.draw(healthShape2);
-
-    // shield
-    sf::RectangleShape shieldShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
-    shieldShape.setOutlineColor(COLOR_DARKER_BLUE);
-    shieldShape.setFillColor(COLOR_BLUE);
-    shieldShape.setPosition(5 + (float) WINDOW_WIDTH / 3, WINDOW_HEIGHT - 30);
+    // points
+    sf::RectangleShape shieldShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
+    shieldShape.setOutlineColor(COLOR_CYAN);
+    shieldShape.setFillColor(COLOR_CYAN);
+    shieldShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(shieldShape);
 
+    // points text
+    sf::Text pointsText;
+    pointsText.setFont(gameData->assetManager.getFont(POINTS_FONT));
+    pointsText.setCharacterSize(20);
+    pointsText.setFillColor(COLOR_BLACK);
+    std::string stringPoints = std::to_string(points);
+    float offsetPointsString = stringPoints.length() * 7.f;
+    pointsText.setString(stringPoints);
+    pointsText.setPosition(
+        5 + static_cast<float>(WINDOW_WIDTH) / 3 + (static_cast<float>(WINDOW_WIDTH) / 3 / 2) - offsetPointsString,
+        WINDOW_HEIGHT - 35);
+    gameData->renderWindow.draw(pointsText);
+
     // energy
-    sf::RectangleShape energyShape(sf::Vector2f((float) WINDOW_WIDTH / 3, 30));
+    sf::RectangleShape energyShape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / 3, 40));
     energyShape.setOutlineColor(COLOR_DARKER_BLUE);
-    shieldShape.setFillColor(COLOR_DARKER_BLUE);
-    energyShape.setPosition(5 + (float) WINDOW_WIDTH / 3 * 2, WINDOW_HEIGHT - 30);
+    energyShape.setFillColor(COLOR_DARK_BLUE);
+    energyShape.setPosition(5 + static_cast<float>(WINDOW_WIDTH) / 3 * 2, WINDOW_HEIGHT - 40);
     gameData->renderWindow.draw(energyShape);
+
+    // level text
+    if (levelComplete) {
+        sf::Text levelText;
+        levelText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        levelText.setCharacterSize(50);
+        levelText.setFillColor(COLOR_CYAN);
+        float offsetLevelString = 150;
+        levelText.setString("LEVEL " + std::to_string(level + 1));
+        levelText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetLevelString, 100);
+        gameData->renderWindow.draw(levelText);
+    }
+
+    // game over text
+    if (gameOver) {
+        sf::Text gameOverText;
+        gameOverText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        gameOverText.setCharacterSize(50);
+        gameOverText.setFillColor(COLOR_CYAN);
+        float offsetGameOverText = 190;
+        gameOverText.setString("game over");
+        gameOverText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetGameOverText, 300);
+
+        sf::Text newGameText;
+        newGameText.setFont(gameData->assetManager.getFont(GAME_FONT));
+        newGameText.setCharacterSize(30);
+        newGameText.setFillColor(COLOR_CYAN);
+        float offsetNewGameText = 320;
+        newGameText.setString("- press enter for new game -");
+        newGameText.setPosition(static_cast<float>(WINDOW_WIDTH) / 2 - offsetNewGameText, 360);
+
+        gameData->renderWindow.draw(gameOverText);
+        gameData->renderWindow.draw(newGameText);
+    }
 
     /** draw not game related UI elements **/
 
@@ -370,35 +580,53 @@ void GameScreen::draw() {
     gameData->renderWindow.display();
 }
 
-void GameScreen::resume() {
-
-}
-
-void GameScreen::pause() {
-
-}
-
 // -------------------------
+
+void GameScreen::initAsteroids() {
+    // fill row after row from right to left
+    for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {
+        int asteroidsInRow = static_cast<int>(WINDOW_WIDTH / Asteroid::ASTEROID_WIDTH + 1);
+        for (int e = 0; e < asteroidsInRow; e++) {
+            float y = getAsteroidStartY();
+            y = y + static_cast<float>(i) * Asteroid::ASTEROID_HEIGHT + static_cast<float>(i) * ASTEROID_VERTICAL_SPACE;
+            y = randomFloatBetween(y - ASTEROID_VERTICAL_SPACE / 2, y + ASTEROID_VERTICAL_SPACE / 2);
+            float x = e > 0 ? asteroidsArray[i].at(e - 1).getX() : WINDOW_WIDTH;
+            x -= randomFloatBetween(ASTEROID_HORIZONTAL_SPACE_MIN, ASTEROID_HORIZONTAL_SPACE_MAX);
+            float r = randomFloatBetween(ASTEROID_ROTATION_ANGLE_MIN, ASTEROID_ROTATION_ANGLE_MAX);
+            asteroidsArray[i].emplace_back(x, y, r);
+            if (randomFloatBetween(0.0, 1.0) > ASTEROID_PROBABILITY)
+                asteroidsArray[i].back().setVisible(false);
+        }
+    }
+}
+
+void GameScreen::initMonsters() {
+    for (int i = 0; i < NUMBER_OF_MONSTER_ROWS; i++) {
+        float z = WINDOW_WIDTH - 200;
+        int monstersInRow = static_cast<int>(z / (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
+        float monstersWidth = (static_cast<float>(monstersInRow) *
+            (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE));
+        float offset = (WINDOW_WIDTH - monstersWidth) / 2 + MONSTER_HORIZONTAL_DISTANCE / 2;
+        for (int e = 0; e < monstersInRow; e++) {
+            float y = MONSTER_VERTICAL_DISTANCE * static_cast<float>(i) + MONSTER_VERTICAL_DISTANCE;
+            float x = (Monster::MONSTER_WIDTH + MONSTER_HORIZONTAL_DISTANCE) * static_cast<float>(e) + offset;
+            monstersArray[i].emplace_back(x, y);
+        }
+    }
+}
 
 void GameScreen::moveSpaceship(float v) {
 
     float x = spaceship.getX() + v;
     if (x < SPACESHIP_MAX_LEFT_POSITION) {
         spaceship.setX(SPACESHIP_MAX_LEFT_POSITION);
-        movingLeft = false;
+        spaceship.setMovingLeft(false);
     } else if (x > SPACESHIP_MAX_RIGHT_POSITION) {
         spaceship.setX(SPACESHIP_MAX_RIGHT_POSITION);
-        movingRight = false;
+        spaceship.setMovingRight(false);
     } else {
         spaceship.moveX(v);
     }
-}
-
-int GameScreen::randomIntBetween(float fMin, float fMax) {
-
-    int iMin = (int) fMin;
-    int iMax = (int) fMax;
-    return rand() % (iMax - iMin + 1) + iMin; // NOLINT(cert-msc50-cpp)
 }
 
 float GameScreen::randomFloatBetween(float fMin, float fMax) {
@@ -407,9 +635,9 @@ float GameScreen::randomFloatBetween(float fMin, float fMax) {
     return fMin + randDouble * (fMax - fMin);
 }
 
-float GameScreen::getAsteroidStartY() const {
+float GameScreen::getAsteroidStartY() {
 
-    return ((float) WINDOW_HEIGHT / 2) - (((float) NUMBER_OF_ASTEROID_ROWS / 2) * ASTEROID_HEIGHT) -
+    return ((float) WINDOW_HEIGHT / 2) - (((float) NUMBER_OF_ASTEROID_ROWS / 2) * Asteroid::ASTEROID_HEIGHT) -
         (((float) NUMBER_OF_ASTEROID_ROWS / 2) * ASTEROID_VERTICAL_SPACE) +
         (ASTEROID_VERTICAL_SPACE / 2) + (GAME_HEADER_HEIGHT / 2);
 }

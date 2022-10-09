@@ -4,29 +4,10 @@
 #include "../Constants.hpp"
 #include "../GameScreen/GameScreen.hpp"
 
+const std::string MenuScreen::MENU_TITLE_STRING = "MENU"; // NOLINT(cert-err58-cpp)
+
 MenuScreen::MenuScreen(std::shared_ptr<GameManager::GameData> gameData) :
-    gameData(gameData) {
-
-    singlePlayerString = new std::string("player vs. computer");
-    highscoreString = new std::string("highscore");
-    aboutString = new std::string("about");
-
-    colorRed = new COLOR_RED;
-    colorLightBlue = new COLOR_BLACK;
-    colorDarkBlue = new COLOR_BLUE;
-
-    spaceHeader = new SpaceHeader(gameData);
-    singlePlayerButton = new SpaceButton(50, 300, WINDOW_WIDTH - 100, 50);
-    highscoreButton = new SpaceButton(50, 370, WINDOW_WIDTH - 100, 50);
-    aboutButton = new SpaceButton(50, 440, WINDOW_WIDTH - 100, 50);
-
-    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/background_menu.png", false);
-    gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
-    gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
-    gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
-    gameData->assetManager.loadSound(GAME_SOUND, "res/space.wav");
-    gameData->assetManager.playSound(GAME_SOUND);
-}
+    gameData(std::move(gameData)) {}
 
 MenuScreen::~MenuScreen() {
 
@@ -46,6 +27,25 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::init() {
 
+    singlePlayerString = new std::string("player vs. computer");
+    highscoreString = new std::string("highscore");
+    aboutString = new std::string("about");
+
+    colorRed = new COLOR_ORANGE;
+    colorLightBlue = new COLOR_BLACK;
+    colorDarkBlue = new COLOR_CYAN;
+
+    spaceHeader = new SpaceHeader(gameData);
+    singlePlayerButton = new SpaceButton(50, 300, WINDOW_WIDTH - 100, 50);
+    highscoreButton = new SpaceButton(50, 370, WINDOW_WIDTH - 100, 50);
+    aboutButton = new SpaceButton(50, 440, WINDOW_WIDTH - 100, 50);
+
+    gameData->assetManager.loadTexture(BACKGROUND_TEXTURE, "res/background_menu.png", false);
+    gameData->assetManager.loadTexture(SOUND_ON_TEXTURE, "res/soundOn.png", false);
+    gameData->assetManager.loadTexture(SOUND_OFF_TEXTURE, "res/soundOff.png", true);
+    gameData->assetManager.loadFont(GAME_FONT, "res/space_age.ttf");
+    gameData->assetManager.loadSound(GAME_SOUND, "res/space_sound.wav");
+    gameData->assetManager.playSound(GAME_SOUND);
 }
 
 void MenuScreen::handleInput() {
@@ -89,7 +89,6 @@ void MenuScreen::handleInput() {
                 {
                     sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(gameData->renderWindow);
                     sf::Vector2f mouseCoordsInWindow = gameData->renderWindow.mapPixelToCoords(mousePositionInWindow);
-
                     spaceHeader->setSoundButtonHovered(spaceHeader->getSoundButton()->contains(mouseCoordsInWindow));
                     spaceHeader->setCloseButtonHovered(spaceHeader->getCloseButton()->contains(mouseCoordsInWindow));
                     singlePlayerButtonHovered = singlePlayerButton->contains(mouseCoordsInWindow);
@@ -148,7 +147,6 @@ void MenuScreen::draw() {
     // background
     sf::RectangleShape backgroundShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     backgroundShape.setTexture(&gameData->assetManager.getTexture(BACKGROUND_TEXTURE));
-//    backgroundShape.setFillColor(COLOR_BLUE);
     gameData->renderWindow.draw(backgroundShape);
 
     // border around window
@@ -167,14 +165,15 @@ void MenuScreen::draw() {
     menuText.setFont(gameData->assetManager.getFont(GAME_FONT));
     menuText.setString(MENU_TITLE_STRING);
     menuText.setCharacterSize(MENU_TITLE_CHAR_SIZE);
-    menuText.setFillColor(COLOR_BLACK);
+    menuText.setFillColor(COLOR_CYAN);
     menuText.setPosition((WINDOW_WIDTH - menuText.getLocalBounds().width) / 2, 100);
-    menuText.setOutlineColor(COLOR_BLUE);
+    menuText.setOutlineColor(COLOR_BLACK);
     menuText.setOutlineThickness(MENU_TITLE_BORDER_SIZE);
     gameData->renderWindow.draw(menuText);
 
     // singlePlayerButton
-    singlePlayerButton->setOutline(singlePlayerButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    singlePlayerButton->setOutline(singlePlayerButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     singlePlayerButton->setFillColor(colorDarkBlue);
     singlePlayerButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     singlePlayerButton->setText(singlePlayerString, BUTTON_CHAR_SIZE);
@@ -182,7 +181,8 @@ void MenuScreen::draw() {
     singlePlayerButton->renderButtonOnWindow(gameData->renderWindow);
 
     // highscore button
-    highscoreButton->setOutline(highscoreButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    highscoreButton->setOutline(highscoreButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     highscoreButton->setFillColor(colorDarkBlue);
     highscoreButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     highscoreButton->setText(highscoreString, BUTTON_CHAR_SIZE);
@@ -190,7 +190,8 @@ void MenuScreen::draw() {
     highscoreButton->renderButtonOnWindow(gameData->renderWindow);
 
     // about button
-    aboutButton->setOutline(aboutButtonHovered ? colorRed : colorLightBlue, BUTTON_DEFAULT_BORDER_SIZE);
+    aboutButton->setOutline(aboutButtonHovered ? colorRed : colorLightBlue,
+        BUTTON_DEFAULT_BORDER_SIZE);
     aboutButton->setFillColor(colorDarkBlue);
     aboutButton->setFont(&gameData->assetManager.getFont(GAME_FONT));
     aboutButton->setText(aboutString, BUTTON_CHAR_SIZE);
@@ -198,14 +199,4 @@ void MenuScreen::draw() {
     aboutButton->renderButtonOnWindow(gameData->renderWindow);
 
     gameData->renderWindow.display();
-}
-
-void MenuScreen::resume() {
-
-    // no resume on menu screen
-}
-
-void MenuScreen::pause() {
-
-    // no pause on menu screen
 }

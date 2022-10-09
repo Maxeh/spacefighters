@@ -13,13 +13,11 @@ public:
         sf::RenderWindow renderWindow;
     };
     GameManager(int width, int height, const std::string& title);
+    static const int UPDATES_PER_SECOND = 50;
 private:
-    const int UPDATE_INTERVAL = 1000 / 75; // ~75 fps
-
+    static const int UPDATE_INTERVAL = 1000 / UPDATES_PER_SECOND;
     std::shared_ptr<GameData> gameData = std::make_shared<GameData>();
-
-    void run();
-    static int getClockTimeInMillis(sf::Clock& clock);
+    void runGame();
 };
 
 #endif

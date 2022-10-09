@@ -1,24 +1,30 @@
 #ifndef SPACEFIGHTERS_COLLISION_HPP
 #define SPACEFIGHTERS_COLLISION_HPP
 
+#include "Missile.hpp"
+#include "Spaceship.hpp"
+
 class Collision {
-    int MAX_TICKS = 3;
-    float POSITIONS[12][2] = {
-        {90, 62},{60, 62},{30, 62},{0, 62},
-        {90, 32},{60, 32},{30, 32},{0, 32},
-        {90, 0},{60, 0},{30, 0},{0, 0}};
+private:
+    static const float SPRITE_POSITIONS[12][2];
+    static const int MAX_TICKS = 2;
     float x;
     float y;
-    int phase;
+    int state = 0;
     int ticks = 0;
-
+    MissileDirection missileDirection;
+    Spaceship* spaceship = nullptr;
 public:
-    Collision(float x, float y, int phase);
+    static constexpr float COLLISION_WIDTH = 30;
+    static constexpr float COLLISION_HEIGHT = 26;
+    Collision(float x, float y, MissileDirection missileDirection);
+    Collision(float x, float y, Spaceship* spaceship, MissileDirection missileDirection);
     float getX() const;
     float getY() const;
-    float* getCords();
-    void updatePhase();
-    bool isMaxPhase();
+    MissileDirection getMissileDirection() const;
+    const float* getSpritePositions() const;
+    bool isMaxState() const;
+    void updateState();
 };
 
 #endif

@@ -1,4 +1,0 @@
-ToolSet: w64 6.0 (local)@C:\Users\Maximilian\Documents\Projects\toolchain\mingw32
-Options: 
-
-Options:

@@ -1,10 +1,21 @@
 #include "Collision.hpp"
 
-Collision::Collision(float x, float y, int phase) :
-    x(x), y(y), phase(phase) {}
+const float Collision::SPRITE_POSITIONS[12][2] = {
+    {90, 62}, {60, 62}, {30, 62}, {0, 62},
+    {90, 32}, {60, 32}, {30, 32}, {0, 32},
+    {90, 0}, {60, 0}, {30, 0}, {0, 0}};
+
+Collision::Collision(float x, float y, MissileDirection missileDirection) :
+    x(x), y(y), missileDirection(missileDirection) {}
+
+Collision::Collision(float x, float y, Spaceship* spaceship, MissileDirection missileDirection) :
+    x(x), y(y), spaceship(spaceship), missileDirection(missileDirection) {}
 
 float Collision::getX() const {
 
+    if (spaceship) {
+        return spaceship->getX() + x;
+    }
     return x;
 }
 
@@ -13,22 +24,27 @@ float Collision::getY() const {
     return y;
 }
 
-void Collision::updatePhase() {
+MissileDirection Collision::getMissileDirection() const {
+
+    return missileDirection;
+}
+
+const float* Collision::getSpritePositions() const {
+
+    return SPRITE_POSITIONS[state];
+}
+
+bool Collision::isMaxState() const {
+
+    return state == sizeof(SPRITE_POSITIONS) / sizeof(SPRITE_POSITIONS[0]);
+}
+
+void Collision::updateState() {
 
     if (++ticks == MAX_TICKS) {
-        phase++;
+        state++;
         ticks = 0;
     }
-}
-
-float* Collision::getCords() {
-
-    return POSITIONS[phase];
-}
-
-bool Collision::isMaxPhase() {
-
-    return phase == sizeof(POSITIONS) / sizeof(POSITIONS[0]);
 }
 
 

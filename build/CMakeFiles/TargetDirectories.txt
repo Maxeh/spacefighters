@@ -1,0 +1,3 @@
+C:/Users/ehbau/Documents/Github/spacefighters/build/CMakeFiles/spacefighters.dir
+C:/Users/ehbau/Documents/Github/spacefighters/build/CMakeFiles/edit_cache.dir
+C:/Users/ehbau/Documents/Github/spacefighters/build/CMakeFiles/rebuild_cache.dir
