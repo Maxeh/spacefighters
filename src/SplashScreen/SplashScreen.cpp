@@ -46,13 +46,3 @@ void SplashScreen::draw() {
 
     gameData->renderWindow.display();
 }
-
-void SplashScreen::resume() {
-
-    // no resume on splash screen
-}
-
-void SplashScreen::pause() {
-
-    // no pause on splash screen
-}

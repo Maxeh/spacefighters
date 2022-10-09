@@ -4,7 +4,7 @@
 class Monster {
 private:
     static const float SPRITE_POSITIONS[2][2];
-    static const int MAX_TICKS = 20;
+    static const int MAX_TICKS = 25;
     static const int MIN_TICKS = 8;
     float x;
     float y;

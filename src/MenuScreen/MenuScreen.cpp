@@ -200,13 +200,3 @@ void MenuScreen::draw() {
 
     gameData->renderWindow.display();
 }
-
-void MenuScreen::resume() {
-
-    // no resume on menu screen
-}
-
-void MenuScreen::pause() {
-
-    // no pause on menu screen
-}

@@ -70,7 +70,6 @@ void GameScreen::handleInput() {
                         missiles.emplace_back(x + Spaceship::SPACESHIP_WIDTH - 6, y,
                             MissileDirection::UP);
                         spaceship.reload();
-                        points = points > 100 ? points - 100 : 0;
                     }
                 }
                 if (isEnterKey(event.key.code)) {
@@ -593,15 +592,8 @@ void GameScreen::draw() {
     gameData->renderWindow.display();
 }
 
-void GameScreen::resume() {
-
-}
-
-void GameScreen::pause() {
-
-}
-
 // -------------------------
+
 void GameScreen::initAsteroids() {
     // fill row after row from right to left
     for (int i = 0; i < NUMBER_OF_ASTEROID_ROWS; i++) {

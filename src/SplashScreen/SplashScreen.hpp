@@ -14,8 +14,6 @@ public:
     void handleInput() override;
     void update() override;
     void draw() override;
-    void resume() override;
-    void pause() override;
 };
 
 #endif
